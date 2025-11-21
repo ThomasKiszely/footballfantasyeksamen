@@ -6,7 +6,7 @@ const { notFound } = require('./middlewares/notFound');
 const { errorHandler } = require('./middlewares/errorHandler');
 const { connectToMongo } = require('./services/db');
 connectToMongo();
-//npx nodemon server eller npm run dev for at starte nodemon - ctrl-c for at afslutte
+
 
 // Middleware
 app.use(express.json());
