@@ -1,7 +1,7 @@
 import { describe, vi, expect, it } from 'vitest';
 import mongoose from 'mongoose';
 
-const { connectToMongo } = require('src/services/db');
+import { connectToMongo } from 'src/services/db';
 
 vi.mock("mongoose", () => {
     return {
@@ -16,5 +16,11 @@ vi.mock("mongoose", () => {
     };
 });
 
-describe("connectToMongo", () => {})
+describe("connectToMongo", () => {
+    it('Should call mongoose.connectToMongo with db_url', async () => {
+        process.env.DB_URL = "mongodb://localhost:27017/testdb";
+        await connectToMongo();
+        expect(mongoose.connect(process.env.DB_URL)).toHaveBeenCalledWith(process.env.DB_URL);
+    });
+})
 
