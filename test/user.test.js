@@ -6,7 +6,7 @@ describe('userRepo', () => {
 
     beforeEach(connectToMongoDb);
     it('Skal oprette en bruger', async () => {
-        
+
     });
 
 
