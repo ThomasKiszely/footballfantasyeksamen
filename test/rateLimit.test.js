@@ -1,0 +1,24 @@
+import { describe, it, expect, beforeEach, vi } from 'vitest';
+import request from 'supertest';
+import express from 'express';
+
+vi.mock('../src/services/db', () => ({
+    connectToMongo: vi.fn()
+}));
+
+const { rateLimiter } = require('../src/middlewares/rateLimiter');
+
+describe('Rate Limiter Middleware', () => {
+    let app;
+
+    beforeEach(() => {
+        app = express();
+        app.use(rateLimiter);
+        app.get('/test', (req, res) => {
+            res.status(200).json({ message: 'success' });
+        });
+    });
+
+    it
+
+}
