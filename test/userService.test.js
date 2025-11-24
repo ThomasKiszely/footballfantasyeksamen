@@ -3,6 +3,9 @@ import { vi, assert, test, describe, beforeEach, expect, it } from 'vitest';
 const userService = require('../src/services/userService');
 const userRepo = require('../src/data/userRepo');
 const User = require('../src/models/User');
+const bcrypt = require('bcrypt');
+
+
 
 test('assert', () => {
     assert.ok(userService);
@@ -38,5 +41,17 @@ describe('userService', () => {
         expect(mockResponse.name).toEqual('John');
         expect(mockResponse.password).toEqual('1234');
     });
-})
-//vi.spyOn(console, 'log')
+    it('returns a signed in user', async () => {
+        const mockId = 1;
+        const mockResponse = { name: 'John', password: '1234', point: 0, budget: 0 };
+        vi.spyOn(userRepo, 'getUserByName').mockResolvedValue({ _id: 1, username: 'John', password: 'hashed' });
+        vi.spyOn(bcrypt, 'compare').mockResolvedValue(true);
+
+        const result = await userService.login('John', '1234');
+
+        expect(result.user.username).toBe('John');
+
+    });
+});
+
+

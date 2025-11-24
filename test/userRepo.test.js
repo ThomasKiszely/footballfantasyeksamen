@@ -39,6 +39,32 @@ describe('userRepo', () => {
             expect.objectContaining({username: 'Ron69'}),
         ]);
     });
+    it('Returns a user from id', async () => {
+        const id = 1;
+        const fakeUser = {
+            username: 'john',
+            password: '123',
+            point: 0,
+            budget: 200
+        }
+        vi.spyOn(userRepo, 'getUserById').mockResolvedValue(fakeUser);
+
+        const user = await userRepo.getUserById(1);
+
+        expect(user.username).toBe('john');
+    });
+    it('Returns a user from name', async () => {
+        const fakeUser = {
+            username: 'john',
+            password: '123',
+            point: 0,
+            budget: 200
+        }
+        vi.spyOn(userRepo, 'getUserByName').mockResolvedValue(fakeUser);
+        const user = await userRepo.getUserByName(fakeUser.username);
+
+        expect(user.username).toBe('john');
+    });
 
     it('Delete a user', async () => {
         let testUser1 = {
