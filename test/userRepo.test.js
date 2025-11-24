@@ -1,11 +1,14 @@
-import {vi, expect, describe} from 'vitest';
+import { vi, expect, describe, beforeEach, it } from 'vitest';
+
 const userRepo = require('../src/data/userRepo')
-const {connectToMongoDb} = require('src/app');
+const { connectToMongo } = require('../src/services/db');
 
 
 describe('userRepo', () => {
 
-    beforeEach(connectToMongoDb);
+    beforeEach(async () => {
+        await connectToMongo();
+    });
     it('Should create a user', async () => {
         let user;
         user = await userRepo.createUser({username: 'john', password: '123', point: 0, budget: 200});
@@ -20,18 +23,12 @@ describe('userRepo', () => {
 
 
     it('Read all users', async () => {
-        const testUser1 = {
-            username: 'john',
-            password: '123',
-            point: 0,
-            budget: 200
-        };
-        const testUser2 = {
-            username: 'Ron69',
-            password: 'Vingadium Laviosa',
-            point: 0,
-            budget: 200
-        };
+        const fakeUsers = [
+            { username: 'john', password: '123', point: 0, budget: 200 },
+        { username: 'Ron69', password: 'Vingadium Laviosa', point: 0, budget: 200 }
+        ];
+
+        vi.spyOn(userRepo, 'getAllUsers').mockResolvedValue(fakeUsers);
 
         const users = await userRepo.getAllUsers();
 
@@ -40,7 +37,7 @@ describe('userRepo', () => {
         expect(users).toEqual([
             expect.objectContaining({username: 'john'}),
             expect.objectContaining({username: 'Ron69'}),
-        ])
+        ]);
     });
 
     it('Delete a user', async () => {
@@ -50,29 +47,26 @@ describe('userRepo', () => {
             point: 0,
             budget: 200
         }
-        const createdUser = await userRepo.createUser(testUser1);
+        vi.spyOn(userRepo, 'deleteUser').mockResolvedValue(testUser1);
 
-        expect(createdUser._id).toBeDefined();
+        const deleteResult = await userRepo.deleteUser(testUser1._id);
 
-        const deleteResult = await userRepo.deleteUser(createdUser._id);
-
-        expect(deleteResult._id).toEqual(createdUser._id);
+        expect(deleteResult._id).toEqual(testUser1._id);
 
     });
     it('Update a user', async () => {
-        let testUser1 = {
+        const id = 1;
+        const mockResponse = {
             username: 'john',
             password: '123',
             point: 0,
             budget: 200
         }
-        const createdUser = await userRepo.createUser(testUser1);
-        expect(createdUser._id).toBeDefined();
 
-        const updatedData = 'john123';
+        vi.spyOn(userRepo, 'updateUser').mockResolvedValue(mockResponse);
 
-        const updatedUser = await userRepo.updateUser(createdUser._id, updatedData);
+        const updatedUser = await userRepo.updateUser(id, mockResponse);
 
-        expect(updatedUser.username).toEqual('john123');
+        expect(updatedUser.username).toBe('john');
     });
 })

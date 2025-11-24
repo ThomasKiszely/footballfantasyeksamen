@@ -1,7 +1,7 @@
 import { vi, assert, test, describe, beforeEach, expect, it } from 'vitest';
 
 const userService = require('../src/services/userService');
-const userRepo = require('../src/services/userRepo');
+const userRepo = require('../src/data/userRepo');
 const User = require('../src/models/User');
 
 test('assert', () => {
@@ -13,7 +13,7 @@ describe('userService', () => {
         const mockResponse = { name: 'John', password: '1234', point: 0, budget: 0 };
         vi.spyOn(userRepo, 'createUser').mockResolvedValue(mockResponse);
 
-        await userService.createUser(mockResponse);
+        await userService.signUp(mockResponse.name, mockResponse.password);
 
         expect(mockResponse.name).toEqual('John');
         expect(mockResponse.password).toEqual('1234');
