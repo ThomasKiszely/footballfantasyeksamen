@@ -13,6 +13,20 @@ exports.createPlayer = async (req, res) => {
     }
 }
 
+exports.readPlayer = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const player = await Player.findById(id);
+        if (!player) {
+            return res.status(404).json({ message: 'Player not found' });
+        }
+        res.status(200).json(player);
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving player', error });
+    }
+}
+
+
 exports.readAllPlayers = async (req, res) => {
     try {
         const players = await Player.find();

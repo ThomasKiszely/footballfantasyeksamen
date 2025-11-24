@@ -1,10 +1,12 @@
-import {vi, expect, describe} from 'vitest';
+import {vi, expect, describe, beforeEach} from 'vitest';
 const {connectToMongo} = require('../src/app');
 const playerRepo = require('../src/data/playerRepo');
 
 describe('playerRepo', () => {
 
     beforeEach(connectToMongo);
+
+
     it('Should create a player', async () => {
         let player;
         player = await playerRepo.createPlayer({name: 'john', club: 'Manchester United', position: 'Defender', price: 200});
