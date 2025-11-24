@@ -87,30 +87,38 @@ exports.addPlayersToDb = async (players) => {
 // API
 exports.callPlayersApi = async (req, res) => {
     try {
-        const response = await fetch('http://api.football-data.org/v4/teams', {
+        const response = await fetch('http://api.football-data.org/v4/competitions/2021/teams', {
             headers: {
                 'X-Auth-Token': process.env.API_KEY
             }
         });
 
         if (!response.ok) {
-            return res.status(500).json({ message: 'API request failed: ${response.status}' });
+            return res.status(500).json({ message: `API request failed: ${response.status}` });
         }
 
         const data = await response.json();
 
-        // henter kun det relevante data for hver spiller
-        const players = data.squad.map(player => ({
-            name: `${player.firstName} ${player.lastName}`,
-            club: data.name,
-            position: player.position,
-            price: player.marketValue
-        }));
+        // Extract players from all teams
+        const players = [];
+        data.teams.forEach(team => {
+            team.squad.forEach(player => {
+                players.push({
+                    name: player.name,
+                    club: team.name,
+                    position: player.position,
+                    price: 0
+                });
+            });
+        });
 
-        // tilføjer spillerne til vores egen database
+        // Add all players to database
         await this.addPlayersToDb(players);
 
-        res.status(200).json(players);
+        res.status(200).json({
+            message: `Successfully processed ${players.length} players from ${data.teams.length} teams`,
+            playerCount: players.length
+        });
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving player data from API', error: error.message });
     }
