@@ -16,6 +16,7 @@
     "axios": "^1.13.2",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "express-rate-limit": "^8.2.1",
     "mongodb-memory-server": "^10.3.0",
     "mongoose": "^8.20.1",
     "vitest": "^4.0.12"
