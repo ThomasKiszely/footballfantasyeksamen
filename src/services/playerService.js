@@ -1,8 +1,9 @@
 const Player = require("../models/Player");
 const playerRepo = require("../data/playerRepo");
+const fetch = require('node-fetch');
 
 exports.create = async (playerData) => {
-    await playerRepo.create(playerData)
+    return await playerRepo.create(playerData)
 };
 
 exports.findById = async (id) => {
@@ -72,7 +73,7 @@ exports.fetchAndSyncPlayers = async () => {
             players.push({
                 name: player.name,
                 club: team.name,
-                position: convertPosition(player.position),
+                position: exports.convertPosition(player.position),
                 price: 0
             });
         });
