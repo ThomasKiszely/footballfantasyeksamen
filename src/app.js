@@ -22,7 +22,6 @@ app.use(notFound);
 app.use(errorHandler);
 
 
-
 function startDataSync() {
     // Fetch data every 10 minutes
     cron.schedule('*/10 * * * *', async () => {
@@ -31,5 +30,6 @@ function startDataSync() {
     });
 }
 startDataSync();
+
 
 module.exports = app;

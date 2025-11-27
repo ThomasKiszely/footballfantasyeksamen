@@ -7,3 +7,6 @@ router.get('/:id', playerRepo.readPlayer);
 router.post('/', playerRepo.createPlayer);
 router.put('/:id', playerRepo.updatePlayer);
 router.delete('/:id', playerRepo.deletePlayer);
+
+
+module.exports = router;
