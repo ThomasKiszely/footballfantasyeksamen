@@ -1,6 +1,8 @@
 const Player = require("../models/Player");
 const playerRepo = require("../data/playerRepo");
-const fetch = require('node-fetch');
+//const fetch = require('node-fetch');
+const axios = require("axios");
+
 
 exports.create = async (playerData) => {
     return await playerRepo.create(playerData)
@@ -57,15 +59,13 @@ exports.convertPosition = (position) => {
 
 
 exports.fetchAndSyncPlayers = async () => {
-    const response = await fetch('http://api.football-data.org/v4/competitions/2021/teams', {
-        headers: { 'X-Auth-Token': process.env.API_KEY }
+    const response = await axios.get('http://api.football-data.org/v4/competitions/2021/teams', {
+        headers: { 'X-Auth-Token': process.env.API_FOOTBALL_KEY }
     });
 
-    if (!response.ok) {
-        throw new Error(`API request failed: ${response.status}`);
-    }
 
-    const data = await response.json();
+
+    const data = response.data
     const players = [];
 
     data.teams.forEach(team => {
