@@ -7,13 +7,35 @@
     <meta name="author" content="Thomas BKJ">
     <meta name="robots" content="index, follow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="style.css">
+    <title>FootBallFantasy</title>
+    <link rel="stylesheet" href="loginstyle.css">
 </head>
 <body>
+<header>
+<h1>FootballFantasy</h1>
+</header>
+<div class="card">
+    <div class="tabs">
+        <button id="loginTab" class="active">Login</button>
+        <button id="signupTab">Opret bruger</button>
+    </div>
 
-<script src="script.js"></script>
+    <form id="loginForm">
+        <input type="text" id="loginUsername" placeholder="Brugernavn" required autofocus>
+        <input type="password" id="loginPassword" placeholder="Adgangskode" required>
+        <button type="submit">Log ind</button>
 
-<footer>&copy; ThomasBJ</footer>
+    </form>
+
+    <form id="signupForm" class="hidden">
+        <input type="text" id="signupUsername" placeholder="Brugernavn" required autofocus>
+        <input type="password" id="signupPassword" placeholder="Adgangskode" required>
+        <button type="submit">Opret bruger</button>
+    </form>
+    <div id="message"></div>
+</div>
+<script src="login.js"></script>
+
+<footer></footer>
 </body>
 </html>
