@@ -1,4 +1,5 @@
 const playerRepo = require('../data/playerRepo');
+const {convertPosition} = require("./playerService");
 require('dotenv').config();
 
 exports.fetchAndSyncPlayers = async () => {
@@ -18,7 +19,7 @@ exports.fetchAndSyncPlayers = async () => {
             players.push({
                 name: player.name,
                 club: team.name,
-                position: player.position,
+                position: convertPosition(player.position),
                 price: 0
             });
         });
