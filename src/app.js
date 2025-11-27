@@ -8,6 +8,7 @@ const { errorHandler } = require('./middlewares/errorHandler');
 const { connectToMongo } = require('./services/db');
 const cron = require('node-cron');
 const playerRepo = require('./data/playerRepo');
+const {fetchAndSyncPlayers} = require('./services/footballDataService');
 connectToMongo();
 
 
@@ -28,7 +29,7 @@ function startDataSync() {
     // Fetch data every 10 minutes
     cron.schedule('*/10 * * * *', async () => {
         console.log('Reading player data from API...');
-        await playerRepo.callPlayersApi();
+        await fetchAndSyncPlayers();
     });
 }
 startDataSync();

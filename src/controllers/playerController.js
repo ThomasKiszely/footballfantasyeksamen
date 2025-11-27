@@ -1,11 +1,12 @@
 const playerRepo = require('../data/playerRepo');
+const playerService = require('../services/playerService');
 
 // CRUD
 // CREATE (POST)
 exports.createPlayer = async (req, res) => {
     try {
         const { name, club, position, price } = req.body;
-        const savedPlayer = await playerRepo.create({ name, club, position, price });
+        const savedPlayer = await playerService.create({ name, club, position, price });
         res.status(201).json(savedPlayer);
     } catch (error) {
         res.status(500).json({ message: 'Error creating player', error });
@@ -15,7 +16,7 @@ exports.createPlayer = async (req, res) => {
 // READ (GET)
 exports.getPlayer = async (req, res) => {
     try {
-        const player = await playerRepo.findById(req.params.id);
+        const player = await playerService.findById(req.params.id);
         if (!player) {
             return res.status(404).json({ message: 'Player not found' });
         }
@@ -28,7 +29,7 @@ exports.getPlayer = async (req, res) => {
 // READ ALL (GET)
 exports.getAllPlayers = async (req, res) => {
     try {
-        const players = await playerRepo.findAll();
+        const players = await playerService.findAll();
         res.status(200).json(players);
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving players', error });
@@ -38,7 +39,7 @@ exports.getAllPlayers = async (req, res) => {
 // UPDATE (PUT)
 exports.updatePlayer = async (req, res) => {
     try {
-        const updatedPlayer = await playerRepo.update(req.params.id, req.body);
+        const updatedPlayer = await playerService.update(req.params.id, req.body);
         if (!updatedPlayer) {
             return res.status(404).json({ message: 'Player not found' });
         }
@@ -51,7 +52,7 @@ exports.updatePlayer = async (req, res) => {
 // DELETE (DELETE)
 exports.deletePlayer = async (req, res) => {
     try {
-        const deletedPlayer = await playerRepo.delete(req.params.id);
+        const deletedPlayer = await playerService.delete(req.params.id);
         if (!deletedPlayer) {
             return res.status(404).json({ message: 'Player not found' });
         }
