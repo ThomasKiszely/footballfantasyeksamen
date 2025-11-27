@@ -10,8 +10,7 @@ describe('userRepo', () => {
         const fakeuser = ({
             username: 'john',
             password: '123',
-            point: 0,
-            budget: 200,
+            teams: ['HotSpurs']
         });
         vi.spyOn(userRepo, 'createUser').mockResolvedValue(fakeuser);
 
@@ -21,16 +20,15 @@ describe('userRepo', () => {
             expect.objectContaining({
                 username: 'john',
                 password: '123',
-                point: 0,
-                budget: 200,
+                teams: ['HotSpurs']
             })
         );
     });
 
     it('Read all users', async () => {
         const fakeUsers = [
-            { username: 'john', password: '123', point: 0, budget: 200 },
-            { username: 'Ron69', password: 'Vingadium Laviosa', point: 0, budget: 200 },
+            { username: 'john', password: '123', teams: ['HotSpurs'] },
+            { username: 'Ron69', password: 'Vingadium Laviosa', teams: ['HotSpurs'] },
         ];
 
         vi.spyOn(userRepo, 'getAllUsers').mockResolvedValue(fakeUsers);
@@ -46,7 +44,7 @@ describe('userRepo', () => {
     });
 
     it('Returns a user from id', async () => {
-        const fakeUser = { username: 'john', password: '123', point: 0, budget: 200 };
+        const fakeUser = { username: 'john', password: '123', teams: ['HotSpurs'] };
         vi.spyOn(userRepo, 'getUserById').mockResolvedValue(fakeUser);
 
         const user = await userRepo.getUserById(1);
@@ -55,7 +53,7 @@ describe('userRepo', () => {
     });
 
     it('Returns a user from name', async () => {
-        const fakeUser = { username: 'john', password: '123', point: 0, budget: 200 };
+        const fakeUser = { username: 'john', password: '123', teams: ['HotSpurs'] };
         vi.spyOn(userRepo, 'getUserByName').mockResolvedValue(fakeUser);
 
         const user = await userRepo.getUserByName(fakeUser.username);
@@ -64,7 +62,7 @@ describe('userRepo', () => {
     });
 
     it('Deletes a user', async () => {
-        const testUser1 = { _id: 1, username: 'john', password: '123', point: 0, budget: 200 };
+        const testUser1 = { _id: 1, username: 'john', password: '123', teams: ['HotSpurs'] };
         vi.spyOn(userRepo, 'deleteUser').mockResolvedValue(testUser1);
 
         const deleteResult = await userRepo.deleteUser(testUser1._id);
@@ -74,7 +72,7 @@ describe('userRepo', () => {
 
     it('Update a user', async () => {
         const id = 1;
-        const mockResponse = { username: 'john', password: '123', point: 0, budget: 200 };
+        const mockResponse = { username: 'john', password: '123', teams: ['HotSpurs'] };
         vi.spyOn(userRepo, 'updateUser').mockResolvedValue(mockResponse);
 
         const updatedUser = await userRepo.updateUser(id, mockResponse);

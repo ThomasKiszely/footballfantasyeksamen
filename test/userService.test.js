@@ -13,7 +13,7 @@ test('assert', () => {
 
 describe('userService', () => {
     it('creates a new user', async() => {
-        const mockResponse = { username: 'John', password: '1234', point: 0, budget: 0 };
+        const mockResponse = { username: 'John', password: '1234', teams: ['Liverpool', 'Chelsea'] };
         vi.spyOn(userRepo, 'createUser').mockResolvedValue(mockResponse);
 
         const result = await userService.signUp(mockResponse.username, mockResponse.password);
@@ -23,7 +23,7 @@ describe('userService', () => {
     });
     it('returns a user', async () => {
         const mockId = 1;
-        const mockResponse = { name: 'John', password: '1234', point: 0, budget: 0 };
+        const mockResponse = { name: 'John', password: '1234', teams: ['Liverpool', 'Chelsea'] };
         vi.spyOn(userRepo, 'getUserById').mockResolvedValue(mockResponse);
 
         const result = await userService.getUserById(mockId);
@@ -33,7 +33,7 @@ describe('userService', () => {
     });
     it('returns an updated user', async () => {
         const mockId = 1;
-        const mockResponse = { name: 'John', password: '1234', point: 0, budget: 0 };
+        const mockResponse = { name: 'John', password: '1234', teams: ['Liverpool', 'Chelsea'] };
         vi.spyOn(userRepo, 'updateUser').mockResolvedValue(mockResponse);
 
         const result = await userService.updateUser(mockId, mockResponse);

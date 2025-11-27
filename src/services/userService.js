@@ -33,8 +33,7 @@ async function login(username, password){
         user: {
             id: user._id,
             username: user.username,
-            point: user.point,
-            budget: user.budget,
+            teams: user.teams,
             role: user.role,
         }
     };
