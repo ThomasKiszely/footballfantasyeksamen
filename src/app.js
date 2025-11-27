@@ -8,7 +8,7 @@ const { errorHandler } = require('./middlewares/errorHandler');
 const { connectToMongo } = require('./services/db');
 const cron = require('node-cron');
 const playerRepo = require('./data/playerRepo');
-const {fetchAndSyncPlayers} = require('./services/footballDataService');
+const {fetchAndSyncPlayers} = require('./services/playerService');
 connectToMongo();
 
 
