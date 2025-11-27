@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const playerRoutes = require('./routes/playerRoutes');
 const router = require('./routes/userRoutes');
 const { notFound } = require('./middlewares/notFound');
 const { errorHandler } = require('./middlewares/errorHandler');
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Routes
+app.use('/players', playerRoutes)
 app.use('/api/user', router);
 
 app.use(notFound);

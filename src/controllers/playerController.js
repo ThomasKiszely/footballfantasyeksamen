@@ -1,5 +1,7 @@
 const playerRepo = require('../data/playerRepo');
 
+// CRUD
+// CREATE (POST)
 exports.createPlayer = async (req, res) => {
     try {
         const { name, club, position, price } = req.body;
@@ -10,6 +12,7 @@ exports.createPlayer = async (req, res) => {
     }
 };
 
+// READ (GET)
 exports.getPlayer = async (req, res) => {
     try {
         const player = await playerRepo.findById(req.params.id);
@@ -22,6 +25,7 @@ exports.getPlayer = async (req, res) => {
     }
 };
 
+// READ ALL (GET)
 exports.getAllPlayers = async (req, res) => {
     try {
         const players = await playerRepo.findAll();
@@ -31,6 +35,7 @@ exports.getAllPlayers = async (req, res) => {
     }
 };
 
+// UPDATE (PUT)
 exports.updatePlayer = async (req, res) => {
     try {
         const updatedPlayer = await playerRepo.update(req.params.id, req.body);
@@ -43,6 +48,7 @@ exports.updatePlayer = async (req, res) => {
     }
 };
 
+// DELETE (DELETE)
 exports.deletePlayer = async (req, res) => {
     try {
         const deletedPlayer = await playerRepo.delete(req.params.id);

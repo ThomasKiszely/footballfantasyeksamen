@@ -1,5 +1,7 @@
 const Player = require('../models/player');
 
+// talks to the database and performs CRUD operations
+
 exports.create = async (playerData) => {
     const newPlayer = new Player(playerData);
     return await newPlayer.save();
