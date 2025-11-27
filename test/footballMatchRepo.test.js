@@ -1,6 +1,8 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, beforeAll, afterAll } from "vitest";
+const mongoose = require("mongoose");
+const {MongoMemoryServer} = require("mongodb-memory-server");
 
-// Mock axios som CommonJS
+
 vi.mock("axios", () => {
     return { get: vi.fn() };
 });
@@ -8,10 +10,10 @@ vi.mock("axios", () => {
 const axios = require("axios");
 const footballMatchRepo = require("../src/data/footballMatchRepo");
 
-// --- Test for fetchAllMatches ---
+
 describe("footballMatchRepo", () => {
     it("Should return a list of matches from api", async () => {
-        // Mock API respons
+
         axios.get = vi.fn(() =>
             Promise.resolve({
                 data: {
@@ -47,11 +49,11 @@ describe("footballMatchRepo", () => {
     });
 });
 
-// --- Test for saveToDB ---
+
 const FootballMatch = { bulkWrite: vi.fn() };
 const fetchAllMatchesMock = vi.spyOn(footballMatchRepo, "fetchAllMatches");
 
-// Lokal saveToDB der bruger FootballMatch mock
+
 const saveToDB = async () => {
     const matches = await footballMatchRepo.fetchAllMatches();
     if (!matches || !matches.length) return;
@@ -108,3 +110,43 @@ describe("saveToDB", () => {
         expect(FootballMatch.bulkWrite).not.toHaveBeenCalled();
     });
 });
+
+describe("CRUD Operations", () => {
+
+    let mongoServer;
+
+    beforeAll(async () => {
+        mongoServer = await MongoMemoryServer.create();
+        await mongoose.connect(mongoServer.getUri());
+    });
+
+    afterAll(async () => {
+        await mongoose.disconnect();
+        await mongoServer.stop();
+    });
+
+    it('Should be able to read all matches', async () => {
+        let testMatch = {
+            matchId: 432105,
+            utcDate: "2025-11-24T15:00:00Z",
+            status: "FINISHED",
+            competition: { name: "Premier League", type: "League", emblem: "..." },
+            season: "2025-08-01",
+            matchday: 13,
+            homeTeam: "Man Utd",
+            awayTeam: "Chelsea",
+            homeScore: 2,
+            awayScore: 1,
+            winner: "HOME_TEAM"
+        };
+        const createdMatch = await footballMatchRepo.createMatch(testMatch);
+        const matches = await footballMatchRepo.getAllMatches();
+
+        expect(matches).toBeInstanceOf(Array);
+        expect(matches.length).toBeGreaterThan(0);
+
+        const match = matches[0];
+        expect(match.homeTeam).toEqual("Man Utd");
+        expect(match.awayTeam).toEqual("Chelsea");
+    });
+})

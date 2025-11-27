@@ -27,6 +27,7 @@ const fetchAllMatches = async() => {
             awayTeam: match.awayTeam.name,
             homeScore: match.score.fullTime.home ?? null,
             awayScore: match.score.fullTime.away ?? null,
+            winner: match.score.winner ?? null,
         }));
     } catch (error) {
         console.log('Fejl ved load af kamp i repo', error.message);
@@ -53,7 +54,25 @@ const saveToDB = async() => {
     }
 }
 
+async function createMatch(footballMatchData) {
+    const newMatch = new FootballMatch(footballMatchData);
+    return await newMatch.save();
+}
+
+async function getAllMatches() {
+    try {
+        return await FootballMatch.find({});
+    } catch (error) {
+        console.log('Fejl ved hentning af alle kampe', error.message);
+        throw error;
+    }
+}
+
+
 module.exports = {
     fetchAllMatches,
     saveToDB,
+    createMatch,
+    getAllMatches,
+
 }

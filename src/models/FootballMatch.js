@@ -15,6 +15,7 @@ const footballMatchSchema = new mongoose.Schema({
     awayTeam: {type: String, required: true},
     homeScore: {type: Number, default: null},
     awayScore: {type: Number, default: null},
+    winner: {type: String, required: true},
 }, {
     timestamps: true,
 });
