@@ -1,5 +1,6 @@
 const userService = require('../services/userService');
 
+
 async function signup(req, res, next) {
     try {
         const { username, password } = req.body;
