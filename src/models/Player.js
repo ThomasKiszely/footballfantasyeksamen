@@ -7,6 +7,5 @@ const playerSchema = new mongoose.Schema({
     price: { type: Number, required: true },
 });
 
-const Player = mongoose.model('Player', playerSchema);
 
-module.exports = Player;
+module.exports = mongoose.models.Player || mongoose.model('Player', playerSchema);
