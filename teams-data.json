@@ -1,0 +1,3771 @@
+[
+  {
+    "name": "Kepa Arrizabalaga",
+    "club": "Arsenal FC",
+    "position": "GK",
+    "price": 4500000
+  },
+  {
+    "name": "David Raya",
+    "club": "Arsenal FC",
+    "position": "GK",
+    "price": 7500000
+  },
+  {
+    "name": "Tommy Setford",
+    "club": "Arsenal FC",
+    "position": "GK",
+    "price": 1200000
+  },
+  {
+    "name": "Aleksei Fedorushchenko",
+    "club": "Arsenal FC",
+    "position": "GK",
+    "price": 1000000
+  },
+  {
+    "name": "Max Dowman",
+    "club": "Arsenal FC",
+    "position": "Midfield",
+    "price": 1500000
+  },
+  {
+    "name": "Andre Harriman-Annous",
+    "club": "Arsenal FC",
+    "position": "Offence",
+    "price": 1000000
+  },
+  {
+    "name": "Myles Lewis-Skelly",
+    "club": "Arsenal FC",
+    "position": "LB",
+    "price": 2500000
+  },
+  {
+    "name": "Ethan Nwaneri",
+    "club": "Arsenal FC",
+    "position": "CAM",
+    "price": 3500000
+  },
+  {
+    "name": "Cristhian Mosquera",
+    "club": "Arsenal FC",
+    "position": "CB",
+    "price": 6500000
+  },
+  {
+    "name": "Noni Madueke",
+    "club": "Arsenal FC",
+    "position": "RW",
+    "price": 7000000
+  },
+  {
+    "name": "Riccardo Calafiori",
+    "club": "Arsenal FC",
+    "position": "LB",
+    "price": 8000000
+  },
+  {
+    "name": "Piero Hincapié",
+    "club": "Arsenal FC",
+    "position": "CB",
+    "price": 7500000
+  },
+  {
+    "name": "Martín Zubimendi",
+    "club": "Arsenal FC",
+    "position": "CDM",
+    "price": 10500000
+  },
+  {
+    "name": "Bukayo Saka",
+    "club": "Arsenal FC",
+    "position": "RW",
+    "price": 14500000
+  },
+  {
+    "name": "Jurrien Timber",
+    "club": "Arsenal FC",
+    "position": "RB",
+    "price": 8500000
+  },
+  {
+    "name": "William Saliba",
+    "club": "Arsenal FC",
+    "position": "CB",
+    "price": 13000000
+  },
+  {
+    "name": "Martinelli",
+    "club": "Arsenal FC",
+    "position": "LW",
+    "price": 11500000
+  },
+  {
+    "name": "Christian Nørgaard",
+    "club": "Arsenal FC",
+    "position": "CDM",
+    "price": 5500000
+  },
+  {
+    "name": "Gabriel",
+    "club": "Arsenal FC",
+    "position": "CB",
+    "price": 12000000
+  },
+  {
+    "name": "Leandro Trossard",
+    "club": "Arsenal FC",
+    "position": "LW",
+    "price": 7500000
+  },
+  {
+    "name": "Viktor Gyökeres",
+    "club": "Arsenal FC",
+    "position": "CF",
+    "price": 13500000
+  },
+  {
+    "name": "Declan Rice",
+    "club": "Arsenal FC",
+    "position": "CM",
+    "price": 14000000
+  },
+  {
+    "name": "Mikel Merino",
+    "club": "Arsenal FC",
+    "position": "CM",
+    "price": 8500000
+  },
+  {
+    "name": "Martin Ødegaard",
+    "club": "Arsenal FC",
+    "position": "CAM",
+    "price": 14500000
+  },
+  {
+    "name": "Ben White",
+    "club": "Arsenal FC",
+    "position": "RB",
+    "price": 10000000
+  },
+  {
+    "name": "Eberechi Eze",
+    "club": "Arsenal FC",
+    "position": "CAM",
+    "price": 9500000
+  },
+  {
+    "name": "Gabriel Jesus",
+    "club": "Arsenal FC",
+    "position": "CF",
+    "price": 8500000
+  },
+  {
+    "name": "Kai Havertz",
+    "club": "Arsenal FC",
+    "position": "CF",
+    "price": 10500000
+  },
+  {
+    "name": "Emiliano Martínez",
+    "club": "Aston Villa FC",
+    "position": "GK",
+    "price": 9500000
+  },
+  {
+    "name": "Marco Bizot",
+    "club": "Aston Villa FC",
+    "position": "GK",
+    "price": 3500000
+  },
+  {
+    "name": "James Wright",
+    "club": "Aston Villa FC",
+    "position": "GK",
+    "price": 1000000
+  },
+  {
+    "name": "Sam Proctor",
+    "club": "Aston Villa FC",
+    "position": "GK",
+    "price": 1000000
+  },
+  {
+    "name": "Russ Oakley",
+    "club": "Aston Villa FC",
+    "position": "GK",
+    "price": 1000000
+  },
+  {
+    "name": "Ben Broggio",
+    "club": "Aston Villa FC",
+    "position": "Midfield",
+    "price": 1200000
+  },
+  {
+    "name": "Aidan Borland",
+    "club": "Aston Villa FC",
+    "position": "Midfield",
+    "price": 1000000
+  },
+  {
+    "name": "Jamaldeen Jimoh",
+    "club": "Aston Villa FC",
+    "position": "Midfield",
+    "price": 1500000
+  },
+  {
+    "name": "Bradley Burrowes",
+    "club": "Aston Villa FC",
+    "position": "Midfield",
+    "price": 1000000
+  },
+  {
+    "name": "George Hemmings",
+    "club": "Aston Villa FC",
+    "position": "Midfield",
+    "price": 1000000
+  },
+  {
+    "name": "John McGinn",
+    "club": "Aston Villa FC",
+    "position": "CM",
+    "price": 8500000
+  },
+  {
+    "name": "Pau Torres",
+    "club": "Aston Villa FC",
+    "position": "CB",
+    "price": 9500000
+  },
+  {
+    "name": "Emiliano Buendía",
+    "club": "Aston Villa FC",
+    "position": "CAM",
+    "price": 5500000
+  },
+  {
+    "name": "Matty Cash",
+    "club": "Aston Villa FC",
+    "position": "RB",
+    "price": 6500000
+  },
+  {
+    "name": "Boubacar Kamara",
+    "club": "Aston Villa FC",
+    "position": "CDM",
+    "price": 8000000
+  },
+  {
+    "name": "Tyrone Mings",
+    "club": "Aston Villa FC",
+    "position": "CB",
+    "price": 5000000
+  },
+  {
+    "name": "Ross Barkley",
+    "club": "Aston Villa FC",
+    "position": "CM",
+    "price": 4500000
+  },
+  {
+    "name": "Donyell Malen",
+    "club": "Aston Villa FC",
+    "position": "RW",
+    "price": 9000000
+  },
+  {
+    "name": "Ezri Konsa",
+    "club": "Aston Villa FC",
+    "position": "CB",
+    "price": 7500000
+  },
+  {
+    "name": "Ollie Watkins",
+    "club": "Aston Villa FC",
+    "position": "CF",
+    "price": 12500000
+  },
+  {
+    "name": "Youri Tielemans",
+    "club": "Aston Villa FC",
+    "position": "CM",
+    "price": 7000000
+  },
+  {
+    "name": "Victor Nilsson-Lindelöf",
+    "club": "Aston Villa FC",
+    "position": "CB",
+    "price": 5000000
+  },
+  {
+    "name": "Lucas Digne",
+    "club": "Aston Villa FC",
+    "position": "LB",
+    "price": 6000000
+  },
+  {
+    "name": "Jadon Sancho",
+    "club": "Aston Villa FC",
+    "position": "LW",
+    "price": 8500000
+  },
+  {
+    "name": "Travis Patterson",
+    "club": "Aston Villa FC",
+    "position": "LB",
+    "price": 1200000
+  },
+  {
+    "name": "Andrés Garcia",
+    "club": "Aston Villa FC",
+    "position": "RB",
+    "price": 2000000
+  },
+  {
+    "name": "Lamare Bogarde",
+    "club": "Aston Villa FC",
+    "position": "CDM",
+    "price": 2500000
+  },
+  {
+    "name": "Ian Maatsen",
+    "club": "Aston Villa FC",
+    "position": "LB",
+    "price": 7500000
+  },
+  {
+    "name": "Evann Guessand",
+    "club": "Aston Villa FC",
+    "position": "CF",
+    "price": 4500000
+  },
+  {
+    "name": "Harvey Elliott",
+    "club": "Aston Villa FC",
+    "position": "CM",
+    "price": 6500000
+  },
+  {
+    "name": "Amadou Onana",
+    "club": "Aston Villa FC",
+    "position": "CDM",
+    "price": 9500000
+  },
+  {
+    "name": "Morgan Rogers",
+    "club": "Aston Villa FC",
+    "position": "CAM",
+    "price": 7500000
+  },
+  {
+    "name": "Robert Sánchez",
+    "club": "Chelsea FC",
+    "position": "GK",
+    "price": 5500000
+  },
+  {
+    "name": "Gabriel Slonina",
+    "club": "Chelsea FC",
+    "position": "GK",
+    "price": 2000000
+  },
+  {
+    "name": "Filip Jörgensen",
+    "club": "Chelsea FC",
+    "position": "GK",
+    "price": 3500000
+  },
+  {
+    "name": "Max Merrick",
+    "club": "Chelsea FC",
+    "position": "GK",
+    "price": 1000000
+  },
+  {
+    "name": "Landon Emenalo",
+    "club": "Chelsea FC",
+    "position": "Defence",
+    "price": 1000000
+  },
+  {
+    "name": "Reggie Walsh",
+    "club": "Chelsea FC",
+    "position": "Midfield",
+    "price": 1000000
+  },
+  {
+    "name": "Estevao",
+    "club": "Chelsea FC",
+    "position": "Offence",
+    "price": 5500000
+  },
+  {
+    "name": "Shumaira Mheuka",
+    "club": "Chelsea FC",
+    "position": "Offence",
+    "price": 1500000
+  },
+  {
+    "name": "Ryan Kavuma-McQueen",
+    "club": "Chelsea FC",
+    "position": "Offence",
+    "price": 1000000
+  },
+  {
+    "name": "Dario Essugo",
+    "club": "Chelsea FC",
+    "position": "CDM",
+    "price": 3000000
+  },
+  {
+    "name": "Malo Gusto",
+    "club": "Chelsea FC",
+    "position": "RB",
+    "price": 7500000
+  },
+  {
+    "name": "Liam Delap",
+    "club": "Chelsea FC",
+    "position": "CF",
+    "price": 6000000
+  },
+  {
+    "name": "Cole Palmer",
+    "club": "Chelsea FC",
+    "position": "CAM",
+    "price": 14500000
+  },
+  {
+    "name": "Moisés Caicedo",
+    "club": "Chelsea FC",
+    "position": "CDM",
+    "price": 11500000
+  },
+  {
+    "name": "João Pedro",
+    "club": "Chelsea FC",
+    "position": "CF",
+    "price": 8500000
+  },
+  {
+    "name": "Enzo Fernández",
+    "club": "Chelsea FC",
+    "position": "CM",
+    "price": 11000000
+  },
+  {
+    "name": "Mykhailo Mudryk",
+    "club": "Chelsea FC",
+    "position": "LW",
+    "price": 7000000
+  },
+  {
+    "name": "Reece James",
+    "club": "Chelsea FC",
+    "position": "RB",
+    "price": 9500000
+  },
+  {
+    "name": "Cucurella",
+    "club": "Chelsea FC",
+    "position": "LB",
+    "price": 7500000
+  },
+  {
+    "name": "Wesley Fofana",
+    "club": "Chelsea FC",
+    "position": "CB",
+    "price": 8500000
+  },
+  {
+    "name": "Tosin Adarabioyo",
+    "club": "Chelsea FC",
+    "position": "CB",
+    "price": 6000000
+  },
+  {
+    "name": "Trevoh Chalobah",
+    "club": "Chelsea FC",
+    "position": "CB",
+    "price": 5500000
+  },
+  {
+    "name": "Raheem Sterling",
+    "club": "Chelsea FC",
+    "position": "RW",
+    "price": 7500000
+  },
+  {
+    "name": "Pedro Neto",
+    "club": "Chelsea FC",
+    "position": "RW",
+    "price": 9500000
+  },
+  {
+    "name": "Axel Disasi",
+    "club": "Chelsea FC",
+    "position": "CB",
+    "price": 6500000
+  },
+  {
+    "name": "Tyrique George",
+    "club": "Chelsea FC",
+    "position": "LW",
+    "price": 2000000
+  },
+  {
+    "name": "Josh Acheampong",
+    "club": "Chelsea FC",
+    "position": "RB",
+    "price": 2500000
+  },
+  {
+    "name": "Ollie Harrison",
+    "club": "Chelsea FC",
+    "position": "CDM",
+    "price": 1500000
+  },
+  {
+    "name": "Marc Guiu",
+    "club": "Chelsea FC",
+    "position": "CF",
+    "price": 3000000
+  },
+  {
+    "name": "Jorrel Hato",
+    "club": "Chelsea FC",
+    "position": "CB",
+    "price": 8500000
+  },
+  {
+    "name": "Facundo Buonanotte",
+    "club": "Chelsea FC",
+    "position": "CAM",
+    "price": 5500000
+  },
+  {
+    "name": "Alejandro Garnacho",
+    "club": "Chelsea FC",
+    "position": "LW",
+    "price": 10500000
+  },
+  {
+    "name": "Jamie Bynoe-Gittens",
+    "club": "Chelsea FC",
+    "position": "LW",
+    "price": 9000000
+  },
+  {
+    "name": "Romeo Lavia",
+    "club": "Chelsea FC",
+    "position": "CDM",
+    "price": 7500000
+  },
+  {
+    "name": "Levi Colwill",
+    "club": "Chelsea FC",
+    "position": "CB",
+    "price": 9500000
+  },
+  {
+    "name": "Benoît Badiashile",
+    "club": "Chelsea FC",
+    "position": "CB",
+    "price": 7000000
+  },
+  {
+    "name": "Andrey Santos",
+    "club": "Chelsea FC",
+    "position": "CM",
+    "price": 4000000
+  },
+  {
+    "name": "Jordan Pickford",
+    "club": "Everton FC",
+    "position": "GK",
+    "price": 8000000
+  },
+  {
+    "name": "Thomas King",
+    "club": "Everton FC",
+    "position": "GK",
+    "price": 1000000
+  },
+  {
+    "name": "Mark Travers",
+    "club": "Everton FC",
+    "position": "GK",
+    "price": 2500000
+  },
+  {
+    "name": "Harry Tyrer",
+    "club": "Everton FC",
+    "position": "GK",
+    "price": 1200000
+  },
+  {
+    "name": "Adam Aznou",
+    "club": "Everton FC",
+    "position": "LB",
+    "price": 3500000
+  },
+  {
+    "name": "Elijah Campbell",
+    "club": "Everton FC",
+    "position": "CB",
+    "price": 1500000
+  },
+  {
+    "name": "Tyler Dibling",
+    "club": "Everton FC",
+    "position": "RW",
+    "price": 4500000
+  },
+  {
+    "name": "Thierno Barry",
+    "club": "Everton FC",
+    "position": "CF",
+    "price": 5000000
+  },
+  {
+    "name": "Tim Iroegbunam",
+    "club": "Everton FC",
+    "position": "CM",
+    "price": 4500000
+  },
+  {
+    "name": "Merlin Röhl",
+    "club": "Everton FC",
+    "position": "CM",
+    "price": 5000000
+  },
+  {
+    "name": "Carlos Alcaraz",
+    "club": "Everton FC",
+    "position": "CM",
+    "price": 5500000
+  },
+  {
+    "name": "Kiernan Dewsbury Hall",
+    "club": "Everton FC",
+    "position": "CM",
+    "price": 7000000
+  },
+  {
+    "name": "Nathan Patterson",
+    "club": "Everton FC",
+    "position": "RB",
+    "price": 4500000
+  },
+  {
+    "name": "Jake O'Brien",
+    "club": "Everton FC",
+    "position": "CB",
+    "price": 5500000
+  },
+  {
+    "name": "Beto",
+    "club": "Everton FC",
+    "position": "CF",
+    "price": 5000000
+  },
+  {
+    "name": "Jarrad Branthwaite",
+    "club": "Everton FC",
+    "position": "CB",
+    "price": 9500000
+  },
+  {
+    "name": "James Garner",
+    "club": "Everton FC",
+    "position": "CDM",
+    "price": 6000000
+  },
+  {
+    "name": "Iliman Ndiaye",
+    "club": "Everton FC",
+    "position": "LW",
+    "price": 6500000
+  },
+  {
+    "name": "Vitalii Mykolenko",
+    "club": "Everton FC",
+    "position": "LB",
+    "price": 5000000
+  },
+  {
+    "name": "Dwight McNeil",
+    "club": "Everton FC",
+    "position": "CAM",
+    "price": 6000000
+  },
+  {
+    "name": "Séamus Coleman",
+    "club": "Everton FC",
+    "position": "RB",
+    "price": 3000000
+  },
+  {
+    "name": "Michael Keane",
+    "club": "Everton FC",
+    "position": "CB",
+    "price": 3500000
+  },
+  {
+    "name": "Jack Grealish",
+    "club": "Everton FC",
+    "position": "LW",
+    "price": 9000000
+  },
+  {
+    "name": "Idrissa Gana Guèye",
+    "club": "Everton FC",
+    "position": "CM",
+    "price": 4000000
+  },
+  {
+    "name": "James Tarkowski",
+    "club": "Everton FC",
+    "position": "CB",
+    "price": 5500000
+  },
+  {
+    "name": "Bernd Leno",
+    "club": "Fulham FC",
+    "position": "GK",
+    "price": 6500000
+  },
+  {
+    "name": "Benjamin Lecomte",
+    "club": "Fulham FC",
+    "position": "GK",
+    "price": 3000000
+  },
+  {
+    "name": "Sam Amissah",
+    "club": "Fulham FC",
+    "position": "Defence",
+    "price": 1000000
+  },
+  {
+    "name": "Seth Ridgeon",
+    "club": "Fulham FC",
+    "position": "Midfield",
+    "price": 1000000
+  },
+  {
+    "name": "Kevin Santos",
+    "club": "Fulham FC",
+    "position": "Offence",
+    "price": 1000000
+  },
+  {
+    "name": "Jonah Kusi-Asare",
+    "club": "Fulham FC",
+    "position": "Offence",
+    "price": 1200000
+  },
+  {
+    "name": "Joshua King",
+    "club": "Fulham FC",
+    "position": "CM",
+    "price": 3000000
+  },
+  {
+    "name": "Calvin Bassey",
+    "club": "Fulham FC",
+    "position": "CB",
+    "price": 6500000
+  },
+  {
+    "name": "Rodrigo Muniz",
+    "club": "Fulham FC",
+    "position": "CF",
+    "price": 6000000
+  },
+  {
+    "name": "Jorge Cuenca",
+    "club": "Fulham FC",
+    "position": "CB",
+    "price": 5500000
+  },
+  {
+    "name": "Emile Smith Rowe",
+    "club": "Fulham FC",
+    "position": "CAM",
+    "price": 8500000
+  },
+  {
+    "name": "Samuel Chukwueze",
+    "club": "Fulham FC",
+    "position": "RW",
+    "price": 7000000
+  },
+  {
+    "name": "Saša Lukić",
+    "club": "Fulham FC",
+    "position": "CM",
+    "price": 5500000
+  },
+  {
+    "name": "Harry Wilson",
+    "club": "Fulham FC",
+    "position": "RW",
+    "price": 5500000
+  },
+  {
+    "name": "Sander Berge",
+    "club": "Fulham FC",
+    "position": "CDM",
+    "price": 6500000
+  },
+  {
+    "name": "Kenny Tete",
+    "club": "Fulham FC",
+    "position": "RB",
+    "price": 4500000
+  },
+  {
+    "name": "Issa Diop",
+    "club": "Fulham FC",
+    "position": "CB",
+    "price": 5000000
+  },
+  {
+    "name": "Adama Traoré",
+    "club": "Fulham FC",
+    "position": "RW",
+    "price": 6000000
+  },
+  {
+    "name": "Harrison Reed",
+    "club": "Fulham FC",
+    "position": "CM",
+    "price": 4000000
+  },
+  {
+    "name": "Tom Cairney",
+    "club": "Fulham FC",
+    "position": "CM",
+    "price": 3500000
+  },
+  {
+    "name": "Ryan Sessegnon",
+    "club": "Fulham FC",
+    "position": "LB",
+    "price": 4000000
+  },
+  {
+    "name": "Antonee Robinson",
+    "club": "Fulham FC",
+    "position": "LB",
+    "price": 7000000
+  },
+  {
+    "name": "Alex Iwobi",
+    "club": "Fulham FC",
+    "position": "LW",
+    "price": 6500000
+  },
+  {
+    "name": "Raúl Jiménez",
+    "club": "Fulham FC",
+    "position": "CF",
+    "price": 4500000
+  },
+  {
+    "name": "Joachim Andersen",
+    "club": "Fulham FC",
+    "position": "CB",
+    "price": 7000000
+  },
+  {
+    "name": "Timothy Castagne",
+    "club": "Fulham FC",
+    "position": "RB",
+    "price": 5000000
+  },
+  {
+    "name": "Alisson",
+    "club": "Liverpool FC",
+    "position": "GK",
+    "price": 10000000
+  },
+  {
+    "name": "Freddie Woodman",
+    "club": "Liverpool FC",
+    "position": "GK",
+    "price": 2500000
+  },
+  {
+    "name": "Giorgi Mamardashvili",
+    "club": "Liverpool FC",
+    "position": "GK",
+    "price": 6000000
+  },
+  {
+    "name": "Armin Pecsi",
+    "club": "Liverpool FC",
+    "position": "GK",
+    "price": 1000000
+  },
+  {
+    "name": "Kornel Miściur",
+    "club": "Liverpool FC",
+    "position": "GK",
+    "price": 1000000
+  },
+  {
+    "name": "Stefan Bajcetic",
+    "club": "Liverpool FC",
+    "position": "Defence",
+    "price": 3500000
+  },
+  {
+    "name": "Wellity Lucky",
+    "club": "Liverpool FC",
+    "position": "Defence",
+    "price": 1000000
+  },
+  {
+    "name": "Carter Pinnington",
+    "club": "Liverpool FC",
+    "position": "Defence",
+    "price": 1000000
+  },
+  {
+    "name": "Kieran Morrison",
+    "club": "Liverpool FC",
+    "position": "Midfield",
+    "price": 1200000
+  },
+  {
+    "name": "Tommy Pilling",
+    "club": "Liverpool FC",
+    "position": "Midfield",
+    "price": 1000000
+  },
+  {
+    "name": "Michael Laffey",
+    "club": "Liverpool FC",
+    "position": "Midfield",
+    "price": 1000000
+  },
+  {
+    "name": "Rio Ngumoha",
+    "club": "Liverpool FC",
+    "position": "Offence",
+    "price": 2500000
+  },
+  {
+    "name": "Trent Doherty",
+    "club": "Liverpool FC",
+    "position": "Offence",
+    "price": 1000000
+  },
+  {
+    "name": "Keyrol Figueroa",
+    "club": "Liverpool FC",
+    "position": "Offence",
+    "price": 1500000
+  },
+  {
+    "name": "Jeremie Frimpong",
+    "club": "Liverpool FC",
+    "position": "Right Midfield",
+    "price": 10500000
+  },
+  {
+    "name": "Calvin Ramsay",
+    "club": "Liverpool FC",
+    "position": "RB",
+    "price": 2500000
+  },
+  {
+    "name": "Ryan Gravenberch",
+    "club": "Liverpool FC",
+    "position": "CDM",
+    "price": 10500000
+  },
+  {
+    "name": "Alexis Mac Allister",
+    "club": "Liverpool FC",
+    "position": "CM",
+    "price": 12000000
+  },
+  {
+    "name": "Florian Wirtz",
+    "club": "Liverpool FC",
+    "position": "CAM",
+    "price": 14500000
+  },
+  {
+    "name": "Dominik Szoboszlai",
+    "club": "Liverpool FC",
+    "position": "CM",
+    "price": 11000000
+  },
+  {
+    "name": "Ibrahima Konaté",
+    "club": "Liverpool FC",
+    "position": "CB",
+    "price": 10500000
+  },
+  {
+    "name": "Curtis Jones",
+    "club": "Liverpool FC",
+    "position": "CM",
+    "price": 7500000
+  },
+  {
+    "name": "Virgil van Dijk",
+    "club": "Liverpool FC",
+    "position": "CB",
+    "price": 11500000
+  },
+  {
+    "name": "Andrew Robertson",
+    "club": "Liverpool FC",
+    "position": "LB",
+    "price": 9000000
+  },
+  {
+    "name": "Joe Gomez",
+    "club": "Liverpool FC",
+    "position": "CB",
+    "price": 6500000
+  },
+  {
+    "name": "Cody Gakpo",
+    "club": "Liverpool FC",
+    "position": "LW",
+    "price": 11000000
+  },
+  {
+    "name": "Alexander Isak",
+    "club": "Liverpool FC",
+    "position": "CF",
+    "price": 13500000
+  },
+  {
+    "name": "Mohamed Salah",
+    "club": "Liverpool FC",
+    "position": "RW",
+    "price": 15000000
+  },
+  {
+    "name": "Wataru Endō",
+    "club": "Liverpool FC",
+    "position": "CDM",
+    "price": 6500000
+  },
+  {
+    "name": "Federico Chiesa",
+    "club": "Liverpool FC",
+    "position": "RW",
+    "price": 7000000
+  },
+  {
+    "name": "Amara Nallo",
+    "club": "Liverpool FC",
+    "position": "CB",
+    "price": 2000000
+  },
+  {
+    "name": "Jayden Danns",
+    "club": "Liverpool FC",
+    "position": "CF",
+    "price": 2500000
+  },
+  {
+    "name": "Trey Nyoni",
+    "club": "Liverpool FC",
+    "position": "CAM",
+    "price": 2500000
+  },
+  {
+    "name": "Giovanni Leoni",
+    "club": "Liverpool FC",
+    "position": "CB",
+    "price": 4500000
+  },
+  {
+    "name": "Conor Bradley",
+    "club": "Liverpool FC",
+    "position": "RB",
+    "price": 5500000
+  },
+  {
+    "name": "Milos Kerkez",
+    "club": "Liverpool FC",
+    "position": "LB",
+    "price": 7000000
+  },
+  {
+    "name": "Kaide Gordon",
+    "club": "Liverpool FC",
+    "position": "RW",
+    "price": 2500000
+  },
+  {
+    "name": "Hugo Ekitike",
+    "club": "Liverpool FC",
+    "position": "CF",
+    "price": 6500000
+  },
+  {
+    "name": "Rhys Williams",
+    "club": "Liverpool FC",
+    "position": "CB",
+    "price": 2000000
+  },
+  {
+    "name": "Gianluigi Donnarumma",
+    "club": "Manchester City FC",
+    "position": "GK",
+    "price": 12000000
+  },
+  {
+    "name": "Marcus Bettinelli",
+    "club": "Manchester City FC",
+    "position": "GK",
+    "price": 2000000
+  },
+  {
+    "name": "Stefan Ortega Moreno",
+    "club": "Manchester City FC",
+    "position": "GK",
+    "price": 5500000
+  },
+  {
+    "name": "James Trafford",
+    "club": "Manchester City FC",
+    "position": "GK",
+    "price": 4000000
+  },
+  {
+    "name": "Kaden Braithwaite",
+    "club": "Manchester City FC",
+    "position": "Defence",
+    "price": 1500000
+  },
+  {
+    "name": "Stephen Mfuni",
+    "club": "Manchester City FC",
+    "position": "Defence",
+    "price": 1000000
+  },
+  {
+    "name": "Nico O'Reilly",
+    "club": "Manchester City FC",
+    "position": "Midfield",
+    "price": 2500000
+  },
+  {
+    "name": "Divine Mukasa",
+    "club": "Manchester City FC",
+    "position": "Midfield",
+    "price": 1000000
+  },
+  {
+    "name": "Ryan McAidoo",
+    "club": "Manchester City FC",
+    "position": "Midfield",
+    "price": 1500000
+  },
+  {
+    "name": "Jaden Heskey",
+    "club": "Manchester City FC",
+    "position": "Offence",
+    "price": 1200000
+  },
+  {
+    "name": "Reigan Heskey",
+    "club": "Manchester City FC",
+    "position": "Offence",
+    "price": 1000000
+  },
+  {
+    "name": "Matheus Nunes",
+    "club": "Manchester City FC",
+    "position": "CM",
+    "price": 7000000
+  },
+  {
+    "name": "Omar Marmoush",
+    "club": "Manchester City FC",
+    "position": "CF",
+    "price": 11500000
+  },
+  {
+    "name": "Erling Haaland",
+    "club": "Manchester City FC",
+    "position": "CF",
+    "price": 15000000
+  },
+  {
+    "name": "Rúben Dias",
+    "club": "Manchester City FC",
+    "position": "CB",
+    "price": 12500000
+  },
+  {
+    "name": "Rayan Aït Nouri",
+    "club": "Manchester City FC",
+    "position": "LB",
+    "price": 8500000
+  },
+  {
+    "name": "Nathan Aké",
+    "club": "Manchester City FC",
+    "position": "CB",
+    "price": 8000000
+  },
+  {
+    "name": "Phil Foden",
+    "club": "Manchester City FC",
+    "position": "RW",
+    "price": 14000000
+  },
+  {
+    "name": "Tijjani Reijnders",
+    "club": "Manchester City FC",
+    "position": "CM",
+    "price": 9500000
+  },
+  {
+    "name": "Kalvin Phillips",
+    "club": "Manchester City FC",
+    "position": "CDM",
+    "price": 5000000
+  },
+  {
+    "name": "John Stones",
+    "club": "Manchester City FC",
+    "position": "CB",
+    "price": 8500000
+  },
+  {
+    "name": "Bernardo Silva",
+    "club": "Manchester City FC",
+    "position": "CAM",
+    "price": 12000000
+  },
+  {
+    "name": "Rodri",
+    "club": "Manchester City FC",
+    "position": "CDM",
+    "price": 14500000
+  },
+  {
+    "name": "Mateo Kovačić",
+    "club": "Manchester City FC",
+    "position": "CM",
+    "price": 8000000
+  },
+  {
+    "name": "Abdukodir Khusanov",
+    "club": "Manchester City FC",
+    "position": "CB",
+    "price": 6000000
+  },
+  {
+    "name": "Rico Lewis",
+    "club": "Manchester City FC",
+    "position": "RB",
+    "price": 6500000
+  },
+  {
+    "name": "Oscar Bobb",
+    "club": "Manchester City FC",
+    "position": "RW",
+    "price": 5000000
+  },
+  {
+    "name": "Nico Gonzalez",
+    "club": "Manchester City FC",
+    "position": "CM",
+    "price": 9000000
+  },
+  {
+    "name": "Sávio",
+    "club": "Manchester City FC",
+    "position": "RW",
+    "price": 7500000
+  },
+  {
+    "name": "Rayan Cherki",
+    "club": "Manchester City FC",
+    "position": "CAM",
+    "price": 8500000
+  },
+  {
+    "name": "Joško Gvardiol",
+    "club": "Manchester City FC",
+    "position": "LB",
+    "price": 12000000
+  },
+  {
+    "name": "Jeremy Doku",
+    "club": "Manchester City FC",
+    "position": "LW",
+    "price": 10500000
+  },
+  {
+    "name": "Tom Heaton",
+    "club": "Manchester United FC",
+    "position": "GK",
+    "price": 2000000
+  },
+  {
+    "name": "Altay Bayındır",
+    "club": "Manchester United FC",
+    "position": "GK",
+    "price": 4000000
+  },
+  {
+    "name": "Senne Lammens",
+    "club": "Manchester United FC",
+    "position": "GK",
+    "price": 1500000
+  },
+  {
+    "name": "Tyler Fredricson",
+    "club": "Manchester United FC",
+    "position": "Defence",
+    "price": 1000000
+  },
+  {
+    "name": "Diego León",
+    "club": "Manchester United FC",
+    "position": "Defence",
+    "price": 1200000
+  },
+  {
+    "name": "Jack Fletcher",
+    "club": "Manchester United FC",
+    "position": "Midfield",
+    "price": 1000000
+  },
+  {
+    "name": "Chido Obi-Martin",
+    "club": "Manchester United FC",
+    "position": "Offence",
+    "price": 2500000
+  },
+  {
+    "name": "Shea Lacey",
+    "club": "Manchester United FC",
+    "position": "Offence",
+    "price": 1500000
+  },
+  {
+    "name": "Ayden Heaven",
+    "club": "Manchester United FC",
+    "position": "CB",
+    "price": 2000000
+  },
+  {
+    "name": "Patrick Dorgu",
+    "club": "Manchester United FC",
+    "position": "LB",
+    "price": 8000000
+  },
+  {
+    "name": "Kobbie Mainoo",
+    "club": "Manchester United FC",
+    "position": "CM",
+    "price": 9000000
+  },
+  {
+    "name": "Leny Yoro",
+    "club": "Manchester United FC",
+    "position": "CB",
+    "price": 9500000
+  },
+  {
+    "name": "Amad Diallo",
+    "club": "Manchester United FC",
+    "position": "RW",
+    "price": 8500000
+  },
+  {
+    "name": "Benjamin Šeško",
+    "club": "Manchester United FC",
+    "position": "CF",
+    "price": 13000000
+  },
+  {
+    "name": "Joshua Zirkzee",
+    "club": "Manchester United FC",
+    "position": "CF",
+    "price": 7500000
+  },
+  {
+    "name": "Lisandro Martínez",
+    "club": "Manchester United FC",
+    "position": "CB",
+    "price": 10000000
+  },
+  {
+    "name": "Matheus Cunha",
+    "club": "Manchester United FC",
+    "position": "CF",
+    "price": 10500000
+  },
+  {
+    "name": "Manuel Ugarte",
+    "club": "Manchester United FC",
+    "position": "CDM",
+    "price": 9000000
+  },
+  {
+    "name": "Diogo Dalot",
+    "club": "Manchester United FC",
+    "position": "RB",
+    "price": 7500000
+  },
+  {
+    "name": "Bryan Mbeumo",
+    "club": "Manchester United FC",
+    "position": "RW",
+    "price": 9500000
+  },
+  {
+    "name": "Luke Shaw",
+    "club": "Manchester United FC",
+    "position": "LB",
+    "price": 6500000
+  },
+  {
+    "name": "Mason Mount",
+    "club": "Manchester United FC",
+    "position": "CAM",
+    "price": 7000000
+  },
+  {
+    "name": "Noussair Mazraoui",
+    "club": "Manchester United FC",
+    "position": "RB",
+    "price": 7000000
+  },
+  {
+    "name": "Matthijs de Ligt",
+    "club": "Manchester United FC",
+    "position": "CB",
+    "price": 10000000
+  },
+  {
+    "name": "Tyrell Malacia",
+    "club": "Manchester United FC",
+    "position": "LB",
+    "price": 4500000
+  },
+  {
+    "name": "Harry Maguire",
+    "club": "Manchester United FC",
+    "position": "CB",
+    "price": 5500000
+  },
+  {
+    "name": "Bruno Fernandes",
+    "club": "Manchester United FC",
+    "position": "CAM",
+    "price": 12500000
+  },
+  {
+    "name": "Casemiro",
+    "club": "Manchester United FC",
+    "position": "CDM",
+    "price": 6000000
+  },
+  {
+    "name": "Nick Pope",
+    "club": "Newcastle United FC",
+    "position": "GK",
+    "price": 7000000
+  },
+  {
+    "name": "John Ruddy",
+    "club": "Newcastle United FC",
+    "position": "GK",
+    "price": 2000000
+  },
+  {
+    "name": "Mark Gillespie",
+    "club": "Newcastle United FC",
+    "position": "GK",
+    "price": 1500000
+  },
+  {
+    "name": "Aaron Ramsdale",
+    "club": "Newcastle United FC",
+    "position": "GK",
+    "price": 6500000
+  },
+  {
+    "name": "Max Thompson",
+    "club": "Newcastle United FC",
+    "position": "GK",
+    "price": 1000000
+  },
+  {
+    "name": "Lewis Hall",
+    "club": "Newcastle United FC",
+    "position": "Midfield",
+    "price": 6500000
+  },
+  {
+    "name": "Sam Alabi",
+    "club": "Newcastle United FC",
+    "position": "Midfield",
+    "price": 1000000
+  },
+  {
+    "name": "Nick Woltemade",
+    "club": "Newcastle United FC",
+    "position": "Offence",
+    "price": 3500000
+  },
+  {
+    "name": "Sean Neave",
+    "club": "Newcastle United FC",
+    "position": "Offence",
+    "price": 1000000
+  },
+  {
+    "name": "Seung-soo Park",
+    "club": "Newcastle United FC",
+    "position": "Offence",
+    "price": 1200000
+  },
+  {
+    "name": "Joelinton",
+    "club": "Newcastle United FC",
+    "position": "CM",
+    "price": 8500000
+  },
+  {
+    "name": "Harvey Barnes",
+    "club": "Newcastle United FC",
+    "position": "LW",
+    "price": 7500000
+  },
+  {
+    "name": "Jacob Murphy",
+    "club": "Newcastle United FC",
+    "position": "RW",
+    "price": 5500000
+  },
+  {
+    "name": "Jamaal Lascelles",
+    "club": "Newcastle United FC",
+    "position": "CB",
+    "price": 3500000
+  },
+  {
+    "name": "Anthony Gordon",
+    "club": "Newcastle United FC",
+    "position": "LW",
+    "price": 11000000
+  },
+  {
+    "name": "Joe Willock",
+    "club": "Newcastle United FC",
+    "position": "CM",
+    "price": 6500000
+  },
+  {
+    "name": "Dan Burn",
+    "club": "Newcastle United FC",
+    "position": "CB",
+    "price": 5500000
+  },
+  {
+    "name": "Kieran Trippier",
+    "club": "Newcastle United FC",
+    "position": "RB",
+    "price": 5000000
+  },
+  {
+    "name": "Sandro Tonali",
+    "club": "Newcastle United FC",
+    "position": "CM",
+    "price": 11500000
+  },
+  {
+    "name": "Emil Krafth",
+    "club": "Newcastle United FC",
+    "position": "RB",
+    "price": 3500000
+  },
+  {
+    "name": "Bruno Guimarães",
+    "club": "Newcastle United FC",
+    "position": "CDM",
+    "price": 13000000
+  },
+  {
+    "name": "Yoane Wissa",
+    "club": "Newcastle United FC",
+    "position": "CF",
+    "price": 7500000
+  },
+  {
+    "name": "Fabian Schär",
+    "club": "Newcastle United FC",
+    "position": "CB",
+    "price": 5500000
+  },
+  {
+    "name": "Alex Murphy",
+    "club": "Newcastle United FC",
+    "position": "LB",
+    "price": 2000000
+  },
+  {
+    "name": "Lewis Miley",
+    "club": "Newcastle United FC",
+    "position": "CM",
+    "price": 4500000
+  },
+  {
+    "name": "William Osula",
+    "club": "Newcastle United FC",
+    "position": "CF",
+    "price": 5000000
+  },
+  {
+    "name": "Valentino Livramento",
+    "club": "Newcastle United FC",
+    "position": "RB",
+    "price": 6500000
+  },
+  {
+    "name": "Anthony Elanga",
+    "club": "Newcastle United FC",
+    "position": "RW",
+    "price": 7000000
+  },
+  {
+    "name": "Harrison Ashby",
+    "club": "Newcastle United FC",
+    "position": "RB",
+    "price": 2500000
+  },
+  {
+    "name": "Malick Thiaw",
+    "club": "Newcastle United FC",
+    "position": "CB",
+    "price": 8500000
+  },
+  {
+    "name": "Jacob Ramsey",
+    "club": "Newcastle United FC",
+    "position": "Left Midfield",
+    "price": 8000000
+  },
+  {
+    "name": "Sven Botman",
+    "club": "Newcastle United FC",
+    "position": "CB",
+    "price": 10000000
+  },
+  {
+    "name": "Simon Moore",
+    "club": "Sunderland AFC",
+    "position": "GK",
+    "price": 2000000
+  },
+  {
+    "name": "Anthony Patterson",
+    "club": "Sunderland AFC",
+    "position": "GK",
+    "price": 4000000
+  },
+  {
+    "name": "Robin Roefs",
+    "club": "Sunderland AFC",
+    "position": "GK",
+    "price": 2500000
+  },
+  {
+    "name": "Blondy Noukeu",
+    "club": "Sunderland AFC",
+    "position": "GK",
+    "price": 1500000
+  },
+  {
+    "name": "Arthur Masuaku",
+    "club": "Sunderland AFC",
+    "position": "Defence",
+    "price": 3000000
+  },
+  {
+    "name": "Leo Hjelde",
+    "club": "Sunderland AFC",
+    "position": "Defence",
+    "price": 2000000
+  },
+  {
+    "name": "Noah Sadiki",
+    "club": "Sunderland AFC",
+    "position": "Defence",
+    "price": 1500000
+  },
+  {
+    "name": "Jenson Jones",
+    "club": "Sunderland AFC",
+    "position": "Defence",
+    "price": 1200000
+  },
+  {
+    "name": "Jay Matete",
+    "club": "Sunderland AFC",
+    "position": "Midfield",
+    "price": 2000000
+  },
+  {
+    "name": "Timur Tuterov",
+    "club": "Sunderland AFC",
+    "position": "Midfield",
+    "price": 1000000
+  },
+  {
+    "name": "Chemsdine Talbi",
+    "club": "Sunderland AFC",
+    "position": "Midfield",
+    "price": 1500000
+  },
+  {
+    "name": "Harrison Jones",
+    "club": "Sunderland AFC",
+    "position": "Midfield",
+    "price": 1200000
+  },
+  {
+    "name": "Jaydon Jones",
+    "club": "Sunderland AFC",
+    "position": "Midfield",
+    "price": 1000000
+  },
+  {
+    "name": "Jack Whittaker",
+    "club": "Sunderland AFC",
+    "position": "Midfield",
+    "price": 1000000
+  },
+  {
+    "name": "Ben Middlemas",
+    "club": "Sunderland AFC",
+    "position": "Offence",
+    "price": 1000000
+  },
+  {
+    "name": "Ian Poveda",
+    "club": "Sunderland AFC",
+    "position": "Offence",
+    "price": 2500000
+  },
+  {
+    "name": "Simon Adingra",
+    "club": "Sunderland AFC",
+    "position": "LW",
+    "price": 7000000
+  },
+  {
+    "name": "Abdoullah Ba",
+    "club": "Sunderland AFC",
+    "position": "Right Midfield",
+    "price": 2500000
+  },
+  {
+    "name": "Aji Alese",
+    "club": "Sunderland AFC",
+    "position": "CB",
+    "price": 3000000
+  },
+  {
+    "name": "Timothee Pembele",
+    "club": "Sunderland AFC",
+    "position": "RB",
+    "price": 3500000
+  },
+  {
+    "name": "Daniel Ballard",
+    "club": "Sunderland AFC",
+    "position": "CB",
+    "price": 4500000
+  },
+  {
+    "name": "Trai Hume",
+    "club": "Sunderland AFC",
+    "position": "RB",
+    "price": 4000000
+  },
+  {
+    "name": "Enzo Le Fée",
+    "club": "Sunderland AFC",
+    "position": "CM",
+    "price": 6500000
+  },
+  {
+    "name": "Brian Brobbey",
+    "club": "Sunderland AFC",
+    "position": "CF",
+    "price": 8500000
+  },
+  {
+    "name": "Wilson Isidor",
+    "club": "Sunderland AFC",
+    "position": "CF",
+    "price": 5500000
+  },
+  {
+    "name": "Omar Alderete",
+    "club": "Sunderland AFC",
+    "position": "CB",
+    "price": 5000000
+  },
+  {
+    "name": "Reinildo",
+    "club": "Sunderland AFC",
+    "position": "LB",
+    "price": 5500000
+  },
+  {
+    "name": "Bertrand Traoré",
+    "club": "Sunderland AFC",
+    "position": "RW",
+    "price": 5000000
+  },
+  {
+    "name": "Nordi Mukiele",
+    "club": "Sunderland AFC",
+    "position": "RB",
+    "price": 6000000
+  },
+  {
+    "name": "Lutsharel Geertruida",
+    "club": "Sunderland AFC",
+    "position": "RB",
+    "price": 7500000
+  },
+  {
+    "name": "Luke O'Nien",
+    "club": "Sunderland AFC",
+    "position": "CB",
+    "price": 3500000
+  },
+  {
+    "name": "Granit Xhaka",
+    "club": "Sunderland AFC",
+    "position": "CDM",
+    "price": 9000000
+  },
+  {
+    "name": "Ahmed Abdullahi",
+    "club": "Sunderland AFC",
+    "position": "CF",
+    "price": 2000000
+  },
+  {
+    "name": "Joseph Anderson",
+    "club": "Sunderland AFC",
+    "position": "CB",
+    "price": 1500000
+  },
+  {
+    "name": "Chris Rigg",
+    "club": "Sunderland AFC",
+    "position": "CM",
+    "price": 5000000
+  },
+  {
+    "name": "Eliezer Mayenda",
+    "club": "Sunderland AFC",
+    "position": "CF",
+    "price": 3500000
+  },
+  {
+    "name": "Romaine Mundle",
+    "club": "Sunderland AFC",
+    "position": "LW",
+    "price": 4500000
+  },
+  {
+    "name": "Dan Neil",
+    "club": "Sunderland AFC",
+    "position": "CM",
+    "price": 5500000
+  },
+  {
+    "name": "Dennis Cirkin",
+    "club": "Sunderland AFC",
+    "position": "LB",
+    "price": 6500000
+  },
+  {
+    "name": "Habib Diarra",
+    "club": "Sunderland AFC",
+    "position": "CM",
+    "price": 7000000
+  },
+  {
+    "name": "Guglielmo Vicario",
+    "club": "Tottenham Hotspur FC",
+    "position": "GK",
+    "price": 7500000
+  },
+  {
+    "name": "Brandon Austin",
+    "club": "Tottenham Hotspur FC",
+    "position": "GK",
+    "price": 2000000
+  },
+  {
+    "name": "Antonín Kinský",
+    "club": "Tottenham Hotspur FC",
+    "position": "GK",
+    "price": 4500000
+  },
+  {
+    "name": "Luca Gunter",
+    "club": "Tottenham Hotspur FC",
+    "position": "GK",
+    "price": 1000000
+  },
+  {
+    "name": "Kota Takai",
+    "club": "Tottenham Hotspur FC",
+    "position": "Defence",
+    "price": 1000000
+  },
+  {
+    "name": "Malachi Hardy",
+    "club": "Tottenham Hotspur FC",
+    "position": "Defence",
+    "price": 1000000
+  },
+  {
+    "name": "Jun'ai Byfield",
+    "club": "Tottenham Hotspur FC",
+    "position": "Defence",
+    "price": 1000000
+  },
+  {
+    "name": "James Rowswell",
+    "club": "Tottenham Hotspur FC",
+    "position": "Defence",
+    "price": 1000000
+  },
+  {
+    "name": "Callum Olusesi",
+    "club": "Tottenham Hotspur FC",
+    "position": "Midfield",
+    "price": 1200000
+  },
+  {
+    "name": "Rio Kyerematen",
+    "club": "Tottenham Hotspur FC",
+    "position": "Midfield",
+    "price": 1500000
+  },
+  {
+    "name": "Luca Williams-Barnett",
+    "club": "Tottenham Hotspur FC",
+    "position": "Offence",
+    "price": 1000000
+  },
+  {
+    "name": "Tynan Thompson",
+    "club": "Tottenham Hotspur FC",
+    "position": "Offence",
+    "price": 1000000
+  },
+  {
+    "name": "Yusuf Akhamrich",
+    "club": "Tottenham Hotspur FC",
+    "position": "Offence",
+    "price": 1200000
+  },
+  {
+    "name": "Radu Drăgușin",
+    "club": "Tottenham Hotspur FC",
+    "position": "CB",
+    "price": 7000000
+  },
+
+  {
+    "name": "Mickey van de Ven",
+    "club": "Tottenham Hotspur FC",
+    "position": "CB",
+    "price": 11000000
+  },
+  {
+    "name": "Brennan Johnson",
+    "club": "Tottenham Hotspur FC",
+    "position": "RW",
+    "price": 8500000
+  },
+  {
+    "name": "Pedro Porro",
+    "club": "Tottenham Hotspur FC",
+    "position": "RB",
+    "price": 9500000
+  },
+  {
+    "name": "Djed Spence",
+    "club": "Tottenham Hotspur FC",
+    "position": "RB",
+    "price": 4000000
+  },
+  {
+    "name": "Mohammed Kudus",
+    "club": "Tottenham Hotspur FC",
+    "position": "RW",
+    "price": 10500000
+  },
+  {
+    "name": "Christian Romero",
+    "club": "Tottenham Hotspur FC",
+    "position": "CB",
+    "price": 11500000
+  },
+  {
+    "name": "João Palhinha",
+    "club": "Tottenham Hotspur FC",
+    "position": "CDM",
+    "price": 10000000
+  },
+  {
+    "name": "Randal Kolo Muani",
+    "club": "Tottenham Hotspur FC",
+    "position": "CF",
+    "price": 9500000
+  },
+  {
+    "name": "Yves Bissouma",
+    "club": "Tottenham Hotspur FC",
+    "position": "CDM",
+    "price": 7000000
+  },
+  {
+    "name": "Richarlison",
+    "club": "Tottenham Hotspur FC",
+    "position": "CF",
+    "price": 7500000
+  },
+  {
+    "name": "Ben Davies",
+    "club": "Tottenham Hotspur FC",
+    "position": "CB",
+    "price": 4500000
+  },
+  {
+    "name": "Dominic Solanke",
+    "club": "Tottenham Hotspur FC",
+    "position": "CF",
+    "price": 9000000
+  },
+  {
+    "name": "Kevin Danso",
+    "club": "Tottenham Hotspur FC",
+    "position": "CB",
+    "price": 7000000
+  },
+  {
+    "name": "James Maddison",
+    "club": "Tottenham Hotspur FC",
+    "position": "CAM",
+    "price": 11000000
+  },
+  {
+    "name": "Rodrigo Bentancur",
+    "club": "Tottenham Hotspur FC",
+    "position": "CDM",
+    "price": 8000000
+  },
+  {
+    "name": "Dejan Kulusevski",
+    "club": "Tottenham Hotspur FC",
+    "position": "CAM",
+    "price": 10500000
+  },
+  {
+    "name": "Lucas Bergvall",
+    "club": "Tottenham Hotspur FC",
+    "position": "CM",
+    "price": 5500000
+  },
+  {
+    "name": "Wilson Odobert",
+    "club": "Tottenham Hotspur FC",
+    "position": "RW",
+    "price": 6500000
+  },
+  {
+    "name": "Archie Gray",
+    "club": "Tottenham Hotspur FC",
+    "position": "RB",
+    "price": 6000000
+  },
+  {
+    "name": "Mathys Tel",
+    "club": "Tottenham Hotspur FC",
+    "position": "CF",
+    "price": 8500000
+  },
+  {
+    "name": "Pape Sarr",
+    "club": "Tottenham Hotspur FC",
+    "position": "CM",
+    "price": 7500000
+  },
+  {
+    "name": "Destiny Udogie",
+    "club": "Tottenham Hotspur FC",
+    "position": "LB",
+    "price": 8500000
+  },
+  {
+    "name": "Dane Scarlett",
+    "club": "Tottenham Hotspur FC",
+    "position": "CF",
+    "price": 3000000
+  },
+  {
+    "name": "Xavi Simons",
+    "club": "Tottenham Hotspur FC",
+    "position": "CAM",
+    "price": 12500000
+  },
+  {
+    "name": "Sam Johnstone",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "GK",
+    "price": 4500000
+  },
+  {
+    "name": "Daniel Bentley",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "GK",
+    "price": 2500000
+  },
+  {
+    "name": "José Sá",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "GK",
+    "price": 5000000
+  },
+  {
+    "name": "David Wolfe",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "Defence",
+    "price": 1000000
+  },
+  {
+    "name": "Jhon Arias",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "Midfield",
+    "price": 7000000
+  },
+  {
+    "name": "Fer López",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "Midfield",
+    "price": 2500000
+  },
+  {
+    "name": "Toluwalas Arokodare",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "Offence",
+    "price": 5500000
+  },
+  {
+    "name": "Jackson Tchatchoua",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "Offence",
+    "price": 4500000
+  },
+  {
+    "name": "Jørgen Strand Larsen",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "Offence",
+    "price": 7500000
+  },
+  {
+    "name": "Mateus Mané",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "Offence",
+    "price": 2000000
+  },
+  {
+    "name": "Enso Gonzalez",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "LW",
+    "price": 3500000
+  },
+  {
+    "name": "Nathan Fraser",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "CF",
+    "price": 2500000
+  },
+  {
+    "name": "Hugo Bueno",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "LB",
+    "price": 4000000
+  },
+  {
+    "name": "Yerson Mosquera",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "CB",
+    "price": 5500000
+  },
+  {
+    "name": "Rodrigo Gomes",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "Right Midfield",
+    "price": 6000000
+  },
+  {
+    "name": "Emmanuel Agbadou",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "CB",
+    "price": 6500000
+  },
+  {
+    "name": "André",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "CDM",
+    "price": 7500000
+  },
+  {
+    "name": "João Gomes",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "CM",
+    "price": 9000000
+  },
+  {
+    "name": "Tawanda Chirewa",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "CAM",
+    "price": 2500000
+  },
+  {
+    "name": "Toti Gomes",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "CB",
+    "price": 5000000
+  },
+  {
+    "name": "Ki-Jana Hoever",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "RB",
+    "price": 4000000
+  },
+  {
+    "name": "Ladislav Krejčí",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "CB",
+    "price": 6500000
+  },
+  {
+    "name": "Marshall Munetsi",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "CM",
+    "price": 6500000
+  },
+  {
+    "name": "Santiago Bueno",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "CB",
+    "price": 6000000
+  },
+  {
+    "name": "Matt Doherty",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "RB",
+    "price": 3500000
+  },
+  {
+    "name": "Hwang Heechan",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "CF",
+    "price": 7000000
+  },
+  {
+    "name": "Jean-Ricner Bellegarde",
+    "club": "Wolverhampton Wanderers FC",
+    "position": "CM",
+    "price": 5500000
+  },
+  {
+    "name": "Martin Dúbravka",
+    "club": "Burnley FC",
+    "position": "GK",
+    "price": 4000000
+  },
+  {
+    "name": "Václav Hladký",
+    "club": "Burnley FC",
+    "position": "GK",
+    "price": 3000000
+  },
+  {
+    "name": "Max Weiss",
+    "club": "Burnley FC",
+    "position": "GK",
+    "price": 1000000
+  },
+  {
+    "name": "Oliver Sonne",
+    "club": "Burnley FC",
+    "position": "Defence",
+    "price": 4500000
+  },
+  {
+    "name": "Murray Campbell",
+    "club": "Burnley FC",
+    "position": "Defence",
+    "price": 1200000
+  },
+  {
+    "name": "Marley Leuluai",
+    "club": "Burnley FC",
+    "position": "Defence",
+    "price": 1000000
+  },
+  {
+    "name": "Enock Agyei",
+    "club": "Burnley FC",
+    "position": "Midfield",
+    "price": 2000000
+  },
+  {
+    "name": "Mike Trésor",
+    "club": "Burnley FC",
+    "position": "Midfield",
+    "price": 5500000
+  },
+  {
+    "name": "Josh Laurent",
+    "club": "Burnley FC",
+    "position": "Midfield",
+    "price": 4500000
+  },
+  {
+    "name": "Oliver Pimlott",
+    "club": "Burnley FC",
+    "position": "Midfield",
+    "price": 1000000
+  },
+  {
+    "name": "Ellis Clark",
+    "club": "Burnley FC",
+    "position": "Midfield",
+    "price": 1000000
+  },
+  {
+    "name": "George Brierley",
+    "club": "Burnley FC",
+    "position": "Midfield",
+    "price": 1000000
+  },
+  {
+    "name": "Zeki Amdouni",
+    "club": "Burnley FC",
+    "position": "Offence",
+    "price": 6000000
+  },
+  {
+    "name": "Jaydon Banel",
+    "club": "Burnley FC",
+    "position": "Offence",
+    "price": 2000000
+  },
+  {
+    "name": "Brandon Pouani",
+    "club": "Burnley FC",
+    "position": "Offence",
+    "price": 1500000
+  },
+  {
+    "name": "Armando Broja",
+    "club": "Burnley FC",
+    "position": "CF",
+    "price": 6500000
+  },
+  {
+    "name": "Zian Flemming",
+    "club": "Burnley FC",
+    "position": "CAM",
+    "price": 5500000
+  },
+  {
+    "name": "Florentino",
+    "club": "Burnley FC",
+    "position": "CDM",
+    "price": 5000000
+  },
+  {
+    "name": "Lyle Foster",
+    "club": "Burnley FC",
+    "position": "CF",
+    "price": 6000000
+  },
+  {
+    "name": "Hjalmar Ekdal",
+    "club": "Burnley FC",
+    "position": "CB",
+    "price": 4500000
+  },
+  {
+    "name": "Joe Worrall",
+    "club": "Burnley FC",
+    "position": "CB",
+    "price": 5000000
+  },
+  {
+    "name": "Jacob Bruun Larsen",
+    "club": "Burnley FC",
+    "position": "LW",
+    "price": 5500000
+  },
+  {
+    "name": "Hannes Delcroix",
+    "club": "Burnley FC",
+    "position": "CB",
+    "price": 5500000
+  },
+  {
+    "name": "Josh Cullen",
+    "club": "Burnley FC",
+    "position": "CDM",
+    "price": 6000000
+  },
+  {
+    "name": "Ashley Barnes",
+    "club": "Burnley FC",
+    "position": "CF",
+    "price": 3000000
+  },
+  {
+    "name": "Connor Roberts",
+    "club": "Burnley FC",
+    "position": "RB",
+    "price": 4000000
+  },
+  {
+    "name": "Louis Beyer",
+    "club": "Burnley FC",
+    "position": "CB",
+    "price": 4500000
+  },
+  {
+    "name": "Marcus Edwards",
+    "club": "Burnley FC",
+    "position": "RW",
+    "price": 6500000
+  },
+  {
+    "name": "Axel Tuanzebe",
+    "club": "Burnley FC",
+    "position": "RB",
+    "price": 4500000
+  },
+  {
+    "name": "Kyle Walker",
+    "club": "Burnley FC",
+    "position": "RB",
+    "price": 4000000
+  },
+  {
+    "name": "Bashir Humphreys",
+    "club": "Burnley FC",
+    "position": "CB",
+    "price": 5000000
+  },
+  {
+    "name": "Quilindschy Hartman",
+    "club": "Burnley FC",
+    "position": "LB",
+    "price": 4500000
+  },
+  {
+    "name": "Lucas Pires",
+    "club": "Burnley FC",
+    "position": "LB",
+    "price": 4500000
+  },
+  {
+    "name": "Maxime Estève",
+    "club": "Burnley FC",
+    "position": "CB",
+    "price": 5500000
+  },
+  {
+    "name": "Loum Tchaouna",
+    "club": "Burnley FC",
+    "position": "RW",
+    "price": 5000000
+  },
+  {
+    "name": "Hannibal Mejbri",
+    "club": "Burnley FC",
+    "position": "CAM",
+    "price": 6500000
+  },
+  {
+    "name": "Chimuanya Ugochukwu",
+    "club": "Burnley FC",
+    "position": "CDM",
+    "price": 5500000
+  },
+  {
+    "name": "Jaidon Anthony",
+    "club": "Burnley FC",
+    "position": "LW",
+    "price": 5500000
+  },
+  {
+    "name": "Lucas Perri",
+    "club": "Leeds United FC",
+    "position": "GK",
+    "price": 5000000
+  },
+  {
+    "name": "Alex Cairns",
+    "club": "Leeds United FC",
+    "position": "GK",
+    "price": 2000000
+  },
+  {
+    "name": "Karl Darlow",
+    "club": "Leeds United FC",
+    "position": "GK",
+    "price": 2500000
+  },
+  {
+    "name": "Illan Meslier",
+    "club": "Leeds United FC",
+    "position": "GK",
+    "price": 6000000
+  },
+  {
+    "name": "Harry Gray",
+    "club": "Leeds United FC",
+    "position": "Offence",
+    "price": 1500000
+  },
+  {
+    "name": "Wilfried Gnonto",
+    "club": "Leeds United FC",
+    "position": "RW",
+    "price": 8500000
+  },
+  {
+    "name": "Brenden Aaronson",
+    "club": "Leeds United FC",
+    "position": "CAM",
+    "price": 7000000
+  },
+  {
+    "name": "Ilia Gruev",
+    "club": "Leeds United FC",
+    "position": "CDM",
+    "price": 5500000
+  },
+  {
+    "name": "Jaka Bijol",
+    "club": "Leeds United FC",
+    "position": "CB",
+    "price": 7500000
+  },
+  {
+    "name": "Joël Piroe",
+    "club": "Leeds United FC",
+    "position": "CAM",
+    "price": 7500000
+  },
+  {
+    "name": "Anton Stach",
+    "club": "Leeds United FC",
+    "position": "CM",
+    "price": 6000000
+  },
+  {
+    "name": "Ao Tanaka",
+    "club": "Leeds United FC",
+    "position": "CM",
+    "price": 6500000
+  },
+  {
+    "name": "Gabriel Gudmundsson",
+    "club": "Leeds United FC",
+    "position": "LB",
+    "price": 6500000
+  },
+  {
+    "name": "Noah Okafor",
+    "club": "Leeds United FC",
+    "position": "LW",
+    "price": 8000000
+  },
+  {
+    "name": "Sebastiaan Bornauw",
+    "club": "Leeds United FC",
+    "position": "CB",
+    "price": 5500000
+  },
+  {
+    "name": "Sam Byram",
+    "club": "Leeds United FC",
+    "position": "RB",
+    "price": 3500000
+  },
+  {
+    "name": "Daniel James",
+    "club": "Leeds United FC",
+    "position": "RW",
+    "price": 7000000
+  },
+  {
+    "name": "Lukas Nmecha",
+    "club": "Leeds United FC",
+    "position": "CF",
+    "price": 7500000
+  },
+  {
+    "name": "Dominic Calvert-Lewin",
+    "club": "Leeds United FC",
+    "position": "CF",
+    "price": 8000000
+  },
+  {
+    "name": "Ethan Ampadu",
+    "club": "Leeds United FC",
+    "position": "CDM",
+    "price": 7000000
+  },
+  {
+    "name": "Joe Rodon",
+    "club": "Leeds United FC",
+    "position": "CB",
+    "price": 7000000
+  },
+  {
+    "name": "James Justin",
+    "club": "Leeds United FC",
+    "position": "RB",
+    "price": 7500000
+  },
+  {
+    "name": "Sean Longstaff",
+    "club": "Leeds United FC",
+    "position": "CM",
+    "price": 6000000
+  },
+  {
+    "name": "Jack Harrison",
+    "club": "Leeds United FC",
+    "position": "RW",
+    "price": 6500000
+  },
+  {
+    "name": "Jayden Bogle",
+    "club": "Leeds United FC",
+    "position": "RB",
+    "price": 6000000
+  },
+  {
+    "name": "Pascal Struijk",
+    "club": "Leeds United FC",
+    "position": "CB",
+    "price": 7000000
+  },
+  {
+    "name": "John",
+    "club": "Nottingham Forest FC",
+    "position": "GK",
+    "price": 3000000
+  },
+  {
+    "name": "Matz Sels",
+    "club": "Nottingham Forest FC",
+    "position": "GK",
+    "price": 5500000
+  },
+  {
+    "name": "Angus Gunn",
+    "club": "Nottingham Forest FC",
+    "position": "GK",
+    "price": 4000000
+  },
+  {
+    "name": "Keehan Willows",
+    "club": "Nottingham Forest FC",
+    "position": "GK",
+    "price": 1000000
+  },
+  {
+    "name": "Jair Paula",
+    "club": "Nottingham Forest FC",
+    "position": "Defence",
+    "price": 2000000
+  },
+  {
+    "name": "Jack Thompson",
+    "club": "Nottingham Forest FC",
+    "position": "Defence",
+    "price": 1500000
+  },
+  {
+    "name": "Ben Hammond",
+    "club": "Nottingham Forest FC",
+    "position": "Defence",
+    "price": 1000000
+  },
+  {
+    "name": "Jimmy Sinclair",
+    "club": "Nottingham Forest FC",
+    "position": "Midfield",
+    "price": 1000000
+  },
+  {
+    "name": "Archie Whitehall",
+    "club": "Nottingham Forest FC",
+    "position": "Midfield",
+    "price": 1000000
+  },
+  {
+    "name": "Igor Jesus",
+    "club": "Nottingham Forest FC",
+    "position": "Offence",
+    "price": 6500000
+  },
+  {
+    "name": "Zyan Blake",
+    "club": "Nottingham Forest FC",
+    "position": "Offence",
+    "price": 1500000
+  },
+  {
+    "name": "Elliot Anderson",
+    "club": "Nottingham Forest FC",
+    "position": "CM",
+    "price": 7500000
+  },
+  {
+    "name": "Dan Ndoye",
+    "club": "Nottingham Forest FC",
+    "position": "RW",
+    "price": 8000000
+  },
+  {
+    "name": "Nicolás Domínguez",
+    "club": "Nottingham Forest FC",
+    "position": "CM",
+    "price": 7000000
+  },
+  {
+    "name": "Douglas Luiz",
+    "club": "Nottingham Forest FC",
+    "position": "CM",
+    "price": 9500000
+  },
+  {
+    "name": "Taiwo Awoniyi",
+    "club": "Nottingham Forest FC",
+    "position": "CF",
+    "price": 7000000
+  },
+  {
+    "name": "Ibrahim Sangaré",
+    "club": "Nottingham Forest FC",
+    "position": "CDM",
+    "price": 8000000
+  },
+  {
+    "name": "Chris Wood",
+    "club": "Nottingham Forest FC",
+    "position": "CF",
+    "price": 6500000
+  },
+  {
+    "name": "Oleksandr Zinchenko",
+    "club": "Nottingham Forest FC",
+    "position": "LB",
+    "price": 7000000
+  },
+  {
+    "name": "Callum Hudson-Odoi",
+    "club": "Nottingham Forest FC",
+    "position": "LW",
+    "price": 8000000
+  },
+  {
+    "name": "Ryan Yates",
+    "club": "Nottingham Forest FC",
+    "position": "CM",
+    "price": 5500000
+  },
+  {
+    "name": "Morgan Gibbs-White",
+    "club": "Nottingham Forest FC",
+    "position": "CAM",
+    "price": 10000000
+  },
+  {
+    "name": "Willy Boly",
+    "club": "Nottingham Forest FC",
+    "position": "CB",
+    "price": 4000000
+  },
+  {
+    "name": "Ola Aina",
+    "club": "Nottingham Forest FC",
+    "position": "RB",
+    "price": 6000000
+  },
+  {
+    "name": "Nikola Milenković",
+    "club": "Nottingham Forest FC",
+    "position": "CB",
+    "price": 8500000
+  },
+  {
+    "name": "Zach Abbott",
+    "club": "Nottingham Forest FC",
+    "position": "CB",
+    "price": 1500000
+  },
+  {
+    "name": "Murillo",
+    "club": "Nottingham Forest FC",
+    "position": "CB",
+    "price": 9500000
+  },
+  {
+    "name": "Nicolò Savona",
+    "club": "Nottingham Forest FC",
+    "position": "RB",
+    "price": 6500000
+  },
+  {
+    "name": "Omari Hutchinson",
+    "club": "Nottingham Forest FC",
+    "position": "CAM",
+    "price": 7500000
+  },
+  {
+    "name": "James McAtee",
+    "club": "Nottingham Forest FC",
+    "position": "CAM",
+    "price": 7000000
+  },
+  {
+    "name": "Dilane Bakwa",
+    "club": "Nottingham Forest FC",
+    "position": "RW",
+    "price": 6500000
+  },
+  {
+    "name": "Neco Williams",
+    "club": "Nottingham Forest FC",
+    "position": "RB",
+    "price": 6500000
+  },
+  {
+    "name": "Arnaud Kalimuendo",
+    "club": "Nottingham Forest FC",
+    "position": "CF",
+    "price": 8000000
+  },
+  {
+    "name": "Morato",
+    "club": "Nottingham Forest FC",
+    "position": "CB",
+    "price": 7500000
+  },
+  {
+    "name": "Dean Henderson",
+    "club": "Crystal Palace FC",
+    "position": "GK",
+    "price": 6500000
+  },
+  {
+    "name": "Remi Matthews",
+    "club": "Crystal Palace FC",
+    "position": "GK",
+    "price": 2000000
+  },
+  {
+    "name": "Walter Benítez",
+    "club": "Crystal Palace FC",
+    "position": "GK",
+    "price": 5500000
+  },
+  {
+    "name": "Jaydee Canvot",
+    "club": "Crystal Palace FC",
+    "position": "Defence",
+    "price": 1000000
+  },
+  {
+    "name": "Rio Cardines",
+    "club": "Crystal Palace FC",
+    "position": "Defence",
+    "price": 1000000
+  },
+  {
+    "name": "Adam Wharton",
+    "club": "Crystal Palace FC",
+    "position": "Midfield",
+    "price": 8000000
+  },
+  {
+    "name": "Yeremy",
+    "club": "Crystal Palace FC",
+    "position": "Offence",
+    "price": 5500000
+  },
+  {
+    "name": "Caleb Kporha",
+    "club": "Crystal Palace FC",
+    "position": "RB",
+    "price": 2500000
+  },
+  {
+    "name": "Chrisantus",
+    "club": "Crystal Palace FC",
+    "position": "CAM",
+    "price": 3500000
+  },
+  {
+    "name": "Romain Esse",
+    "club": "Crystal Palace FC",
+    "position": "CAM",
+    "price": 5000000
+  },
+  {
+    "name": "Kaden Rodney",
+    "club": "Crystal Palace FC",
+    "position": "CDM",
+    "price": 2000000
+  },
+  {
+    "name": "Justin Devenny",
+    "club": "Crystal Palace FC",
+    "position": "CM",
+    "price": 3500000
+  },
+  {
+    "name": "Chadi Riad",
+    "club": "Crystal Palace FC",
+    "position": "CB",
+    "price": 6000000
+  },
+  {
+    "name": "Tyrick Mitchell",
+    "club": "Crystal Palace FC",
+    "position": "LB",
+    "price": 6500000
+  },
+  {
+    "name": "Naouirou Ahamada",
+    "club": "Crystal Palace FC",
+    "position": "CM",
+    "price": 5500000
+  },
+  {
+    "name": "Marc Guéhi",
+    "club": "Crystal Palace FC",
+    "position": "CB",
+    "price": 10000000
+  },
+  {
+    "name": "Chris Richards",
+    "club": "Crystal Palace FC",
+    "position": "CB",
+    "price": 6000000
+  },
+  {
+    "name": "Maxence Lacroix",
+    "club": "Crystal Palace FC",
+    "position": "CB",
+    "price": 7500000
+  },
+  {
+    "name": "Cheick Doucouré",
+    "club": "Crystal Palace FC",
+    "position": "CDM",
+    "price": 7000000
+  },
+  {
+    "name": "Daniel Muñoz",
+    "club": "Crystal Palace FC",
+    "position": "RB",
+    "price": 6500000
+  },
+  {
+    "name": "Borna Sosa",
+    "club": "Crystal Palace FC",
+    "position": "Left Midfield",
+    "price": 6000000
+  },
+  {
+    "name": "Will Hughes",
+    "club": "Crystal Palace FC",
+    "position": "CM",
+    "price": 5000000
+  },
+  {
+    "name": "Nathaniel Clyne",
+    "club": "Crystal Palace FC",
+    "position": "RB",
+    "price": 3000000
+  },
+  {
+    "name": "Eddie Nketiah",
+    "club": "Crystal Palace FC",
+    "position": "CF",
+    "price": 8500000
+  },
+  {
+    "name": "Daichi Kamada",
+    "club": "Crystal Palace FC",
+    "position": "CAM",
+    "price": 6500000
+  },
+  {
+    "name": "Jefferson Lerma",
+    "club": "Crystal Palace FC",
+    "position": "CDM",
+    "price": 6500000
+  },
+  {
+    "name": "Ismaïla Sarr",
+    "club": "Crystal Palace FC",
+    "position": "RW",
+    "price": 7500000
+  },
+  {
+    "name": "Jean-Philippe Mateta",
+    "club": "Crystal Palace FC",
+    "position": "CF",
+    "price": 8000000
+  },
+  {
+    "name": "Jason Steele",
+    "club": "Brighton & Hove Albion FC",
+    "position": "GK",
+    "price": 3500000
+  },
+  {
+    "name": "Bart Verbruggen",
+    "club": "Brighton & Hove Albion FC",
+    "position": "GK",
+    "price": 7000000
+  },
+  {
+    "name": "Thomas McGill",
+    "club": "Brighton & Hove Albion FC",
+    "position": "GK",
+    "price": 1500000
+  },
+  {
+    "name": "Nils Ramming",
+    "club": "Brighton & Hove Albion FC",
+    "position": "GK",
+    "price": 1000000
+  },
+  {
+    "name": "Maxim De Cuyper",
+    "club": "Brighton & Hove Albion FC",
+    "position": "Defence",
+    "price": 7500000
+  },
+  {
+    "name": "Charlie Tasker",
+    "club": "Brighton & Hove Albion FC",
+    "position": "Defence",
+    "price": 1000000
+  },
+  {
+    "name": "Freddie Simmonds",
+    "club": "Brighton & Hove Albion FC",
+    "position": "Defence",
+    "price": 1000000
+  },
+  {
+    "name": "Tom Watson",
+    "club": "Brighton & Hove Albion FC",
+    "position": "Midfield",
+    "price": 1500000
+  },
+  {
+    "name": "Joe Knight",
+    "club": "Brighton & Hove Albion FC",
+    "position": "Midfield",
+    "price": 1000000
+  },
+  {
+    "name": "Nehemiah Oriola",
+    "club": "Brighton & Hove Albion FC",
+    "position": "Midfield",
+    "price": 1200000
+  },
+  {
+    "name": "Charalampos Kostoulas",
+    "club": "Brighton & Hove Albion FC",
+    "position": "Offence",
+    "price": 3000000
+  },
+  {
+    "name": "Harry Howell",
+    "club": "Brighton & Hove Albion FC",
+    "position": "Offence",
+    "price": 1500000
+  },
+  {
+    "name": "Yasin Ayari",
+    "club": "Brighton & Hove Albion FC",
+    "position": "CM",
+    "price": 6000000
+  },
+  {
+    "name": "Kaoru Mitoma",
+    "club": "Brighton & Hove Albion FC",
+    "position": "LW",
+    "price": 11000000
+  },
+  {
+    "name": "Jan Paul van Hecke",
+    "club": "Brighton & Hove Albion FC",
+    "position": "CB",
+    "price": 7000000
+  },
+  {
+    "name": "Mats Wieffer",
+    "club": "Brighton & Hove Albion FC",
+    "position": "CDM",
+    "price": 7500000
+  },
+  {
+    "name": "Georginio Rutter",
+    "club": "Brighton & Hove Albion FC",
+    "position": "CF",
+    "price": 9000000
+  },
+  {
+    "name": "Ferdi Kadıoğlu",
+    "club": "Brighton & Hove Albion FC",
+    "position": "LB",
+    "price": 8500000
+  },
+  {
+    "name": "Lewis Dunk",
+    "club": "Brighton & Hove Albion FC",
+    "position": "CB",
+    "price": 7500000
+  },
+  {
+    "name": "James Milner",
+    "club": "Brighton & Hove Albion FC",
+    "position": "CM",
+    "price": 3000000
+  },
+  {
+    "name": "Joël Veltman",
+    "club": "Brighton & Hove Albion FC",
+    "position": "RB",
+    "price": 5500000
+  },
+  {
+    "name": "Adam Webster",
+    "club": "Brighton & Hove Albion FC",
+    "position": "CB",
+    "price": 5500000
+  },
+  {
+    "name": "Danny Welbeck",
+    "club": "Brighton & Hove Albion FC",
+    "position": "CF",
+    "price": 5000000
+  },
+  {
+    "name": "Olivier Boscagli",
+    "club": "Brighton & Hove Albion FC",
+    "position": "CB",
+    "price": 7000000
+  },
+  {
+    "name": "Stefanos Tzimas",
+    "club": "Brighton & Hove Albion FC",
+    "position": "CF",
+    "price": 6500000
+  },
+  {
+    "name": "Brajan Gruda",
+    "club": "Brighton & Hove Albion FC",
+    "position": "RW",
+    "price": 7500000
+  },
+  {
+    "name": "Jack Hinshelwood",
+    "club": "Brighton & Hove Albion FC",
+    "position": "CM",
+    "price": 6000000
+  },
+  {
+    "name": "Yankubah Minteh",
+    "club": "Brighton & Hove Albion FC",
+    "position": "RW",
+    "price": 8000000
+  },
+  {
+    "name": "Diego Gómez",
+    "club": "Brighton & Hove Albion FC",
+    "position": "CM",
+    "price": 6500000
+  },
+  {
+    "name": "Carlos Baleba",
+    "club": "Brighton & Hove Albion FC",
+    "position": "CDM",
+    "price": 8000000
+  },
+  {
+    "name": "Diego Coppola",
+    "club": "Brighton & Hove Albion FC",
+    "position": "CB",
+    "price": 6000000
+  },
+  {
+    "name": "Solly March",
+    "club": "Brighton & Hove Albion FC",
+    "position": "RW",
+    "price": 6500000
+  },
+  {
+    "name": "Ellery Balcombe",
+    "club": "Brentford FC",
+    "position": "GK",
+    "price": 2500000
+  },
+  {
+    "name": "Caoimhin Kelleher",
+    "club": "Brentford FC",
+    "position": "GK",
+    "price": 7000000
+  },
+  {
+    "name": "Hákon Rafn Valdimarsson",
+    "club": "Brentford FC",
+    "position": "GK",
+    "price": 3000000
+  },
+  {
+    "name": "Matthew Cox",
+    "club": "Brentford FC",
+    "position": "GK",
+    "price": 1000000
+  },
+  {
+    "name": "Julian Eyestone",
+    "club": "Brentford FC",
+    "position": "GK",
+    "price": 1000000
+  },
+  {
+    "name": "Romelle Donovan",
+    "club": "Brentford FC",
+    "position": "Midfield",
+    "price": 1500000
+  },
+  {
+    "name": "Thiago Rodrigues",
+    "club": "Brentford FC",
+    "position": "Offence",
+    "price": 2500000
+  },
+  {
+    "name": "Edmond-Paris Maghoma",
+    "club": "Brentford FC",
+    "position": "CM",
+    "price": 3000000
+  },
+  {
+    "name": "Kevin Schade",
+    "club": "Brentford FC",
+    "position": "LW",
+    "price": 8000000
+  },
+  {
+    "name": "Nathan Collins",
+    "club": "Brentford FC",
+    "position": "CB",
+    "price": 7500000
+  },
+  {
+    "name": "Keane Lewis-Potter",
+    "club": "Brentford FC",
+    "position": "LW",
+    "price": 7000000
+  },
+  {
+    "name": "Aaron Hickey",
+    "club": "Brentford FC",
+    "position": "RB",
+    "price": 6500000
+  },
+  {
+    "name": "Mikkel Damsgaard",
+    "club": "Brentford FC",
+    "position": "LW",
+    "price": 7500000
+  },
+  {
+    "name": "Frank Onyeka",
+    "club": "Brentford FC",
+    "position": "CM",
+    "price": 6000000
+  },
+  {
+    "name": "Kristoffer Ajer",
+    "club": "Brentford FC",
+    "position": "CB",
+    "price": 7000000
+  },
+  {
+    "name": "Mathias Jensen",
+    "club": "Brentford FC",
+    "position": "CM",
+    "price": 6500000
+  },
+  {
+    "name": "Vitaly Janelt",
+    "club": "Brentford FC",
+    "position": "CDM",
+    "price": 7000000
+  },
+  {
+    "name": "Reiss Nelson",
+    "club": "Brentford FC",
+    "position": "RW",
+    "price": 6500000
+  },
+  {
+    "name": "Josh Dasilva",
+    "club": "Brentford FC",
+    "position": "CM",
+    "price": 5500000
+  },
+  {
+    "name": "Sepp van den Berg",
+    "club": "Brentford FC",
+    "position": "CB",
+    "price": 8000000
+  },
+  {
+    "name": "Rico Henry",
+    "club": "Brentford FC",
+    "position": "LB",
+    "price": 6000000
+  },
+  {
+    "name": "Ethan Pinnock",
+    "club": "Brentford FC",
+    "position": "CB",
+    "price": 6500000
+  },
+  {
+    "name": "Jordan Henderson",
+    "club": "Brentford FC",
+    "position": "CM",
+    "price": 5000000
+  },
+  {
+    "name": "Benjamin Arthur",
+    "club": "Brentford FC",
+    "position": "CB",
+    "price": 1500000
+  },
+  {
+    "name": "Yunus Konak",
+    "club": "Brentford FC",
+    "position": "CDM",
+    "price": 3000000
+  },
+  {
+    "name": "Gustavo Gomes",
+    "club": "Brentford FC",
+    "position": "LW",
+    "price": 4000000
+  },
+  {
+    "name": "Yegor Yarmolyuk",
+    "club": "Brentford FC",
+    "position": "CAM",
+    "price": 5000000
+  },
+  {
+    "name": "Michael Kayode",
+    "club": "Brentford FC",
+    "position": "RB",
+    "price": 6500000
+  },
+  {
+    "name": "Dango Ouattara",
+    "club": "Brentford FC",
+    "position": "LW",
+    "price": 7000000
+  },
+  {
+    "name": "Antoni Milambo",
+    "club": "Brentford FC",
+    "position": "CM",
+    "price": 6000000
+  },
+  {
+    "name": "Myles Peart-Harris",
+    "club": "Brentford FC",
+    "position": "CAM",
+    "price": 4500000
+  },
+  {
+    "name": "Fabio Carvalho",
+    "club": "Brentford FC",
+    "position": "CAM",
+    "price": 7500000
+  },
+  {
+    "name": "Alphonse Aréola",
+    "club": "West Ham United FC",
+    "position": "GK",
+    "price": 5500000
+  },
+  {
+    "name": "Łukasz Fabiański",
+    "club": "West Ham United FC",
+    "position": "GK",
+    "price": 3000000
+  },
+  {
+    "name": "Mads Hermansen",
+    "club": "West Ham United FC",
+    "position": "GK",
+    "price": 5000000
+  },
+  {
+    "name": "El Hadji Diouf",
+    "club": "West Ham United FC",
+    "position": "Defence",
+    "price": 1500000
+  },
+  {
+    "name": "Ezra Mayers",
+    "club": "West Ham United FC",
+    "position": "Defence",
+    "price": 1000000
+  },
+  {
+    "name": "Airidas Golambeckis",
+    "club": "West Ham United FC",
+    "position": "Defence",
+    "price": 1000000
+  },
+  {
+    "name": "Mohamadou Kante",
+    "club": "West Ham United FC",
+    "position": "Midfield",
+    "price": 2000000
+  },
+  {
+    "name": "George Earthy",
+    "club": "West Ham United FC",
+    "position": "CAM",
+    "price": 2500000
+  },
+  {
+    "name": "Callum Marshall",
+    "club": "West Ham United FC",
+    "position": "CF",
+    "price": 3000000
+  },
+  {
+    "name": "Luis Guilherme",
+    "club": "West Ham United FC",
+    "position": "RW",
+    "price": 6500000
+  },
+  {
+    "name": "Oliver Scarles",
+    "club": "West Ham United FC",
+    "position": "LB",
+    "price": 1500000
+  },
+  {
+    "name": "Mateus Fernandes",
+    "club": "West Ham United FC",
+    "position": "CM",
+    "price": 6000000
+  },
+  {
+    "name": "Soungoutou Magassa",
+    "club": "West Ham United FC",
+    "position": "CDM",
+    "price": 5500000
+  },
+  {
+    "name": "Freddie Potts",
+    "club": "West Ham United FC",
+    "position": "CDM",
+    "price": 3000000
+  },
+  {
+    "name": "Andy Irving",
+    "club": "West Ham United FC",
+    "position": "CM",
+    "price": 4500000
+  },
+  {
+    "name": "Crysencio Summerville",
+    "club": "West Ham United FC",
+    "position": "LW",
+    "price": 9000000
+  },
+  {
+    "name": "Jean-Clair Todibo",
+    "club": "West Ham United FC",
+    "position": "CB",
+    "price": 9500000
+  },
+  {
+    "name": "Guido Rodríguez",
+    "club": "West Ham United FC",
+    "position": "CDM",
+    "price": 7000000
+  },
+  {
+    "name": "Max Kilman",
+    "club": "West Ham United FC",
+    "position": "CB",
+    "price": 8000000
+  },
+  {
+    "name": "Tomáš Souček",
+    "club": "West Ham United FC",
+    "position": "CDM",
+    "price": 8000000
+  },
+  {
+    "name": "Jarrod Bowen",
+    "club": "West Ham United FC",
+    "position": "RW",
+    "price": 10500000
+  },
+  {
+    "name": "Igor",
+    "club": "West Ham United FC",
+    "position": "CB",
+    "price": 6500000
+  },
+  {
+    "name": "Callum Wilson",
+    "club": "West Ham United FC",
+    "position": "CF",
+    "price": 6500000
+  },
+  {
+    "name": "Aaron Wan-Bissaka",
+    "club": "West Ham United FC",
+    "position": "RB",
+    "price": 7500000
+  },
+  {
+    "name": "James Ward-Prowse",
+    "club": "West Ham United FC",
+    "position": "CM",
+    "price": 7000000
+  },
+  {
+    "name": "Kyle Walker-Peters",
+    "club": "West Ham United FC",
+    "position": "RB",
+    "price": 6500000
+  },
+  {
+    "name": "Konstantinos Mavropanos",
+    "club": "West Ham United FC",
+    "position": "CB",
+    "price": 7000000
+  },
+  {
+    "name": "Lucas Paquetá",
+    "club": "West Ham United FC",
+    "position": "CAM",
+    "price": 10000000
+  },
+  {
+    "name": "Niclas Füllkrug",
+    "club": "West Ham United FC",
+    "position": "CF",
+    "price": 8500000
+  },
+  {
+    "name": "Đorđe Petrović",
+    "club": "AFC Bournemouth",
+    "position": "GK",
+    "price": 5000000
+  },
+  {
+    "name": "Will Dennis",
+    "club": "AFC Bournemouth",
+    "position": "GK",
+    "price": 1500000
+  },
+  {
+    "name": "Veljko Milosavljević",
+    "club": "AFC Bournemouth",
+    "position": "Defence",
+    "price": 2000000
+  },
+  {
+    "name": "Remy Rees-Dottin",
+    "club": "AFC Bournemouth",
+    "position": "Offence",
+    "price": 1500000
+  },
+  {
+    "name": "Álex Jiménez",
+    "club": "AFC Bournemouth",
+    "position": "RB",
+    "price": 6500000
+  },
+  {
+    "name": "Eli Kroupi",
+    "club": "AFC Bournemouth",
+    "position": "CF",
+    "price": 3500000
+  },
+  {
+    "name": "Julio Soler",
+    "club": "AFC Bournemouth",
+    "position": "LB",
+    "price": 6000000
+  },
+  {
+    "name": "Ben Doak",
+    "club": "AFC Bournemouth",
+    "position": "RW",
+    "price": 7000000
+  },
+  {
+    "name": "Alex Scott",
+    "club": "AFC Bournemouth",
+    "position": "CM",
+    "price": 7500000
+  },
+  {
+    "name": "Amine Adli",
+    "club": "AFC Bournemouth",
+    "position": "LW",
+    "price": 8000000
+  },
+  {
+    "name": "Adrien Truffert",
+    "club": "AFC Bournemouth",
+    "position": "LB",
+    "price": 7000000
+  },
+  {
+    "name": "Evanilson",
+    "club": "AFC Bournemouth",
+    "position": "CF",
+    "price": 9000000
+  },
+  {
+    "name": "Julian Araujo",
+    "club": "AFC Bournemouth",
+    "position": "RB",
+    "price": 6000000
+  },
+  {
+    "name": "Bafodé Diakité",
+    "club": "AFC Bournemouth",
+    "position": "CB",
+    "price": 6500000
+  },
+  {
+    "name": "James Hill",
+    "club": "AFC Bournemouth",
+    "position": "CB",
+    "price": 5500000
+  },
+  {
+    "name": "Tyler Adams",
+    "club": "AFC Bournemouth",
+    "position": "CDM",
+    "price": 7000000
+  },
+  {
+    "name": "Marcos Senesi",
+    "club": "AFC Bournemouth",
+    "position": "CB",
+    "price": 7500000
+  },
+  {
+    "name": "Ryan Christie",
+    "club": "AFC Bournemouth",
+    "position": "CM",
+    "price": 6500000
+  },
+  {
+    "name": "Enes Ünal",
+    "club": "AFC Bournemouth",
+    "position": "CF",
+    "price": 7000000
+  },
+  {
+    "name": "Adam Smith",
+    "club": "AFC Bournemouth",
+    "position": "RB",
+    "price": 4000000
+  },
+  {
+    "name": "Justin Kluivert",
+    "club": "AFC Bournemouth",
+    "position": "LW",
+    "price": 7500000
+  },
+  {
+    "name": "Marcus Tavernier",
+    "club": "AFC Bournemouth",
+    "position": "Left Midfield",
+    "price": 7000000
+  },
+  {
+    "name": "Antoine Semenyo",
+    "club": "AFC Bournemouth",
+    "position": "RW",
+    "price": 8500000
+  },
+  {
+    "name": "David Brooks",
+    "club": "AFC Bournemouth",
+    "position": "RW",
+    "price": 6500000
+  },
+  {
+    "name": "Lewis Cook",
+    "club": "AFC Bournemouth",
+    "position": "CM",
+    "price": 6000000
+  }
+]
