@@ -25,6 +25,7 @@ async function login(username, password){
         throw new Error('User or password is wrong');
     }
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
+    console.log(token);
     return {
         token,
         user: {
@@ -39,9 +40,14 @@ async function login(username, password){
 async function updateUser(id, userdata) {
     return await userRepo.updateUser(id, userdata);
 }
+
+async function deleteUser(id) {
+    return await userRepo.deleteUser(id);
+}
 module.exports = {
     signUp,
     getUserById,
     updateUser,
     login,
+    deleteUser,
 };
