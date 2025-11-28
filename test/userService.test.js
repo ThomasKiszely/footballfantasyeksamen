@@ -1,11 +1,9 @@
-import { vi, assert, test, describe, beforeEach, expect, it } from 'vitest';
+import { vi, assert, test, describe, expect, it } from 'vitest';
 
 const userService = require('../src/services/userService');
 const userRepo = require('../src/data/userRepo');
 const User = require('../src/models/User');
 const bcrypt = require('bcrypt');
-
-
 
 test('assert', () => {
     assert.ok(userService);
@@ -53,6 +51,16 @@ describe('userService', () => {
 
         expect(result.user.username).toBe('John');
     });
+    it('Shows a users budget'), async () => {
+        const mockId = 1;
+        const mockUser = new User({
+            _id: mockId,
+            username: 'John',
+            password: 'hashed',
+            budget: 10000,
+        });
+        vi.spyOn(userRepo, 'getUserById').mockResolvedValue(mockUser);
+        const user = await userService.getUserById(mockId);
+        expect(user.budget).toBe(10000);
+    }
 });
-
-
