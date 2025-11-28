@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const playerRoutes = require('./routes/playerRoutes');
 const router = require('./routes/userRoutes');
+const teamRoutes = require('./routes/teamRoutes');
 const { notFound } = require('./middlewares/notFound');
 const { errorHandler } = require('./middlewares/errorHandler');
 const { connectToMongo } = require('./services/db');
@@ -20,6 +21,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 // Routes
 app.use('/players', playerRoutes)
 app.use('/api/user', router);
+app.use('/api/team', teamRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

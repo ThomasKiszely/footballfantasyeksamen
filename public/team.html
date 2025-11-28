@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Mit Hold - FootballFantasy</title>
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/team.css">
+</head>
+<body>
+<header>
+    <nav class="navbar">
+    </nav>
+</header>
+
+<main class="team-page">
+
+    <div id="initialSetupContainer" class="setup-container">
+        <h2>Du har ikke et hold endnu! ⚽</h2>
+        <p>Start dit Fantasy Premier League-eventyr ved at oprette et nyt hold.</p>
+        <button class="btn btn-primary" id="createTeamBtn">Opret Mit Hold Nu</button>
+    </div>
+
+    <div id="teamContent" class="hidden">
+
+        <div class="team-header">
+            <h2>Mit Hold</h2>
+            <div class="team-info">
+                <div class="budget-display">
+                    <span class="label">Budget tilbage:</span>
+                    <span class="value" id="budgetRemaining">90.0M kr</span>
+                </div>
+                <div class="points-display">
+                    <span class="label">Samlede point:</span>
+                    <span class="value" id="totalPoints">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="formation-selector">
+            <label for="formation">Vælg formation:</label>
+            <select id="formation" name="formation">
+                <option value="4-3-3">4-3-3</option>
+                <option value="4-4-2">4-4-2</option>
+            </select>
+        </div>
+
+        <div class="pitch-container">
+            <div class="football-pitch">
+            </div>
+        </div>
+
+        <div class="team-actions">
+            <button class="btn btn-primary" id="saveTeamBtn">Gem Hold</button>
+            <button class="btn btn-secondary" id="clearTeamBtn">Ryd Hold</button>
+        </div>
+
+        <div class="team-summary">
+            <h3>Holdoversigt (Dynamisk liste)</h3>
+            <ul id="team-player-list">
+            </ul>
+        </div>
+    </div>
+</main>
+
+<div id="playerModal" class="modal">
+</div>
+
+<footer>
+</footer>
+
+<script src="../js/team.js"></script>
+</body>
+</html>
