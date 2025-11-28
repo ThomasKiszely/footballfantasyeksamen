@@ -20,7 +20,7 @@ beforeEach(() => {
     delete window.location;
     window.location = { href: "" };
 
-    require("../public/login.js"); // EFTER DOM er sat op
+    require("../public/js/login.js"); // EFTER DOM er sat op
 });
 
 describe("handleAuthentication", () => {
