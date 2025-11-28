@@ -11,11 +11,8 @@ async function signUp(username, password) {
     return await userRepo.createUser({ username, password: hashed });
 }
 
-
-
 async function getUserById(id){
-    const user = await userRepo.getUserById(id);
-    return user;
+    return await userRepo.getUserById(id);
 }
 
 async function login(username, password){
@@ -40,8 +37,7 @@ async function login(username, password){
 }
 
 async function updateUser(id, userdata) {
-    const updatedUser = await userRepo.updateUser(id, userdata);
-    return updatedUser;
+    return await userRepo.updateUser(id, userdata);
 }
 module.exports = {
     signUp,

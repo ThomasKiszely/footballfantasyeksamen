@@ -27,7 +27,35 @@ async function login(req, res, next) {
     }
 }
 
+async function getUserById(req, res, next) {
+    try {
+        const userId = req.params.id;
+        const user = await userService.getUserById(userId);
+        return res.status(200).json({
+            success: true,
+            user,
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function getUserBudget(req, res, next) {
+    try {
+        const userId = req.params.id;
+        const user = await userService.getUserById(userId);
+        return res.status(200).json({
+            success: true,
+            budget: user.budget,
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports = {
     signup,
     login,
+    getUserById,
+    getUserBudget,
 };
