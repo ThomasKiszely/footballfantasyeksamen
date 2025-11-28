@@ -5,8 +5,8 @@ const playerSchema = new mongoose.Schema({
     club: { type: String, required: true },
     position: { type: String, required: true },
     price: { type: Number, required: true },
+    points: { type: Number, default: 0 },
 });
 
-const Player = mongoose.model('Player', playerSchema);
 
-module.exports = Player;
+module.exports = mongoose.models.Player || mongoose.model('Player', playerSchema);

@@ -3,10 +3,15 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-async function signUp(name, password) {
+async function signUp(username, password) {
+    if (!username || !password) {
+        throw new Error("Brugernavn og adgangskode kræves");
+    }
     const hashed = await bcrypt.hash(password, 10);
-    return await userRepo.createUser({ name, password: hashed });
+    return await userRepo.createUser({ username, password: hashed });
 }
+
+
 
 async function getUserById(id){
     const user = await userRepo.getUserById(id);
@@ -28,8 +33,7 @@ async function login(username, password){
         user: {
             id: user._id,
             username: user.username,
-            point: user.point,
-            budget: user.budget,
+            teams: user.teams,
             role: user.role,
         }
     };

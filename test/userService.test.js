@@ -13,44 +13,45 @@ test('assert', () => {
 
 describe('userService', () => {
     it('creates a new user', async() => {
-        const mockResponse = { name: 'John', password: '1234', point: 0, budget: 0 };
+        const mockResponse = { username: 'John', password: '1234', teams: ['Liverpool', 'Chelsea'] };
         vi.spyOn(userRepo, 'createUser').mockResolvedValue(mockResponse);
 
-        await userService.signUp(mockResponse.name, mockResponse.password);
+        const result = await userService.signUp(mockResponse.username, mockResponse.password);
 
-        expect(mockResponse.name).toEqual('John');
-        expect(mockResponse.password).toEqual('1234');
+        expect(userRepo.createUser).toHaveBeenCalledWith( { username: 'John', password: expect.any(String) });
+        expect(result).toEqual(mockResponse);
     });
     it('returns a user', async () => {
         const mockId = 1;
-        const mockResponse = { name: 'John', password: '1234', point: 0, budget: 0 };
+        const mockResponse = { name: 'John', password: '1234', teams: ['Liverpool', 'Chelsea'] };
         vi.spyOn(userRepo, 'getUserById').mockResolvedValue(mockResponse);
 
-        await userService.getUserById(mockId, mockResponse);
+        const result = await userService.getUserById(mockId);
 
-        expect(mockResponse.name).toEqual('John');
-        expect(mockResponse.password).toEqual('1234');
+        expect(userRepo.getUserById).toHaveBeenCalledWith(mockId);
+        expect(result).toEqual(mockResponse);
     });
     it('returns an updated user', async () => {
         const mockId = 1;
-        const mockResponse = { name: 'John', password: '1234', point: 0, budget: 0 };
+        const mockResponse = { name: 'John', password: '1234', teams: ['Liverpool', 'Chelsea'] };
         vi.spyOn(userRepo, 'updateUser').mockResolvedValue(mockResponse);
 
-        await userService.updateUser(mockId, mockResponse);
+        const result = await userService.updateUser(mockId, mockResponse);
 
-        expect(mockResponse.name).toEqual('John');
-        expect(mockResponse.password).toEqual('1234');
+        expect(userRepo.updateUser).toHaveBeenCalledWith(mockId, mockResponse);
+        expect(result).toEqual(mockResponse);
     });
     it('returns a signed in user', async () => {
-        const mockId = 1;
-        const mockResponse = { name: 'John', password: '1234', point: 0, budget: 0 };
-        vi.spyOn(userRepo, 'getUserByName').mockResolvedValue({ _id: 1, username: 'John', password: 'hashed' });
+        vi.spyOn(userRepo, 'getUserByName').mockResolvedValue({
+            _id: 1,
+            username: 'John',
+            password: 'hashed',
+        });
         vi.spyOn(bcrypt, 'compare').mockResolvedValue(true);
 
         const result = await userService.login('John', '1234');
 
         expect(result.user.username).toBe('John');
-
     });
 });
 
