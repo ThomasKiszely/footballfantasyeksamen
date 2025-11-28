@@ -40,7 +40,7 @@ exports.findByPriceRange = async (minPrice, maxPrice) => {
     return await playerRepo.findByPriceRange(minPrice, maxPrice);
 };
 
-exports.convertPosition = (position) => {
+const convertPosition = (position) => {
     const positionMap = {
         "Left-Back": "LB",
         "Right-Back": "RB",
@@ -73,7 +73,7 @@ exports.fetchAndSyncPlayers = async () => {
             players.push({
                 name: player.name,
                 club: team.name,
-                position: exports.convertPosition(player.position),
+                position: convertPosition(player.position),
                 price: 0
             });
         });
