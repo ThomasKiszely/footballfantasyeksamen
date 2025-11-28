@@ -1,4 +1,3 @@
-const User = require('../models/teamModel');
 const Team = require('../models/teamModel');
 
 
@@ -8,29 +7,29 @@ async function createTeam(teamData) {
 }
 
 async function saveTeam(teamData) {
-    return await team.save();
+    return await Team.save();
 }
 
 async function getAllTeams() {
-    return await teamModel.find({});
+    return await Team.find({});
 }
 
 async function getTeamById(teamId) {
-    return await teamModel.findById(teamId);
+    return await Team.findById(teamId);
 }
 
 async function getTeamByName(teamName) {
-    teamModel = await teamModel.findOne({teamName});
+   const teamModel = await teamModel.findOne({teamName});
     return teamModel;
 }
 
 async function updateTeam(teamId, projectData) {
-    const updatedTeam = teamModel.findOneAndUpdate(teamId, projectData, {new: true, runValidators: true});
+    const updatedTeam = await Team.findOneAndUpdate(teamId, projectData, {new: true, runValidators: true});
     return updatedTeam;
 }
 
 async function deleteTeam (teamId) {
-    const deleted = await teamModel.findByIdAndDelete(teamId);
+    const deleted = await Team.findOneAndDelete(teamId);
     return deleted;
 }
 

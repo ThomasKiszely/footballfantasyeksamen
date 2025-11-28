@@ -1,4 +1,3 @@
-const playerRepo = require('../data/playerRepo');
 const playerService = require('../services/playerService');
 
 // CRUD
@@ -14,7 +13,7 @@ exports.createPlayer = async (req, res) => {
 };
 
 // READ (GET)
-exports.getPlayer = async (req, res) => {
+exports.getPlayerById = async (req, res) => {
     try {
         const player = await playerService.findById(req.params.id);
         if (!player) {
@@ -23,6 +22,37 @@ exports.getPlayer = async (req, res) => {
         res.status(200).json(player);
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving player', error });
+    }
+};
+
+exports.getPlayerByClub = async (req, res) => {
+    try {
+        const club = req.params.club;
+        const players = await playerService.findByClub(club);
+        res.status(200).json(players);
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving players by club', error });
+    }
+};
+
+exports.getPlayerByPosition = async (req, res) => {
+    try {
+        const position = req.params.position;
+        const players = await playerService.findByPosition(position);
+        res.status(200).json(players);
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving players by position', error });
+    }
+};
+
+exports.getPlayerByPriceRange = async (req, res) => {
+    try {
+        const minPrice = parseFloat(req.query.min);
+        const maxPrice = parseFloat(req.query.max);
+        const players = await playerService.findByPriceRange(minPrice, maxPrice);
+        res.status(200).json(players);
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving players by price range', error });
     }
 };
 
@@ -48,6 +78,27 @@ exports.updatePlayer = async (req, res) => {
         res.status(500).json({ message: 'Error updating player', error });
     }
 };
+
+exports.updatePlayerPrice = async (req, res) => {
+    try {
+        const { price } = req.body;
+        const userRole = req.user.role;
+
+        const updatedPlayer = await playerService.updatePlayerPrice(
+            req.params.id,
+            price,
+            userRole
+        );
+
+        if (!updatedPlayer) {
+            return res.status(404).json({ message: 'Player not found' });
+        }
+        res.status(200).json(updatedPlayer);
+    } catch (error) {
+        res.status(403).json({ message: error.message });
+    }
+};
+
 
 // DELETE (DELETE)
 exports.deletePlayer = async (req, res) => {
