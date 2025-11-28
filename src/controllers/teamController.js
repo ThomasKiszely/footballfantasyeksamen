@@ -1,5 +1,5 @@
 const teamService = require('../services/teamService');
-
+const teamPointsService = require('../services/teamPointsService');
 exports.getAll = async (req, res) => {
     try {
         const teams = await teamService.getAllTeams();
@@ -11,11 +11,14 @@ exports.getAll = async (req, res) => {
 
 exports.getById = async (req, res) => {
     try {
-        const team = await teamService.getTeamById(req.params.id);
+        const teamId = req.params.id;
+        const team = await teamService.getTeamById(teamId);
         if (!team) {
             return res.status(404).json({ error: 'Team not found' });
         }
-        res.json(team);
+
+        const updatedTeam = await teamPointsService.updateTeamPoints(teamId);
+        res.json(updatedTeam);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
