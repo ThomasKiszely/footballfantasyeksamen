@@ -58,7 +58,7 @@ describe('userController', () => {
         expect(res.status).toHaveBeenCalledWith(200);
         expect(res.json).toHaveBeenCalledWith(mockResponse);
         expect(userService.getUserById).toHaveBeenCalledWith(1);
-    });*//*
+    });*/
     it('Should return status 200 and a user', async () => {
         const mockResponse = { name: 'John', password: '1234', teams: ['Liverpool'] };
         vi.spyOn(userService, 'updateUser').mockResolvedValue(mockResponse);
@@ -70,22 +70,22 @@ describe('userController', () => {
         await userController.updateUser(req, res, next);
 
         expect(res.status).toHaveBeenCalledWith(200);
-        expect(res.json).toHaveBeenCalledWith(mockResponse);
-        expect(userService.updateUser).toHaveBeenCalledWith(1);
-    }); *//*
+        expect(res.json).toHaveBeenCalledWith({ success: true, updatedUser: mockResponse });
+        expect(userService.updateUser).toHaveBeenCalledWith(1, mockResponse);
+    });
     it('Should return status 204', async () => {
         const mockResponse = { name: 'John', password: '1234', teams: ['Liverpool'] };
         vi.spyOn(userService, 'deleteUser').mockResolvedValue(mockResponse);
 
         const req = ({
             params: {id: 1},
-            body: { name: 'John', password: '1234', point: 0, budget: 0 }
+            body: { name: 'John', password: '1234' }
         });
         await userController.deleteUser(req, res, next);
 
         expect(res.status).toHaveBeenCalledWith(204);
         expect(userService.deleteUser).toHaveBeenCalledWith(1);
-    });*/
+    });
 })
 
 

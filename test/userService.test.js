@@ -63,4 +63,15 @@ describe('userService', () => {
         const user = await userService.getUserById(mockId);
         expect(user.budget).toBe(10000);
     }
+    it('Deleted a user', async () => {
+        const mockId = 1;
+        const mockUser = new User({
+            _id: mockId,
+            username: 'John',
+            password: 'hashed',
+        });
+        vi.spyOn(userRepo, 'deleteUser').mockResolvedValue(mockUser);
+        const result = await userService.deleteUser(mockId);
+        expect(result).toEqual(mockUser);
+    });
 });
