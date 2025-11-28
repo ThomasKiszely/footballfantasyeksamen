@@ -7,12 +7,12 @@ exports.create = async (playerData) => {
     return await newPlayer.save();
 };
 
-// returns one specific player from their id
+// returnerer en specifik spiller baseret på ID
 exports.findById = async (id) => {
     return await Player.findById(id);
 };
 
-// returns all players
+// returnerer alle spillere
 exports.findAll = async () => {
     return await Player.find();
 };
@@ -25,7 +25,7 @@ exports.delete = async (id) => {
     return await Player.findByIdAndDelete(id);
 };
 
-// Updates or creates new players (used ever 10 mins)
+// opdaterer eller indsætter flere spillere baseret på navn og klub hvert 10. minut
 exports.bulkUpsert = async (players) => {
     const bulkOps = players.map(player => ({
         updateOne: {

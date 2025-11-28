@@ -1,4 +1,3 @@
-const Player = require("../models/Player");
 const playerRepo = require("../data/playerRepo");
 //const fetch = require('node-fetch');
 const axios = require("axios");
@@ -18,6 +17,12 @@ exports.findAll = async () => {
 
 exports.update = async (id, updateData) => {
     return await playerRepo.update(id, updateData);
+};
+
+exports.updatePlayerPrice = async (playerId, newPrice, userRole) => {
+    if (userRole === ('admin')) {
+        return await playerRepo.update(playerId, {price: newPrice});
+    }
 };
 
 exports.delete = async (id) => {
@@ -40,7 +45,7 @@ exports.findByPriceRange = async (minPrice, maxPrice) => {
     return await playerRepo.findByPriceRange(minPrice, maxPrice);
 };
 
-exports.convertPosition = (position) => {
+const convertPosition = (position) => {
     const positionMap = {
         "Left-Back": "LB",
         "Right-Back": "RB",
@@ -73,7 +78,7 @@ exports.fetchAndSyncPlayers = async () => {
             players.push({
                 name: player.name,
                 club: team.name,
-                position: exports.convertPosition(player.position),
+                position: convertPosition(player.position),
                 price: 0
             });
         });
@@ -84,3 +89,4 @@ exports.fetchAndSyncPlayers = async () => {
 
     return { playerCount: players.length, teamCount: data.teams.length };
 };
+
