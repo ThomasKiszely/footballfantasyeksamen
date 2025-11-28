@@ -1,4 +1,3 @@
-const playerRepo = require('../data/playerRepo');
 const playerService = require('../services/playerService');
 
 // CRUD
@@ -79,6 +78,27 @@ exports.updatePlayer = async (req, res) => {
         res.status(500).json({ message: 'Error updating player', error });
     }
 };
+
+exports.updatePlayerPrice = async (req, res) => {
+    try {
+        const { price } = req.body;
+        const userRole = req.user.role;
+
+        const updatedPlayer = await playerService.updatePlayerPrice(
+            req.params.id,
+            price,
+            userRole
+        );
+
+        if (!updatedPlayer) {
+            return res.status(404).json({ message: 'Player not found' });
+        }
+        res.status(200).json(updatedPlayer);
+    } catch (error) {
+        res.status(403).json({ message: error.message });
+    }
+};
+
 
 // DELETE (DELETE)
 exports.deletePlayer = async (req, res) => {

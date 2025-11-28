@@ -1,4 +1,3 @@
-const Player = require("../models/Player");
 const playerRepo = require("../data/playerRepo");
 //const fetch = require('node-fetch');
 const axios = require("axios");
@@ -18,6 +17,12 @@ exports.findAll = async () => {
 
 exports.update = async (id, updateData) => {
     return await playerRepo.update(id, updateData);
+};
+
+exports.updatePlayerPrice = async (playerId, newPrice, userRole) => {
+    if (userRole === ('admin')) {
+        return await playerRepo.update(playerId, {price: newPrice});
+    }
 };
 
 exports.delete = async (id) => {
@@ -84,3 +89,4 @@ exports.fetchAndSyncPlayers = async () => {
 
     return { playerCount: players.length, teamCount: data.teams.length };
 };
+
