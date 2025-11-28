@@ -1,8 +1,8 @@
-const teamRepo = require('../data/teamRepo');
+const teamService = require('../services/teamService');
 
 exports.getAll = async (req, res) => {
     try {
-        const teams = await teamRepo.getAllTeams();
+        const teams = await teamService.getAllTeams();
         res.json(teams);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -11,7 +11,7 @@ exports.getAll = async (req, res) => {
 
 exports.getById = async (req, res) => {
     try {
-        const team = await teamRepo.getTeamById(req.params.id);
+        const team = await teamService.getTeamById(req.params.id);
         if (!team) {
             return res.status(404).json({ error: 'Team not found' });
         }
@@ -23,7 +23,7 @@ exports.getById = async (req, res) => {
 
 exports.create = async (req, res) => {
     try {
-        const newTeam = await teamRepo.createTeam(req.body);
+        const newTeam = await teamService.createTeam(req.body);
         res.status(201).json(newTeam);
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -32,7 +32,7 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
     try {
-        const updatedTeam = await teamRepo.updateTeam(req.params.id, req.body);
+        const updatedTeam = await teamService.updateTeam(req.params.id, req.body);
         if (!updatedTeam) {
             return res.status(404).json({ error: 'Team not found' });
         }
@@ -44,7 +44,7 @@ exports.update = async (req, res) => {
 
 exports.deleteTeam = async (req, res) => {
     try {
-        const deletedTeam = await teamRepo.deleteTeam(req.params.id);
+        const deletedTeam = await teamService.deleteTeam(req.params.id);
         if (!deletedTeam) {
             return res.status(404).json({ error: 'Team not found' });
         }
