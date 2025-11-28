@@ -26,12 +26,12 @@ describe("teamPointsService", () => {
 
         vi.spyOn(teamRepo, "getTeamById").mockResolvedValue(fakeTeam);
         vi.spyOn(footballMatchRepo, "getAllMatches").mockResolvedValue(fakeMatches);
-        vi.spyOn(teamRepo, "saveTeam").mockImplementation(async t => t);
+       const saveSpy = vi.spyOn(teamRepo, "saveTeam").mockImplementation(async t => t);
 
         const updatedTeam = await updateTeamPoints("team1");
 
         expect(updatedTeam.points).toBe(6);
-        expect(fakeTeam.save).toHaveBeenCalled();
+        expect(saveSpy).toHaveBeenCalled(fakeTeam);
     });
 
     it("Should award 1 points if its draw", async () => {
