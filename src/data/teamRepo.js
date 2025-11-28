@@ -1,108 +1,46 @@
-const Team = require('../models/Team');
-const Player = require('../models/Player');
-const User = require('../models/User');
-require('dotenv').config();
+const User = require('../models/teamModel');
+const Team = require('../models/teamModel');
 
-// CRUD
 
-const createTeam = async (teamData) => {
-    try {
-        const team = new Team({
-            userId: teamData.userId,
-            goalkeeper: teamData.goalkeeper || null,
-            defenders: teamData.defenders || [],
-            midfielders: teamData.midfielders || [],
-            attackers: teamData.attackers || []
-        });
+async function createTeam(teamData) {
+    const teamModel = new teamModel(teamData);
+    return await teamModel.save();
+}
 
-        return await team.save();
-    } catch (error) {
-        throw new Error(`Error creating team: ${error.message}`);
-    }
-};
+async function saveTeam(teamData) {
+    return await team.save();
+}
 
-const findById = async (teamId) => {
-    try {
-        const team = await Team.findById(teamId)
-            .populate('goalkeeper')
-            .populate('defenders')
-            .populate('midfielders')
-            .populate('attackers')
-            .populate('userId');
-        if (!team) {
-            throw new Error('Team not found');
-        }
-        return team;
-    } catch (error) {
-        throw new Error(`Error finding team: ${error.message}`);
-    }
-};
+async function getAllTeams() {
+    return await teamModel.find({});
+}
 
-const findByUserId = async (userId) => {
-    try {
-        const team = await Team.findOne({ userId })
-            .populate('goalkeeper')
-            .populate('defenders')
-            .populate('midfielders')
-            .populate('attackers');
-        return team;
-    } catch (error) {
-        throw new Error(`Error finding team by user: ${error.message}`);
-    }
-};
-const findAll = async () => {
-    try {
-        const teams = await Team.find()
-            .populate('goalkeeper')
-            .populate('defenders')
-            .populate('midfielders')
-            .populate('attackers')
-            .populate('userId');
+async function getTeamById(teamId) {
+    return await teamModel.findById(teamId);
+}
 
-        if (teams.length <= 0) {
-            throw new Error('No teams found');
-        }
-        return teams;
-    } catch (error) {
-        throw new Error(`Error retrieving teams: ${error.message}`);
-    }
-};
+async function getTeamByName(teamName) {
+    teamModel = await teamModel.findOne({teamName});
+    return teamModel;
+}
 
-const updateTeam = async (teamId, updateData) => {
-    try {
-        const updatedTeam = await Team.findByIdAndUpdate(
-            teamId,
-            updateData,
-            { new: true, runValidators: true }
-        )
-            .populate('goalkeeper')
-            .populate('defenders')
-            .populate('midfielders')
-            .populate('attackers');
-        if (!updatedTeam) {
-            throw new Error('Team not found');
-        }
-        return updatedTeam;
-    } catch (error) {
-        throw new Error(`Error updating team: ${error.message}`);
-    }
-};
-const deleteTeam = async (teamId) => {
-    try {
-        const deletedTeam = await Team.findByIdAndDelete(teamId);
-        if (!deletedTeam) {
-            throw new Error('Team not found');
-        }
-        return deletedTeam;
-    } catch (error) {
-        throw new Error(`Error deleting team: ${error.message}`);
-    }
-};
+async function updateTeam(teamId, projectData) {
+    const updatedTeam = teamModel.findOneAndUpdate(teamId, projectData, {new: true, runValidators: true});
+    return updatedTeam;
+}
+
+async function deleteTeam (teamId) {
+    const deleted = await teamModel.findByIdAndDelete(teamId);
+    return deleted;
+}
+
+
 module.exports = {
     createTeam,
-    findById,
-    findByUserId,
-    findAll,
+    saveTeam,
+    getAllTeams,
+    getTeamById,
+    getTeamByName,
     updateTeam,
     deleteTeam,
 };
