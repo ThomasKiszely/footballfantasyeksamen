@@ -8,7 +8,17 @@ async function signUp(username, password) {
         throw new Error("Brugernavn og adgangskode kræves");
     }
     const hashed = await bcrypt.hash(password, 10);
-    return await userRepo.createUser({ username, password: hashed });
+    const user = await userRepo.createUser({ username, password: hashed });
+    const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN});
+    return ({
+        token,
+        user: {
+            id: user._id,
+            username: user.username,
+            teams: user.teams,
+            role: user.role,
+        }
+    });
 }
 
 async function getUserById(id){

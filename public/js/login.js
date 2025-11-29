@@ -34,6 +34,7 @@ async function handleAuthentication(event, endpoint, usernameId, passwordId) {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({username, password}),
+            credentials: "include",
         });
 
         const data = await res.json();
@@ -41,12 +42,8 @@ async function handleAuthentication(event, endpoint, usernameId, passwordId) {
         if (data.success) {
             msg.textContent = endpoint === "login" ? "Login successfuldt" : "Bruger oprettet";
             msg.style.color = "green";
+            window.location.href = "/fodbold"; // Sørg for at denne route findes
 
-            console.log('Token modtaget:', data.token);
-            if (data.token) {
-                localStorage.setItem('jwt', data.token);
-                window.location.href = "/team.html"; // Sørg for at denne route findes
-            }
         } else {
             msg.textContent = "Fejl: " + (data.error || "Ukendt fejl");
             msg.style.color = "red";

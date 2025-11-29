@@ -4,10 +4,17 @@ const userService = require('../services/userService');
 async function signup(req, res, next) {
     try {
         const { username, password } = req.body;
-        const newUser = await userService.signUp(username, password);
+        const { token, user } = await userService.signUp(username, password);
+        res.cookie("jwt", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+            maxAge: 1000 * 60 * 60, //1 time
+        });
+
         return res.status(201).json({
             success: true,
-            user: { id: newUser._id, username: newUser.username }
+            user,
         });
     } catch (error) {
         next(error);
@@ -18,10 +25,15 @@ async function login(req, res, next) {
     try{
         const { username, password } = req.body;
         const {token, user } = await userService.login(username, password);
-        console.log(user);
+        res.cookie("jwt", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+            maxAge: 1000 * 60 * 60,
+        });
+
         return res.status(200).json({
             success: true,
-            token,
             user,
         });
     } catch (error) {

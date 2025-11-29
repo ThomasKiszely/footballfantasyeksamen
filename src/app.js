@@ -10,10 +10,12 @@ const { connectToMongo } = require('./services/db');
 const cron = require('node-cron');
 const playerRepo = require('./data/playerRepo');
 const {fetchAndSyncPlayers} = require('./services/playerService');
+const cookieParser = require('cookie-parser');
 connectToMongo();
 
 
 // Middleware
+app.use(cookieParser());
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
