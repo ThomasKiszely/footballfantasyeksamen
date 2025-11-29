@@ -42,7 +42,7 @@ async function handleAuthentication(event, endpoint, usernameId, passwordId) {
         if (data.success) {
             msg.textContent = endpoint === "login" ? "Login successfuldt" : "Bruger oprettet";
             msg.style.color = "green";
-            window.location.href = "/fodbold"; // Sørg for at denne route findes
+            window.location.href = "/team.html"; // Sørg for at denne route findes
 
         } else {
             msg.textContent = "Fejl: " + (data.error || "Ukendt fejl");
