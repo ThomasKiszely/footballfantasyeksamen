@@ -11,25 +11,40 @@ exports.getAll = async (req, res) => {
 
 exports.getById = async (req, res) => {
     try {
-        const teamId = req.params.id;
-        const team = await teamService.getTeamById(teamId);
-        if (!team) {
-            return res.status(404).json({ error: 'Team not found' });
+        const team = await teamService.getTeamById(req.params.id);
+        if (!team) return res.status(404).json({ error: "Team not found" });
+
+        console.log("team.userId:", team.userId.toString(), "req.user.id:", req.user.id);
+
+        if (team.userId.toString() !== req.user.id) {
+            return res.status(403).json({ error: "Du har ikke adgang til dette team" });
         }
 
-        const updatedTeam = await teamPointsService.updateTeamPoints(teamId);
-        res.json(updatedTeam);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+        const updatedTeam = await teamPointsService.updateTeamPoints(req.params.id);
+        if (!updatedTeam) {
+            return res.status(500).json({ error: "Kunne ikke opdatere point" });
+        }
+
+        console.log("Team: ", updatedTeam);
+        return res.status(200).json(updatedTeam);
+    } catch (err) {
+        console.error("Fejl i getById:", err);
+        res.status(500).json({ error: err.message });
     }
 };
 
+
+
+
 exports.create = async (req, res) => {
     try {
-        const newTeam = await teamService.createTeam(req.body);
+        const newTeam = await teamService.createTeam({
+            ...req.body,
+            userId: req.user.id   // stadig kun id fra auth
+        });
         res.status(201).json(newTeam);
-    } catch (error) {
-        res.status(400).json({ error: error.message });
+    } catch (err) {
+        res.status(400).json({ error: err.message });
     }
 };
 

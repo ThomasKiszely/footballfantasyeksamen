@@ -20,7 +20,7 @@ async function updateTeamPoints(teamId) {
         }
     }
     team.points = totalPoints;
-    await teamRepo.saveTeam(team);
+    await teamRepo.updateTeam(teamId, {points: totalPoints});
     return team;
 }
 

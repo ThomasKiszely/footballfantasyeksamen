@@ -5,6 +5,7 @@ const msg = document.getElementById('message');
 const loginTab = document.getElementById("loginTab");
 const signupTab = document.getElementById("signupTab");
 
+console.log("login.js loaded");
 loginTab.addEventListener("click", () => {
     loginForm.classList.remove("hidden");
     signupForm.classList.add("hidden");
@@ -36,17 +37,24 @@ async function handleAuthentication(event, endpoint, usernameId, passwordId) {
             body: JSON.stringify({username, password}),
             credentials: "include",
         });
-
+        console.log("Fetch response status:", res.status);
         const data = await res.json();
+        console.log("Auth response JSON:", data);
 
         if (data.success) {
             msg.textContent = endpoint === "login" ? "Login successfuldt" : "Bruger oprettet";
             msg.style.color = "green";
-            window.location.href = "/team.html"; // Sørg for at denne route findes
 
-        } else {
-            msg.textContent = "Fejl: " + (data.error || "Ukendt fejl");
-            msg.style.color = "red";
+            if(data.teamId) {
+                console.log("TeamId received:", data.teamId);
+                localStorage.setItem('teamId', data.teamId);
+                console.log("Saved teamId in localStorage:", localStorage.getItem('teamId'));
+                window.location.href = `/team.html?teamId=${data.teamId}`;
+            } else {
+                console.warn("Ingen teamId i respons → redirect til create-team");
+                window.location.href = `/create-team.html`;
+            }
+
         }
     } catch (error) {
         console.error(error);

@@ -1,5 +1,5 @@
 const userService = require('../services/userService');
-
+const teamService = require('../services/teamService');
 
 async function signup(req, res, next) {
     try {
@@ -12,9 +12,15 @@ async function signup(req, res, next) {
             maxAge: 1000 * 60 * 60, //1 time
         });
 
+        console.log("[login] user._id typeof:", typeof user._id, "value:", user._id);
+        const team = await teamService.getTeamByUserId(user._id || user.id);
+        console.log("[login] team found:", team && team._id);
+
+
         return res.status(201).json({
             success: true,
             user,
+            teamId: team ? team._id : null,
         });
     } catch (error) {
         next(error);
@@ -32,9 +38,15 @@ async function login(req, res, next) {
             maxAge: 1000 * 60 * 60,
         });
 
+        console.log("[login] user._id typeof:", typeof user._id, "value:", user._id);
+        const team = await teamService.getTeamByUserId(user._id || user.id);
+        console.log("[login] team found:", team && team._id);
+
+
         return res.status(200).json({
             success: true,
             user,
+            teamId: team ? team._id : null,
         });
     } catch (error) {
         next(error);

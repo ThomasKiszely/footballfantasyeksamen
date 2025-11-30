@@ -1,4 +1,6 @@
 const teamRepo = require('../data/teamRepo');
+const userRepo = require('../data/userRepo');
+
 
 async function getAllTeams() {
     return teamRepo.getAllTeams();
@@ -9,7 +11,12 @@ async function getTeamById(id) {
 }
 
 async function createTeam(teamData) {
-    return teamRepo.createTeam(teamData);
+    const team = await teamRepo.createTeam(teamData);
+    await userRepo.addTeamToUser(teamData.userId, team._id);
+    return team;
+}
+async function getTeamByUserId(userId) {
+    return teamRepo.getTeamByUserId(userId);
 }
 
 async function updateTeam(id, updateData) {
@@ -26,4 +33,5 @@ module.exports = {
     createTeam,
     updateTeam,
     deleteTeam,
+    getTeamByUserId,
 };

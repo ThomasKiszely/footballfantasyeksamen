@@ -17,6 +17,13 @@ async function getUserByName(username) {
     user = await User.findOne({username});
     return user;
 }
+async function addTeamToUser(userId, teamId) {
+    return await User.findByIdAndUpdate(
+        userId,
+        { $push: { teams: teamId.toString() } },
+        { new: true }
+    );
+}
 
 async function updateUser(userId, userData){
     const updatedUser = User.findOneAndUpdate(userId, userData, {new: true, runValidators: true});
@@ -36,4 +43,5 @@ module.exports = {
     getUserByName,
     updateUser,
     deleteUser,
+    addTeamToUser
 };
