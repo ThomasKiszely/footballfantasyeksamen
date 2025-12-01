@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const leaderboardRoutes = require('./routes/leaderboardRoutes');
 const playerRoutes = require('./routes/playerRoutes');
 const router = require('./routes/userRoutes');
 const teamRoutes = require('./routes/teamRoutes');
@@ -18,13 +19,14 @@ connectToMongo();
 // Middleware
 app.use(cookieParser());
 app.use(express.json());
-
-app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(__dirname, '..', 'public'), { extensions: ['html'] }));
 
 // Routes
 app.use('/api/players', playerRoutes)
 app.use('/api/user', router);
+
 app.use('/api/team', teamRoutes);
+app.use('/api/leaderboard', leaderboardRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
@@ -40,6 +42,5 @@ function startDataSync() {
     });
 }
 startDataSync();
-
 
 module.exports = app;

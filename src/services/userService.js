@@ -14,7 +14,7 @@ async function signUp(username, password) {
     return ({
         token,
         user: {
-            id: user._id,
+            _id: user._id,
             username: user.username,
             teams: user.teams,
             role: user.role,
@@ -39,7 +39,7 @@ async function login(username, password){
     return {
         token,
         user: {
-            id: user._id,
+            _id: user._id,
             username: user.username,
             teams: user.teams,
             role: user.role,
@@ -64,6 +64,12 @@ async function canAffordPlayer(userId, playerId) {
 }
 
 async function updateUser(id, userdata) {
+    if (userdata.password !== '') {
+        const hashed = await bcrypt.hash(userdata.password, 10);
+        userdata.password = hashed;
+    } else {
+        delete userdata.password;
+    }
     return await userRepo.updateUser(id, userdata);
 }
 

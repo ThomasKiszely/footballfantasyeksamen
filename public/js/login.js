@@ -44,17 +44,21 @@ async function handleAuthentication(event, endpoint, usernameId, passwordId) {
         if (data.success) {
             msg.textContent = endpoint === "login" ? "Login successfuldt" : "Bruger oprettet";
             msg.style.color = "green";
+            localStorage.setItem("user", JSON.stringify(data.user));
 
             if(data.teamId) {
                 console.log("TeamId received:", data.teamId);
                 localStorage.setItem('teamId', data.teamId);
                 console.log("Saved teamId in localStorage:", localStorage.getItem('teamId'));
-                window.location.href = `/team.html?teamId=${data.teamId}`;
+                window.location.href = `/team?teamId=${data.teamId}`;
             } else {
                 console.warn("Ingen teamId i respons → redirect til create-team");
-                window.location.href = `/create-team.html`;
+                window.location.href = `/create-team`;
             }
 
+        } else {
+            msg.textContent = "Forkert brugernavn eller kodeord";
+            msg.style.color = "red";
         }
     } catch (error) {
         console.error(error);

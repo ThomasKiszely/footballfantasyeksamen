@@ -45,7 +45,12 @@ async function login(req, res, next) {
 
         return res.status(200).json({
             success: true,
-            user,
+            user: {
+                _id: user._id,
+                username: user.username,
+                teams: user.teams,
+                role: user.role,
+            },
             teamId: team ? team._id : null,
         });
     } catch (error) {
@@ -83,6 +88,7 @@ async function updateUser(req, res, next) {
     try{
         const id = req.params.id;
         const user = req.body;
+        console.log(id);
         const updatedUser = await userService.updateUser(id, user);
         return res.status(200).json({ success: true, updatedUser });
     } catch (error) {
