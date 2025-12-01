@@ -2,6 +2,7 @@ const userRepo = require('../data/userRepo');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
+const teamRepo = require('../data/teamRepo');
 
 async function signUp(username, password) {
     if (!username || !password) {
@@ -46,6 +47,22 @@ async function login(username, password){
     };
 }
 
+async function canAffordPlayer(userId, playerId) {
+    const user = await userRepo.getUserById(userId);
+    const playerRepo = require('../data/playerRepo');
+    const player = await playerRepo.findById(playerId);
+
+    if (!user || !player) {
+        throw new Error('User or player not found');
+    }
+
+    if (user.budget >= player.price) {
+        return true;
+    } else {
+        throw new Error('Insufficient budget to purchase player.');
+    }
+}
+
 async function updateUser(id, userdata) {
     return await userRepo.updateUser(id, userdata);
 }
@@ -59,4 +76,5 @@ module.exports = {
     updateUser,
     login,
     deleteUser,
+    canAffordPlayer,
 };
