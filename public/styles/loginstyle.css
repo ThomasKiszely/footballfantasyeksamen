@@ -42,3 +42,7 @@ input, button {
 #message {
     margin-top: 1rem;
 }
+
+#deleteUser {
+    margin: 10px;        /* 10px luft rundt om knappen */
+}
