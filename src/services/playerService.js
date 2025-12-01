@@ -79,7 +79,6 @@ exports.fetchAndSyncPlayers = async () => {
                 name: player.name,
                 club: team.name,
                 position: convertPosition(player.position),
-                price: 0
             });
         });
     });

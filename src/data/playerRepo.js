@@ -31,7 +31,7 @@ exports.bulkUpsert = async (players) => {
     const bulkOps = players.map(player => ({
         updateOne: {
             filter: { name: player.name, club: player.club },
-            update: { $set: { position: player.position, price: player.price } },
+            update: { $set: { position: player.position} },
             upsert: true
         }
     }));
