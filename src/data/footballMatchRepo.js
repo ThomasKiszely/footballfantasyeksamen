@@ -38,16 +38,19 @@ const fetchAllMatches = async() => {
 const saveToDB = async() => {
     const matches = await fetchAllMatches();
     if(!matches.length) return;
-
     try {
-        const ops = matches.map(match => ({
-            updateOne: {
-                filter: {matchId: match.matchId},
-                update: {$set: match.toObject()},
-                upsert: true,
-            }
-        }));
-        await FootballMatch.bulkWrite(ops);
+        const ops = matches.map(match => {
+        const obj = match.toObject ? match.toObject() : match;
+        delete obj._id;
+            return {
+                updateOne: {
+                    filter: { matchId: obj.matchId },
+                    update: { $set: obj },
+                    upsert: true,
+                }
+            };
+        });
+    await FootballMatch.bulkWrite(ops);
         console.log(`${matches.length} kampe gemt/updated i databasen`);
     } catch (error) {
         console.log('Fejl ved gem af kamp i repo', error.message);
