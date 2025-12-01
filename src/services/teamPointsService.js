@@ -7,10 +7,15 @@ async function fetchAllMatches() {
 }
 
 function calculatePointsForClub(match, clubName) {
+    const isHome = match.homeTeam === clubName;
+    const isAway = match.awayTeam === clubName;
+
+    if(!isHome && !isAway) return 0;
+
     if(match.winner === 'DRAW') return 1;
-    if(match.winner === 'HOME_TEAM' && match.homeTeam === clubName) return 3;
-    if(match.winner === 'AWAY_TEAM' && match.awayTeam === clubName) return 3;
-    return 0;
+    if(match.winner === 'HOME_TEAM') return 3;
+    if(match.winner === 'AWAY_TEAM') return 3;
+    return 0
 }
 
 
