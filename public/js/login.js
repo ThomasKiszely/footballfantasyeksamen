@@ -50,10 +50,10 @@ async function handleAuthentication(event, endpoint, usernameId, passwordId) {
                 console.log("TeamId received:", data.teamId);
                 localStorage.setItem('teamId', data.teamId);
                 console.log("Saved teamId in localStorage:", localStorage.getItem('teamId'));
-                window.location.href = `/team.html?teamId=${data.teamId}`;
+                window.location.href = `/team?teamId=${data.teamId}`;
             } else {
                 console.warn("Ingen teamId i respons → redirect til create-team");
-                window.location.href = `/create-team.html`;
+                window.location.href = `/create-team`;
             }
 
         } else {
