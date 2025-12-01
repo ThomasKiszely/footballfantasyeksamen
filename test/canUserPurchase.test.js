@@ -1,9 +1,7 @@
 import { vi, describe, it, expect, afterEach } from 'vitest';
 
-// Vi importerer servicen vi vil teste
 const userService = require('../src/services/userService');
 
-// Vi importerer repos, som vi skal "mocke" (lade som om vi kalder)
 const userRepo = require('../src/data/userRepo');
 const playerRepo = require('../src/data/playerRepo');
 
@@ -17,8 +15,8 @@ describe('userService.canAffordPlayer', () => {
     });
 
     it('Should return true when user has enough budget', async () => {
-        const userId = 'user-rich';
-        const playerId = 'player-cheap';
+        const userId = 'joachim-rig';
+        const playerId = 'joachim';
 
         getUserByIdMock.mockResolvedValue({ _id: userId, budget: 100 });
         getPlayerByIdMock.mockResolvedValue({ _id: playerId, price: 50 });
@@ -31,8 +29,8 @@ describe('userService.canAffordPlayer', () => {
     });
 
     it('Should throw error when user has insufficient budget', async () => {
-        const userId = 'user-poor';
-        const playerId = 'player-expensive';
+        const userId = 'joachim-fattig';
+        const playerId = 'joachim-hej';
 
         getUserByIdMock.mockResolvedValue({ _id: userId, budget: 50 });
         getPlayerByIdMock.mockResolvedValue({ _id: playerId, price: 100 });
@@ -43,8 +41,8 @@ describe('userService.canAffordPlayer', () => {
     });
 
     it('Should return true when budget exactly matches price', async () => {
-        const userId = 'user-exact';
-        const playerId = 'player-exact';
+        const userId = 'det-er-joachim';
+        const playerId = 'hej-joachim';
 
         getUserByIdMock.mockResolvedValue({ _id: userId, budget: 75 });
         getPlayerByIdMock.mockResolvedValue({ _id: playerId, price: 75 });
