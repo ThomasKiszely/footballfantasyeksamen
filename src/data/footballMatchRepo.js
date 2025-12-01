@@ -42,8 +42,8 @@ const saveToDB = async() => {
     try {
         const ops = matches.map(match => ({
             updateOne: {
-                filter: {id: match.id},
-                update: {$set: match},
+                filter: {matchId: match.matchId},
+                update: {$set: match.toObject()},
                 upsert: true,
             }
         }));

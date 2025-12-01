@@ -1,6 +1,11 @@
 const teamRepo = require("../data/teamRepo");
 const footballMatchRepo = require("../data/footballMatchRepo");
 
+
+async function fetchAllMatches() {
+    return footballMatchRepo.saveToDB();
+}
+
 function calculatePointsForClub(match, clubName) {
     if(match.winner === 'DRAW') return 1;
     if(match.winner === 'HOME_TEAM' && match.homeTeam === clubName) return 3;
@@ -27,4 +32,5 @@ async function updateTeamPoints(teamId) {
 module.exports = {
     updateTeamPoints,
     calculatePointsForClub,
+    fetchAllMatches
 }
