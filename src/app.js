@@ -10,6 +10,7 @@ const { connectToMongo } = require('./services/db');
 const cron = require('node-cron');
 const playerRepo = require('./data/playerRepo');
 const {fetchAndSyncPlayers} = require('./services/playerService');
+const {fetchAllMatches} = require('./services/teamPointsService');
 const cookieParser = require('cookie-parser');
 connectToMongo();
 
@@ -21,7 +22,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Routes
-app.use('/players', playerRoutes)
+app.use('/api/players', playerRoutes)
 app.use('/api/user', router);
 app.use('/api/team', teamRoutes);
 
@@ -31,9 +32,11 @@ app.use(errorHandler);
 
 function startDataSync() {
     // Fetch data every 10 minutes
-    cron.schedule('*/10 * * * *', async () => {
-        console.log('Reading player data from API...');
+    cron.schedule('*/1 * * * *', async () => {
+        console.log('Reading player data and alle matches from API...');
         await fetchAndSyncPlayers();
+        await fetchAllMatches();
+
     });
 }
 startDataSync();
