@@ -10,6 +10,7 @@ async function getLeaderboard() {
         const leaderboard = await res.json();
         renderLeaderboard(leaderboard);
     } catch(error) {
+        console.log("laederboad fejl ", error.message)
         alert('Error fetching leaderboard:', error.message);
     }
 }
@@ -22,7 +23,7 @@ function renderLeaderboard(data) {
     for (const team of data) {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${team.user.username}</td>
+            <td>${team.username}</td>
             <td>${team.teamName}</td>
             <td>${team.points}</td>
         `;

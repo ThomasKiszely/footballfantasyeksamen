@@ -19,12 +19,12 @@ connectToMongo();
 // Middleware
 app.use(cookieParser());
 app.use(express.json());
-
-app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(__dirname, '..', 'public'), { extensions: ['html'] }));
 
 // Routes
 app.use('/api/players', playerRoutes)
 app.use('/api/user', router);
+
 app.use('/api/team', teamRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
 
@@ -42,6 +42,5 @@ function startDataSync() {
     });
 }
 startDataSync();
-
 
 module.exports = app;
