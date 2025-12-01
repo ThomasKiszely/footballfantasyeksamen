@@ -14,9 +14,9 @@ describe("Leaderboard Service", () => {
 
         const sortedTeams = await leaderboardService.retrieveLeaderboard();
 
-        expect(sortedTeams[0].teamName).toBe("Hold B"); // 50 point
-        expect(sortedTeams[1].teamName).toBe("Hold C"); // 30 point
-        expect(sortedTeams[2].teamName).toBe("Hold A"); // 10 point
+        expect(sortedTeams[0].teamName).toBe("Hold B");
+        expect(sortedTeams[1].teamName).toBe("Hold C");
+        expect(sortedTeams[2].teamName).toBe("Hold A");
         expect(sortedTeams.length).toBe(3);
     });
 });
