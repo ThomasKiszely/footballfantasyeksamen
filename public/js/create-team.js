@@ -16,7 +16,7 @@ const user = JSON.parse(localStorage.getItem("user"));
 
 
 editUser.addEventListener("click", (e) => {
-    window.location.href = `/editUser.html?userid=${user._id}`;
+    window.location.href = `/editUser?userid=${user._id}`;
 })
 
 // Opdaterer budget UI

@@ -3,7 +3,7 @@ const editUser = document.getElementById("editUser");
 const user = JSON.parse(localStorage.getItem("user"));
 
 editUser.addEventListener("click", (e) => {
-    window.location.href = `/editUser.html?userid=${user._id}`;
+    window.location.href = `/editUser?userid=${user._id}`;
 });
 
 // Globalt kort over de fire brede positioner for at matche rækkerne i create-team.js
@@ -36,7 +36,7 @@ async function loadTeam() {
     try {
         const teamId = getTeamIdFromUrl() || localStorage.getItem("teamId");
         if (!teamId) {
-            window.location.href = "/create-team.html";
+            window.location.href = "/create-team";
             return;
         }
 
@@ -46,7 +46,7 @@ async function loadTeam() {
         });
 
         if (response.status === 401) {
-            window.location.href = "/login.html";
+            window.location.href = "/";
             return;
         }
         if (!response.ok) {
