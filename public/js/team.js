@@ -1,4 +1,10 @@
 const API_BASE_URL = "http://localhost:3000/api/team";
+const editUser = document.getElementById("editUser");
+const user = JSON.parse(localStorage.getItem("user"));
+
+editUser.addEventListener("click", (e) => {
+    window.location.href = `/editUser.html?userid=${user._id}`;
+});
 
 // Globalt kort over de fire brede positioner for at matche rækkerne i create-team.js
 const POSITION_MAP = {

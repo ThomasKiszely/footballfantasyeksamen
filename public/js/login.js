@@ -56,6 +56,9 @@ async function handleAuthentication(event, endpoint, usernameId, passwordId) {
                 window.location.href = `/create-team.html`;
             }
 
+        } else {
+            msg.textContent = "Forkert brugernavn eller kodeord";
+            msg.style.color = "red";
         }
     } catch (error) {
         console.error(error);
