@@ -26,7 +26,7 @@ async function addTeamToUser(userId, teamId) {
 }
 
 async function updateUser(userId, userData){
-    const updatedUser = User.findOneAndUpdate(userId, userData, {new: true, runValidators: true});
+    const updatedUser = User.findByIdAndUpdate(userId, userData, {new: true, runValidators: true});
     return updatedUser;
 }
 

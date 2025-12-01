@@ -44,6 +44,7 @@ async function handleAuthentication(event, endpoint, usernameId, passwordId) {
         if (data.success) {
             msg.textContent = endpoint === "login" ? "Login successfuldt" : "Bruger oprettet";
             msg.style.color = "green";
+            localStorage.setItem("user", JSON.stringify(data.user));
 
             if(data.teamId) {
                 console.log("TeamId received:", data.teamId);

@@ -10,6 +10,14 @@ const formationSelectEl = document.getElementById("formationSelect");
 let selectedPlayers = [], allPlayers = [], currentPage = 1;
 const pageSize = 10;
 let currentBudget = 100000000; // Antager startbudget på 100M
+const editUser = document.getElementById("editUser");
+const user = JSON.parse(localStorage.getItem("user"));
+
+
+
+editUser.addEventListener("click", (e) => {
+    window.location.href = `/editUser.html?userid=${user._id}`;
+})
 
 // Opdaterer budget UI
 function updateBudgetUI() {
