@@ -1,6 +1,12 @@
 const editUserForm = document.getElementById('editUser');
 const storedUser = JSON.parse(localStorage.getItem('user'));
 const deleteUserButton = document.getElementById('deleteUser');
+const backbutton = document.getElementById('backbutton');
+const teamId = localStorage.getItem('teamId');
+
+backbutton.onclick = () => {
+    window.location.href = `/team?teamId=${teamId}`;
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     if (storedUser && storedUser.username) {

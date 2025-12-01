@@ -46,3 +46,14 @@ input, button {
 #deleteUser {
     margin: 10px;        /* 10px luft rundt om knappen */
 }
+
+#backbutton {
+    position: absolute;
+    top: 10px;      /* afstand fra toppen */
+    left: 10px;     /* afstand fra venstre */
+    padding: 8px 12px;
+    background-color: #ddd;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
