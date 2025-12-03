@@ -13,8 +13,8 @@ function calculatePointsForClub(match, clubName) {
     if(!isHome && !isAway) return 0;
 
     if(match.winner === 'DRAW') return 1;
-    if(match.winner === 'HOME_TEAM') return 3;
-    if(match.winner === 'AWAY_TEAM') return 3;
+    if(match.winner === 'HOME_TEAM' && isHome) return 3;
+    if(match.winner === 'AWAY_TEAM' && isAway) return 3;
     return 0
 }
 

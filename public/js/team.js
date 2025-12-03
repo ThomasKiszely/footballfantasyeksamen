@@ -94,7 +94,7 @@ async function loadTeam() {
             }
         }
 
-        console.log(`Frontend: Vicario's point for GW ${currentGameweek} er: ${latestPointsByPlayer['69284d6df59036d8a3fc703b']}`);
+        console.log(`Frontend: Pedro point for GW ${currentGameweek} er: ${latestPointsByPlayer['69284d6df59036d8a3fc6f4f']}`);
         updateTeamPlayersUI(teamData.players, latestPointsByPlayer, currentGameweek);
 
     } catch (err) {
