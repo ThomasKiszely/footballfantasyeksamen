@@ -7,6 +7,8 @@ function getDefaultBudget() {
     return teamSchema.default();
 }
 
+
+
 async function getAllTeams() {
     return teamRepo.getAllTeams();
 }

@@ -21,7 +21,13 @@ function calculatePointsForClub(match, clubName) {
 
 async function updateTeamPoints(teamId) {
     const team = await teamRepo.getTeamById(teamId);
-    const matches = await footballMatchRepo.getAllMatches();
+    let matches = await footballMatchRepo.getAllMatches();
+
+    matches = matches.filter(match =>
+        match.homeScore !== null && match.homeScore !== undefined
+    );
+
+    matches.sort((a,b) => parseInt(a.matchday) - parseInt(b.matchday));
 
     let totalPoints = 0;
 
@@ -43,14 +49,18 @@ async function updateTeamPoints(teamId) {
 
         for(const player of team.players) {
             const clubPoints = calculatePointsForClub(match, player.club);
+            const playerIdString = player._id.toString();
 
+            if (matchday >= 12 && clubPoints > 0) {
+                console.log(`GW ${matchday} - SPILLEDER: ${player.name} fik ${clubPoints} point!`);
+            }
 
-            if (!detailedGameweekPoints[matchdayString][player._id.toString()]) {
-                detailedGameweekPoints[matchdayString][player._id.toString()] = 0;
+            if (!detailedGameweekPoints[matchdayString][playerIdString]) {
+                detailedGameweekPoints[matchdayString][playerIdString] = 0;
             }
 
             // Akkumulér point til den specifikke spiller i den specifikke Gameweek
-            detailedGameweekPoints[matchdayString][player._id.toString()] += clubPoints;
+            detailedGameweekPoints[matchdayString][playerIdString] += clubPoints;
 
             // Opdater total point for hele holdet
             totalPoints += clubPoints;
@@ -61,13 +71,9 @@ async function updateTeamPoints(teamId) {
     let latestMatchday = 0;
 
     for (const matchdayString in detailedGameweekPoints) {
-        const playerPoints = detailedGameweekPoints[matchdayString];
-
-
-        const gameweekTotal = Object.values(playerPoints).reduce((sum, points) => sum + points, 0);
         const matchdayNumber = parseInt(matchdayString);
 
-        if (gameweekTotal > 0 && matchdayNumber > latestMatchday) {
+        if(matchdayNumber > latestMatchday) {
             latestMatchday = matchdayNumber;
         }
     }
@@ -79,8 +85,6 @@ async function updateTeamPoints(teamId) {
 
 
     team.points = totalPoints;
-
-
     team.detailedGameweekPoints = detailedGameweekPoints;
     team.latestGameweekPoints = latestGameweekPoints;
 
@@ -89,8 +93,8 @@ async function updateTeamPoints(teamId) {
         detailedGameweekPoints: detailedGameweekPoints,
         latestGameweekPoints: latestGameweekPoints
     });
-
-    return team;
+    const freshTeamDocument = await teamRepo.getTeamById(teamId);
+    return freshTeamDocument;
 }
 
 module.exports = {

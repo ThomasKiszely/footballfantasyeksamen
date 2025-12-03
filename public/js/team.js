@@ -30,7 +30,7 @@ function getTeamIdFromUrl() {
 }
 
 
-function findLatestGameweek(detailedPoints) {
+/*function findLatestGameweek(detailedPoints) {
     let latest = 0;
 
     for (const matchdayString in detailedPoints) {
@@ -46,6 +46,8 @@ function findLatestGameweek(detailedPoints) {
     }
     return latest;
 }
+
+ */
 
 
 async function loadTeam() {
@@ -75,12 +77,11 @@ async function loadTeam() {
         updateTeamStatsUI(teamData);
 
 
-        const latestGameweek = findLatestGameweek(teamData.detailedGameweekPoints);
+        const currentGameweek = teamData.currentGameweek;
 
-        const latestPointsByPlayer = teamData.detailedGameweekPoints[String(latestGameweek)] || {};
+        const latestPointsByPlayer = teamData.detailedGameweekPoints[String(currentGameweek)] || {};
 
-
-        updateTeamPlayersUI(teamData.players, latestPointsByPlayer);
+        updateTeamPlayersUI(teamData.players, latestPointsByPlayer, currentGameweek);
 
     } catch (err) {
         console.error("Fejl ved hentning af team:", err);
@@ -96,6 +97,12 @@ function updateTeamStatsUI(team) {
     document.getElementById("teamName").textContent = team.teamName;
     document.getElementById("teamBudget").textContent = (team.budget / 1000000).toFixed(1) + "M"; // Viser budget i M
     document.getElementById("teamPoints").textContent = team.points;
+
+    if(team.currentGameweek) {
+        document.getElementById("currentGameweekHeader").textContent = `Gameweek ${team.currentGameweek}:`;
+    } else {
+        document.getElementById("currentGameweekHeader").textContent = `Start runde:`;
+    }
     document.getElementById("gameweekPoints").textContent = team.latestGameweekPoints;
 }
 

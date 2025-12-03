@@ -5,10 +5,10 @@ const teamPointsService = require('../services/teamPointsService');
 exports.getTeamConfig = async function (req, res) {
     try {
         const START_BUDGET = teamService.getDefaultBudget();
-
         res.json({
             startBudget: START_BUDGET,
             maxPlayers: 11,
+
         });
     } catch (error) {
         res.status(500).json({error: "Fejl af hentning af default budget"});
@@ -40,8 +40,33 @@ exports.getById = async (req, res) => {
             return res.status(500).json({ error: "Kunne ikke opdatere point" });
         }
 
-        console.log("Team: ", updatedTeam);
-        return res.status(200).json(updatedTeam);
+        const teamObject = (updatedTeam && typeof updatedTeam.toObject === 'function')
+            ? updatedTeam.toObject()
+            : updatedTeam; // Bruger det som et simpelt JS objekt, hvis .toObject ikke findes
+
+        // SIKKER TILGANG TIL DETAILED POINTS
+        const detailedPointsMap = teamObject.detailedGameweekPoints;
+
+        let allMatchdays;
+        if (detailedPointsMap instanceof Map) {
+            // Hvis det er et JavaScript Map (som Mongoose Maps bliver til efter .toObject())
+            allMatchdays = Array.from(detailedPointsMap.keys()).map(Number);
+        } else if (typeof detailedPointsMap === 'object' && detailedPointsMap !== null) {
+            // Hvis det er et almindeligt JavaScript Object
+            allMatchdays = Object.keys(detailedPointsMap).map(Number);
+        } else {
+            allMatchdays = [];
+        }
+
+        const currentGameweek = allMatchdays.length > 0 ? Math.max(...allMatchdays) : 0;
+
+        const teamData = {
+            ...teamObject,
+            currentGameweek: currentGameweek,
+        }
+
+        console.log("Team: ", teamData);
+        return res.status(200).json(teamData);
     } catch (err) {
         console.error("Fejl i getById:", err);
         res.status(500).json({ error: err.message });
