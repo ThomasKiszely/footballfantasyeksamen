@@ -9,7 +9,7 @@ const pageIndicatorEl = document.getElementById("pageIndicator");
 const formationSelectEl = document.getElementById("formationSelect");
 let selectedPlayers = [], allPlayers = [], currentPage = 1;
 const pageSize = 10;
-let currentBudget = 100000000; // Antager startbudget på 100M
+let currentBudget = 0;
 const editUser = document.getElementById("editUser");
 const user = JSON.parse(localStorage.getItem("user"));
 
@@ -17,7 +17,30 @@ const user = JSON.parse(localStorage.getItem("user"));
 
 editUser.addEventListener("click", (e) => {
     window.location.href = `/editUser?userid=${user._id}`;
-})
+});
+
+async function fetchInitialData() {
+    try {
+        const res = await fetch (`${API_BASE_URL}/team/config`, {credentials: "include"});
+
+        if(res.ok) {
+           const config = await res.json();
+           currentBudget = config.startBudget;
+
+           const budgetLabel = document.getElementById("budgetLabel");
+           if(budgetLabel) {
+               budgetLabel.textContent = `Resterende Budget (Start: ${(currentBudget / 1000000).toFixed(1)}M)`;
+           }
+        } else {
+            console.log("Kunne ikke hente team config fra API. Bruger standard 90m");
+            currentBudget = 90000000;
+        }
+    } catch (error) {
+        console.error("Fejl ved hentnig af inital data: " + error.message);
+    }
+    loadPlayers();
+    renderPitch("4-3-3");
+}
 
 // Opdaterer budget UI
 function updateBudgetUI() {
@@ -295,4 +318,4 @@ createTeamBtn.addEventListener("click", async () => {
 });
 
 // Starter med 4-3-3
-document.addEventListener("DOMContentLoaded", () => { loadPlayers(); renderPitch("4-3-3"); });
+document.addEventListener("DOMContentLoaded", () => { fetchInitialData()});

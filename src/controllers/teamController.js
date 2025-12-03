@@ -1,5 +1,20 @@
 const teamService = require('../services/teamService');
 const teamPointsService = require('../services/teamPointsService');
+
+
+exports.getTeamConfig = async function (req, res) {
+    try {
+        const START_BUDGET = teamService.getDefaultBudget();
+
+        res.json({
+            startBudget: START_BUDGET,
+            maxPlayers: 11,
+        });
+    } catch (error) {
+        res.status(500).json({error: "Fejl af hentning af default budget"});
+    }
+}
+
 exports.getAll = async (req, res) => {
     try {
         const teams = await teamService.getAllTeams();

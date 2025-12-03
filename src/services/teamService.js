@@ -1,6 +1,11 @@
 const teamRepo = require('../data/teamRepo');
 const userRepo = require('../data/userRepo');
+const Team = require('../models/teamModel');
 
+function getDefaultBudget() {
+    const teamSchema = Team.schema.path('budget');
+    return teamSchema.default();
+}
 
 async function getAllTeams() {
     return teamRepo.getAllTeams();
@@ -34,4 +39,5 @@ module.exports = {
     updateTeam,
     deleteTeam,
     getTeamByUserId,
+    getDefaultBudget,
 };

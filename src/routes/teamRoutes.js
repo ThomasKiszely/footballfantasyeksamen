@@ -3,6 +3,7 @@ const router = express.Router();
 const teamController = require('../controllers/teamController');
 const authToken = require('../middlewares/authMiddleware');
 
+router.get('/config', teamController.getTeamConfig);
 router.get('/', teamController.getAll);
 router.get('/:id', authToken,  teamController.getById);
 router.post('/', authToken , teamController.create);

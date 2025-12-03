@@ -8,7 +8,7 @@ const teamSchema = new mongoose.Schema({
     players: {
         type: [{ type: Schema.Types.ObjectId, ref: 'Player' }], required: true,
     },
-    budget: { type: Number, required: true, default: 9000000 },
+    budget: { type: Number, required: true, default: 90000000 },
     points: { type: Number, required: true, default: 0 },
 });
 
