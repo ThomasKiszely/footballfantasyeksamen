@@ -6,7 +6,6 @@ editUser.addEventListener("click", (e) => {
     window.location.href = `/editUser?userid=${user._id}`;
 });
 
-// Globalt kort over de fire brede positioner for at matche rækkerne i create-team.js
 const POSITION_MAP = {
     "GK": "goalkeeperRow",
     "Defend": "defenderRow",
@@ -14,14 +13,12 @@ const POSITION_MAP = {
     "Offence": "forwardRow"
 };
 
-// Skal matche den logik, der bruges i create-team.js
 function normalizePosition(pos){
     const map={
         "Goalkeeper":"GK","GK":"GK",
         "Left-Back":"Defend","Right-Back":"Defend","Centre-Back":"Defend","LB":"Defend","RB":"Defend","CB":"Defend",
         "Central Midfield":"Midfield","Defensive Midfield":"Midfield","Attacking Midfield":"Midfield","CM":"Midfield","CDM":"Midfield","CAM":"Midfield",
         "Centre-Forward":"Offence","Left Winger":"Offence","Right Winger":"Offence","CF":"Offence","LW":"Offence","RW":"Offence",
-        // Sikrer at hvis vi får en bred kategori fra API/DB, den også virker
         "Defence": "Defend"
     };
     return map[pos] || pos;
@@ -31,6 +28,25 @@ function getTeamIdFromUrl() {
     const params = new URLSearchParams(window.location.search);
     return params.get("teamId");
 }
+
+
+function findLatestGameweek(detailedPoints) {
+    let latest = 0;
+
+    for (const matchdayString in detailedPoints) {
+        const playerPoints = detailedPoints[matchdayString];
+
+        // Beregn summen af point for Gameweeken for at tjekke, om den er afsluttet (points > 0)
+        const gameweekTotal = Object.values(playerPoints).reduce((sum, points) => sum + points, 0);
+        const matchdayNumber = parseInt(matchdayString);
+
+        if (gameweekTotal > 0 && matchdayNumber > latest) {
+            latest = matchdayNumber;
+        }
+    }
+    return latest;
+}
+
 
 async function loadTeam() {
     try {
@@ -55,8 +71,17 @@ async function loadTeam() {
 
         const teamData = await response.json();
         localStorage.setItem("teamId", teamData._id);
+
         updateTeamStatsUI(teamData);
-        updateTeamPlayersUI(teamData.players);
+
+
+        const latestGameweek = findLatestGameweek(teamData.detailedGameweekPoints);
+
+        const latestPointsByPlayer = teamData.detailedGameweekPoints[String(latestGameweek)] || {};
+
+
+        updateTeamPlayersUI(teamData.players, latestPointsByPlayer);
+
     } catch (err) {
         console.error("Fejl ved hentning af team:", err);
         const pitchContainer = document.querySelector('.pitch-container');
@@ -66,64 +91,17 @@ async function loadTeam() {
     }
 }
 
+
 function updateTeamStatsUI(team) {
     document.getElementById("teamName").textContent = team.teamName;
-    document.getElementById("teamBudget").textContent = team.budget.toFixed(2);
+    document.getElementById("teamBudget").textContent = (team.budget / 1000000).toFixed(1) + "M"; // Viser budget i M
     document.getElementById("teamPoints").textContent = team.points;
-
     document.getElementById("gameweekPoints").textContent = team.latestGameweekPoints;
 }
 
-function renderGameweekPoints(pointsPerGameweek) {
-    const containerEl = document.getElementById("gameweekPointsContainer"); // Tjek at du har dette ID i din HTML!
-    if (!containerEl) return;
 
-    // Tøm containeren først
-    containerEl.innerHTML = '';
 
-    // Tjek om der er data
-    const matchdays = Object.keys(pointsPerGameweek);
-    if (matchdays.length === 0) {
-        containerEl.innerHTML = '<p>Ingen pointdata fundet for Gameweeks endnu.</p>';
-        return;
-    }
-
-    // Opret en tabel
-    let html = `
-        <h3 class="stats-title">Points pr. Kampdag</h3>
-        <table class="gameweek-table">
-            <thead>
-                <tr>
-                    <th>Kampdag</th>
-                    <th>Points</th>
-                </tr>
-            </thead>
-            <tbody>
-    `;
-
-    // Sorter kampdagene numerisk, da de kan være strenge ('1', '10')
-    matchdays.sort((a, b) => parseInt(a) - parseInt(b));
-
-    matchdays.forEach(matchday => {
-        const points = pointsPerGameweek[matchday];
-        html += `
-            <tr>
-                <td>${matchday}</td>
-                <td>${points}</td>
-            </tr>
-        `;
-    });
-
-    html += `
-            </tbody>
-        </table>
-    `;
-
-    containerEl.innerHTML = html;
-}
-
-// 🎯 Opdateret: Bruger de normaliserede positioner (GK, Defend, Midfield, Offence)
-function updateTeamPlayersUI(players) {
+function updateTeamPlayersUI(players, latestPointsByPlayer) {
     // Tøm de nuværende rækker
     document.getElementById("goalkeeperRow").innerHTML = '';
     document.getElementById("defenderRow").innerHTML = '';
@@ -138,14 +116,17 @@ function updateTeamPlayersUI(players) {
     };
 
     players.forEach(player => {
-        // Normaliserer positionen (f.eks. 'Left-Back' bliver til 'Defend')
         const broadPosition = normalizePosition(player.position);
-
-        // Finder den korrekte række (f.eks. 'Defend' mapper til 'defenderRow')
         const rowKey = POSITION_MAP[broadPosition];
 
+        const playerIdString = player._id.toString();
+
+        const playerPoints = latestPointsByPlayer[playerIdString] || 0;
+
+        const pointsClass = playerPoints > 0 ? 'player-points-positive' : 'player-points-zero';
+
+
         if (rowKey) {
-            // Skriver den brede position på kortet
             const positionLabel = broadPosition;
 
             const playerCardHTML = `
@@ -154,7 +135,10 @@ function updateTeamPlayersUI(players) {
                         <span class="remove-player">X</span>
                         <div class="player-name">${player.name}</div>
                         <div class="player-club">${player.club}</div>
-                        <div class="player-price">${player.price}M</div>
+                        <div class="player-stats">
+                            <div class="player-price">${(player.price / 1000000).toFixed(1)}M</div>
+                            <div class="player-gameweek-points ${pointsClass}">${playerPoints}</div>
+                        </div>
                         <div class="position-label">${positionLabel}</div>
                     </div>
                 </div>
@@ -165,7 +149,7 @@ function updateTeamPlayersUI(players) {
         }
     });
 
-    // Indsæt den genererede HTML i de korrekte DOM-elementer
+
     document.getElementById("goalkeeperRow").innerHTML = positionRows.goalkeeperRow.join('');
     document.getElementById("defenderRow").innerHTML = positionRows.defenderRow.join('');
     document.getElementById("midfielderRow").innerHTML = positionRows.midfielderRow.join('');

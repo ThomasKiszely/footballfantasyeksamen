@@ -24,7 +24,9 @@ async function updateTeamPoints(teamId) {
     const matches = await footballMatchRepo.getAllMatches();
 
     let totalPoints = 0;
-    let pointsPerGameweek = {};
+
+
+    let detailedGameweekPoints = {};
 
     for (const match of matches) {
         if(match.matchday === null || match.matchday === undefined) continue;
@@ -34,34 +36,60 @@ async function updateTeamPoints(teamId) {
 
         const matchdayString = String(matchday);
 
-        if(!pointsPerGameweek[matchdayString]) {
-            pointsPerGameweek[matchdayString] = 0;
+        // Initialiser Matchday, hvis den ikke eksisterer
+        if (!detailedGameweekPoints[matchdayString]) {
+            detailedGameweekPoints[matchdayString] = {};
         }
 
         for(const player of team.players) {
             const clubPoints = calculatePointsForClub(match, player.club);
-            pointsPerGameweek[matchdayString] += clubPoints;
 
-            totalPoints+= clubPoints;
+
+            if (!detailedGameweekPoints[matchdayString][player._id.toString()]) {
+                detailedGameweekPoints[matchdayString][player._id.toString()] = 0;
+            }
+
+            // Akkumulér point til den specifikke spiller i den specifikke Gameweek
+            detailedGameweekPoints[matchdayString][player._id.toString()] += clubPoints;
+
+            // Opdater total point for hele holdet
+            totalPoints += clubPoints;
         }
     }
+
+
     let latestMatchday = 0;
 
-    for(const matchdayString in pointsPerGameweek) {
-        const points = pointsPerGameweek[matchdayString];
+    for (const matchdayString in detailedGameweekPoints) {
+        const playerPoints = detailedGameweekPoints[matchdayString];
+
+
+        const gameweekTotal = Object.values(playerPoints).reduce((sum, points) => sum + points, 0);
         const matchdayNumber = parseInt(matchdayString);
 
-        if(points > 0 && matchdayNumber > latestMatchday) {
+        if (gameweekTotal > 0 && matchdayNumber > latestMatchday) {
             latestMatchday = matchdayNumber;
         }
     }
-    const latestGameweekPoints = pointsPerGameweek[String(latestMatchday)] || 0;
+
+    // Tjekker om gameweek er gyldtigt, at der blevet spillet, hvis den er så regner alle point sammen fra spillerne
+    const latestGameweekPoints = latestMatchday > 0
+        ? Object.values(detailedGameweekPoints[String(latestMatchday)]).reduce((sum, points) => sum + points, 0)
+        : 0;
+
 
     team.points = totalPoints;
-    team.pointsPerGameweek = pointsPerGameweek;
+
+
+    team.detailedGameweekPoints = detailedGameweekPoints;
     team.latestGameweekPoints = latestGameweekPoints;
 
-    await teamRepo.updateTeam(teamId, {points: totalPoints, pointsPerGameweek: pointsPerGameweek, latestGameweekPoints: latestGameweekPoints });
+    await teamRepo.updateTeam(teamId, {
+        points: totalPoints,
+        detailedGameweekPoints: detailedGameweekPoints,
+        latestGameweekPoints: latestGameweekPoints
+    });
+
     return team;
 }
 
