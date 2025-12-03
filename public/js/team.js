@@ -76,11 +76,25 @@ async function loadTeam() {
 
         updateTeamStatsUI(teamData);
 
-
         const currentGameweek = teamData.currentGameweek;
+        const gameweekKey = String(currentGameweek);
 
-        const latestPointsByPlayer = teamData.detailedGameweekPoints[String(currentGameweek)] || {};
+        let detailedGameweekData = teamData.detailedGameweekPoints[gameweekKey];
+        let latestPointsByPlayer = {};
 
+        if (detailedGameweekData) {
+
+            if (detailedGameweekData instanceof Map) {
+                detailedGameweekData = Object.fromEntries(detailedGameweekData);
+            }
+
+            for (const key in detailedGameweekData) {
+
+                latestPointsByPlayer[String(key)] = detailedGameweekData[key];
+            }
+        }
+
+        console.log(`Frontend: Vicario's point for GW ${currentGameweek} er: ${latestPointsByPlayer['69284d6df59036d8a3fc703b']}`);
         updateTeamPlayersUI(teamData.players, latestPointsByPlayer, currentGameweek);
 
     } catch (err) {
@@ -130,8 +144,12 @@ function updateTeamPlayersUI(players, latestPointsByPlayer) {
 
         const playerPoints = latestPointsByPlayer[playerIdString] || 0;
 
+
         const pointsClass = playerPoints > 0 ? 'player-points-positive' : 'player-points-zero';
 
+        if (player.name === "Guglielmo Vicario") {
+            console.log(`Frontend ID for Vicario: ${player._id.toString()}`);
+        }
 
         if (rowKey) {
             const positionLabel = broadPosition;

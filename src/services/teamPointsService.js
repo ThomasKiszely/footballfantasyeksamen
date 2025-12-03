@@ -51,6 +51,9 @@ async function updateTeamPoints(teamId) {
             const clubPoints = calculatePointsForClub(match, player.club);
             const playerIdString = player._id.toString();
 
+            if(clubPoints > 0) {
+                console.log(`Nøgle i pointkort: ${playerIdString}`);
+            }
             if (matchday >= 12 && clubPoints > 0) {
                 console.log(`GW ${matchday} - SPILLEDER: ${player.name} fik ${clubPoints} point!`);
             }
@@ -94,7 +97,16 @@ async function updateTeamPoints(teamId) {
         latestGameweekPoints: latestGameweekPoints
     });
     const freshTeamDocument = await teamRepo.getTeamById(teamId);
-    return freshTeamDocument;
+
+
+    const teamObject = freshTeamDocument.toObject ? freshTeamDocument.toObject() : freshTeamDocument;
+
+
+    if (teamObject.detailedGameweekPoints && teamObject.detailedGameweekPoints instanceof Map) {
+        teamObject.detailedGameweekPoints = Object.fromEntries(teamObject.detailedGameweekPoints);
+    }
+
+    return teamObject;
 }
 
 module.exports = {
