@@ -24,13 +24,44 @@ async function updateTeamPoints(teamId) {
     const matches = await footballMatchRepo.getAllMatches();
 
     let totalPoints = 0;
+    let pointsPerGameweek = {};
+
     for (const match of matches) {
+        if(match.matchday === null || match.matchday === undefined) continue;
+
+        const matchday = parseInt(match.matchday);
+        if(isNaN(matchday)) continue;
+
+        const matchdayString = String(matchday);
+
+        if(!pointsPerGameweek[matchdayString]) {
+            pointsPerGameweek[matchdayString] = 0;
+        }
+
         for(const player of team.players) {
-            totalPoints += calculatePointsForClub(match, player.club);
+            const clubPoints = calculatePointsForClub(match, player.club);
+            pointsPerGameweek[matchdayString] += clubPoints;
+
+            totalPoints+= clubPoints;
         }
     }
+    let latestMatchday = 0;
+
+    for(const matchdayString in pointsPerGameweek) {
+        const points = pointsPerGameweek[matchdayString];
+        const matchdayNumber = parseInt(matchdayString);
+
+        if(points > 0 && matchdayNumber > latestMatchday) {
+            latestMatchday = matchdayNumber;
+        }
+    }
+    const latestGameweekPoints = pointsPerGameweek[String(latestMatchday)] || 0;
+
     team.points = totalPoints;
-    await teamRepo.updateTeam(teamId, {points: totalPoints});
+    team.pointsPerGameweek = pointsPerGameweek;
+    team.latestGameweekPoints = latestGameweekPoints;
+
+    await teamRepo.updateTeam(teamId, {points: totalPoints, pointsPerGameweek: pointsPerGameweek, latestGameweekPoints: latestGameweekPoints });
     return team;
 }
 

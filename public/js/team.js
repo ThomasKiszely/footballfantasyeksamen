@@ -70,8 +70,57 @@ function updateTeamStatsUI(team) {
     document.getElementById("teamName").textContent = team.teamName;
     document.getElementById("teamBudget").textContent = team.budget.toFixed(2);
     document.getElementById("teamPoints").textContent = team.points;
+
+    document.getElementById("gameweekPoints").textContent = team.latestGameweekPoints;
 }
 
+function renderGameweekPoints(pointsPerGameweek) {
+    const containerEl = document.getElementById("gameweekPointsContainer"); // Tjek at du har dette ID i din HTML!
+    if (!containerEl) return;
+
+    // Tøm containeren først
+    containerEl.innerHTML = '';
+
+    // Tjek om der er data
+    const matchdays = Object.keys(pointsPerGameweek);
+    if (matchdays.length === 0) {
+        containerEl.innerHTML = '<p>Ingen pointdata fundet for Gameweeks endnu.</p>';
+        return;
+    }
+
+    // Opret en tabel
+    let html = `
+        <h3 class="stats-title">Points pr. Kampdag</h3>
+        <table class="gameweek-table">
+            <thead>
+                <tr>
+                    <th>Kampdag</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    // Sorter kampdagene numerisk, da de kan være strenge ('1', '10')
+    matchdays.sort((a, b) => parseInt(a) - parseInt(b));
+
+    matchdays.forEach(matchday => {
+        const points = pointsPerGameweek[matchday];
+        html += `
+            <tr>
+                <td>${matchday}</td>
+                <td>${points}</td>
+            </tr>
+        `;
+    });
+
+    html += `
+            </tbody>
+        </table>
+    `;
+
+    containerEl.innerHTML = html;
+}
 
 // 🎯 Opdateret: Bruger de normaliserede positioner (GK, Defend, Midfield, Offence)
 function updateTeamPlayersUI(players) {
