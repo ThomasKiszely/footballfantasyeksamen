@@ -1,6 +1,23 @@
 const API_BASE_URL = "http://localhost:3000/api/team";
 const editUser = document.getElementById("editUser");
 const user = JSON.parse(localStorage.getItem("user"));
+const logoutBtn = document.getElementById("logout");
+
+logoutBtn.addEventListener("click", async (e) => {
+    try{
+        const response = await fetch('api/user/logout', {
+            method: 'POST',
+            credentials: "include",
+        });
+        if (response.ok) {
+            window.location.href = '/';
+        } else {
+            alert('Could not logout');
+        }
+    } catch (error) {
+        console.error(error.message);
+    }
+});
 
 editUser.addEventListener("click", (e) => {
     window.location.href = `/editUser?userid=${user._id}`;

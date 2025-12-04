@@ -2,7 +2,6 @@ const userRepo = require('../data/userRepo');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const teamRepo = require('../data/teamRepo');
 
 async function signUp(username, password) {
     if (!username || !password) {
@@ -65,8 +64,7 @@ async function canAffordPlayer(userId, playerId) {
 
 async function updateUser(id, userdata) {
     if (userdata.password !== '') {
-        const hashed = await bcrypt.hash(userdata.password, 10);
-        userdata.password = hashed;
+        userdata.password = await bcrypt.hash(userdata.password, 10);
     } else {
         delete userdata.password;
     }
@@ -76,6 +74,7 @@ async function updateUser(id, userdata) {
 async function deleteUser(id) {
     return await userRepo.deleteUser(id);
 }
+
 module.exports = {
     signUp,
     getUserById,
