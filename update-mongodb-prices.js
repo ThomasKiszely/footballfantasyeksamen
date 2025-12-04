@@ -21,7 +21,7 @@ async function updateMongoDBPrices() {
         // Forbind til MongoDB
         const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/footballfantasy';
         console.log('╔═══════════════════════════════════════════════════════════════════╗');
-        console.log('║          🚀 OPDATERING AF PRISER I MONGODB                       ║');
+        console.log('║              OPDATERING AF PRISER I MONGODB                       ║');
         console.log('╚═══════════════════════════════════════════════════════════════════╝\n');
         console.log('🔗 Forbinder til MongoDB...');
         console.log(`   URI: ${mongoUri.replace(/\/\/.*:.*@/, '//***:***@')}\n`);

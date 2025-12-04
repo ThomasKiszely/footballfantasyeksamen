@@ -34,7 +34,6 @@ async function updateTeamPoints(teamId) {
 
     let totalPoints = 0;
 
-
     let detailedGameweekPoints = {};
 
     for (const match of scoredMatches) {

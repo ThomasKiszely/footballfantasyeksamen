@@ -1,6 +1,6 @@
 const path = require("path");
 
-function errorHandler(error, req, res, next) {
+function errorHandler(error, req, res) {
     console.error(error);
     if (req.originalUrl.startsWith("/api") || req.headers.accept?.includes("application/json")) {
         return res.status(error.status || 500).json({ error: error.message || 'Server error' });

@@ -19,10 +19,8 @@ exports.update = async (id, updateData) => {
     return await playerRepo.update(id, updateData);
 };
 
-exports.updatePlayerPrice = async (playerId, newPrice, userRole) => {
-    if (userRole === ('admin')) {
+exports.updatePlayerPrice = async (playerId, newPrice) => {
         return await playerRepo.update(playerId, {price: newPrice});
-    }
 };
 
 exports.delete = async (id) => {
@@ -67,8 +65,6 @@ exports.fetchAndSyncPlayers = async () => {
     const response = await axios.get('http://api.football-data.org/v4/competitions/2021/teams', {
         headers: { 'X-Auth-Token': process.env.API_FOOTBALL_KEY }
     });
-
-
 
     const data = response.data
     const players = [];

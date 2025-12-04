@@ -5,6 +5,7 @@ const leaderboardRoutes = require('./routes/leaderboardRoutes');
 const playerRoutes = require('./routes/playerRoutes');
 const router = require('./routes/userRoutes');
 const teamRoutes = require('./routes/teamRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 const { notFound } = require('./middlewares/notFound');
 const { errorHandler } = require('./middlewares/errorHandler');
 const { connectToMongo } = require('./services/db');
@@ -15,8 +16,6 @@ const {fetchAllMatches} = require('./services/teamPointsService');
 const cookieParser = require('cookie-parser');
 connectToMongo();
 
-
-// Middleware
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'public'), { extensions: ['html'] }));
@@ -27,6 +26,7 @@ app.use('/api/user', router);
 
 app.use('/api/team', teamRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

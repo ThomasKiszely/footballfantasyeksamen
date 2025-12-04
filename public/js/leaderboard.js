@@ -23,7 +23,7 @@ function renderLeaderboard(data) {
     for (const team of data) {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${team.username}</td>
+            <td>${user.username}</td>
             <td>${team.teamName}</td>
             <td>${team.points}</td>
         `;
