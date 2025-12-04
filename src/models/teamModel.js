@@ -14,7 +14,8 @@ const teamSchema = new mongoose.Schema({
     detailedGameweekPoints: {
         type: Map,
         of: {
-            type: Object,
+            type: Map,
+            of: Number,
             default: {}
         },
         default: {}
