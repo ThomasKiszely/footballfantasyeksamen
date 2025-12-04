@@ -105,6 +105,18 @@ async function deleteUser(req, res, next) {
         next(error);
     }
 }
+async function logout(req, res, next) {
+    try{
+        res.clearCookie("jwt", {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+        });
+        return res.status(200).json({ success: true, message: "Logout successfully." });
+    } catch (error){
+        next(error);
+    }
+}
 
 module.exports = {
     signup,
@@ -113,4 +125,5 @@ module.exports = {
     getUserBudget,
     updateUser,
     deleteUser,
+    logout,
 };
