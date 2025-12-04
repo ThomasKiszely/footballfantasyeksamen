@@ -69,7 +69,7 @@ function updateBudgetUI() {
 
     const budgetEl = document.getElementById("remainingBudget");
     if (budgetEl) {
-        budgetEl.textContent = `${remainingBudget.toFixed(1)}M kr`;
+        budgetEl.textContent = `${remainingBudget.toFixed(1)}M`;
         budgetEl.style.color = remainingBudget >= 0 ? '#667eea' : '#e74c3c';
     }
 }
@@ -124,7 +124,7 @@ function renderPlayers() {
                 <span class="player-name-list">${player.name}</span>
                 <div class="player-details">
                     <span>${player.club} / ${broadPosition}</span>
-                    <span class="player-price-list">${(player.price / 1000000).toFixed(1)}M kr</span>
+                    <span class="player-price-list">${(player.price / 1000000).toFixed(1)}M</span>
                 </div>
             </div>
             <button class="btn btn-small select-btn" ${isSelected ? 'disabled' : ''}>${isSelected ? 'Valgt' : 'Vælg'}</button>
@@ -320,7 +320,7 @@ createTeamBtn.addEventListener("click", async () => {
             method: "POST", headers: { "Content-Type": "application/json" }, credentials: "include", body: JSON.stringify(body)
         });
 
-        if (res.status === 401) { window.location.href = "/login.html"; return; }
+        if (res.status === 401) { window.location.href = "/login"; return; }
 
         if (!res.ok) {
             const err = await res.json();
@@ -330,7 +330,7 @@ createTeamBtn.addEventListener("click", async () => {
 
         const newTeam = await res.json();
         localStorage.setItem("teamId", newTeam._id);
-        window.location.href = `/team.html?teamId=${newTeam._id}`;
+        window.location.href = `/team?teamId=${newTeam._id}`;
     } catch (err) {
         console.error("Fejl ved oprettelse af hold:", err);
         alert("Der opstod en netværksfejl.");

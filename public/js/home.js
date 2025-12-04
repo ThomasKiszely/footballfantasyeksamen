@@ -31,7 +31,7 @@ async function updateAuthUI(){
             } else {
                 logoutBtn.textContent = 'Login';
                 logoutBtn.onclick = () => {
-                    window.location.href = '/login.html';
+                    window.location.href = '/login';
                 }
             }
         }
@@ -61,7 +61,7 @@ async function checkAuth() {
 async function goToTeam() {
     const isLoggedIn = await checkAuth();
     if (!isLoggedIn) {
-        window.location.href = '/login.html';
+        window.location.href = '/login';
         return;
     }
     const teamId = localStorage.getItem('teamId');

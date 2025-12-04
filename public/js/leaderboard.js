@@ -35,15 +35,15 @@ if (teamLink) {
         e.preventDefault(); // stop det normale link
         const isLoggedIn = await checkAuth();
         if (!isLoggedIn) {
-            window.location.href = '/login.html';
+            window.location.href = '/login';
             return;
         }
 
         const teamId = localStorage.getItem('teamId');
         if (teamId) {
-            window.location.href = `/team.html?teamId=${teamId}`;
+            window.location.href = `/team?teamId=${teamId}`;
         } else {
-            window.location.href = '/create-team.html';
+            window.location.href = '/create-team';
         }
     });
 }
@@ -87,7 +87,7 @@ async function updateAuthUI(){
             } else {
                 logoutBtn.textContent = 'Login';
                 logoutBtn.onclick = () => {
-                    window.location.href = '/login.html';
+                    window.location.href = '/login';
                 }
             }
         }
