@@ -6,10 +6,10 @@ async function createTeam(teamData) {
     return await team.save();
 }
 
-
-
 async function getAllTeams() {
-    return await Team.find().populate("players");
+    return await Team.find()
+        .populate("players")
+        .populate("userId", "username");
 }
 
 async function getTeamById(teamId) {

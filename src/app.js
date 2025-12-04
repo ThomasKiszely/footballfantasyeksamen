@@ -26,7 +26,6 @@ app.use('/api/user', router);
 
 app.use('/api/team', teamRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
-app.use('/api/admin', adminRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

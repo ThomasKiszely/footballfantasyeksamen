@@ -44,6 +44,7 @@ async function handleAuthentication(event, endpoint, usernameId, passwordId) {
         if (data.success) {
             msg.textContent = endpoint === "login" ? "Login successfuldt" : "Bruger oprettet";
             msg.style.color = "green";
+            localStorage.clear();
             localStorage.setItem("user", JSON.stringify(data.user));
 
             if(data.teamId) {
@@ -62,7 +63,7 @@ async function handleAuthentication(event, endpoint, usernameId, passwordId) {
         }
     } catch (error) {
         console.error(error);
-        msg.textContent = "Serverfejl";
+        msg.textContent = "Forkert brugernavn eller password";
     }
 }
 

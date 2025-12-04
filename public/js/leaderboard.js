@@ -1,34 +1,78 @@
 const listEl = document.getElementById('list');
+const logoutBtn = document.getElementById('logoutBtn');
+const editUserBtn = document.getElementById('editUserBtn');
+
+async function logout() {
+    try {
+        const response = await fetch('/api/user/logout', {
+            method: 'POST',
+            credentials: 'include',
+        });
+
+        if (response.ok) {
+            localStorage.removeItem('user');
+            localStorage.removeItem('teamId');
+            window.location.href = '/';
+        } else {
+            alert('Could not logout');
+        }
+    } catch (error) {
+        console.error('Logout error:', error);
+        alert('Could not logout: ' + error.message);
+    }
+}
+
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', logout);
+}
+
+if (editUserBtn) {
+    editUserBtn.addEventListener('click', () => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user && user._id) {
+            window.location.href = `/editUser?userid=${user._id}`;
+        }
+    });
+}
 
 async function getLeaderboard() {
     try {
         const res = await fetch('/api/leaderboard');
         if (!res.ok) {
-            alert('Failed to fetch leaderboard' + res.status);
+            throw new Error('Failed to fetch leaderboard: ' + res.status);
         }
 
         const leaderboard = await res.json();
         renderLeaderboard(leaderboard);
     } catch(error) {
-        console.log("laederboad fejl ", error.message)
-        alert('Error fetching leaderboard:', error.message);
+        console.log("Leaderboard fejl:", error.message);
+        const listBody = document.querySelector('#list tbody');
+        listBody.innerHTML = '<tr><td colspan="4" class="error-message">Kunne ikke hente leaderboard. Prøv igen senere.</td></tr>';
     }
 }
 
 function renderLeaderboard(data) {
     const listBody = document.querySelector('#list tbody');
-
     listBody.innerHTML = '';
 
-    for (const team of data) {
+    if (!data || data.length === 0) {
+        listBody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 2rem;">Ingen hold fundet endnu.</td></tr>';
+        return;
+    }
+
+    data.forEach((team, index) => {
         const row = document.createElement('tr');
+
+        const username = team.userId?.username || 'Ukendt bruger';
+
         row.innerHTML = `
-            <td>${user.username}</td>
+            <td>${index + 1}</td>
+            <td>${username}</td>
             <td>${team.teamName}</td>
             <td>${team.points}</td>
         `;
         listBody.appendChild(row);
-    }
+    });
 }
 
 getLeaderboard();
