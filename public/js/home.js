@@ -35,9 +35,7 @@ async function updateAuthUI(){
                 }
             }
         }
-        if (goToTeamBtn) {
-            goToTeamBtn.disabled = !isLoggedIn; // deaktiver knappen hvis ikke logget ind
-        }
+
     } catch (error) {
         console.log(error.message);
     }

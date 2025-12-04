@@ -1,11 +1,13 @@
 const listEl = document.getElementById('list');
 const logoutBtn = document.getElementById('logoutBtn');
 const editUserBtn = document.getElementById('editUserBtn');
+const teamLink = document.getElementById('teamlink');
+
 
 async function logout() {
     try {
         const response = await fetch('/api/user/logout', {
-            method: 'POST',
+            method: 'GET',
             credentials: 'include',
         });
 
@@ -26,13 +28,73 @@ if (logoutBtn) {
     logoutBtn.addEventListener('click', logout);
 }
 
-if (editUserBtn) {
-    editUserBtn.addEventListener('click', () => {
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user && user._id) {
-            window.location.href = `/editUser?userid=${user._id}`;
+
+
+if (teamLink) {
+    teamLink.addEventListener('click', async (e) => {
+        e.preventDefault(); // stop det normale link
+        const isLoggedIn = await checkAuth();
+        if (!isLoggedIn) {
+            window.location.href = '/login.html';
+            return;
+        }
+
+        const teamId = localStorage.getItem('teamId');
+        if (teamId) {
+            window.location.href = `/team.html?teamId=${teamId}`;
+        } else {
+            window.location.href = '/create-team.html';
         }
     });
+}
+
+
+if (editUserBtn) {
+    editUserBtn.addEventListener('click', async () => {
+        const isLoggedIn = await checkAuth();
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!isLoggedIn){
+            window.location.href = '/login';
+            return;
+        }
+        if (user && user._id) {
+            window.location.href = `/editUser?userid=${user._id}`}
+    });
+}
+async function checkAuth(){
+    try{
+        const response = await fetch('/api/user/checkAuth', {
+            method: 'POST',
+            credentials: 'include',
+        });
+        if (response.ok) {
+            const data = await response.json();
+            return data.success === true;
+        }
+        return false;
+    } catch (error) {
+        alert('Kunne ikke checke bruger: ' + error.message);
+    }
+}
+
+async function updateAuthUI(){
+    try{
+        const isLoggedIn = await checkAuth();
+        if(logoutBtn){
+            if(isLoggedIn){
+                logoutBtn.textContent = 'Logout';
+                logoutBtn.onclick = logout;
+            } else {
+                logoutBtn.textContent = 'Login';
+                logoutBtn.onclick = () => {
+                    window.location.href = '/login.html';
+                }
+            }
+        }
+
+    } catch (error) {
+        console.log(error.message);
+    }
 }
 
 async function getLeaderboard() {
@@ -76,3 +138,4 @@ function renderLeaderboard(data) {
 }
 
 getLeaderboard();
+document.addEventListener("DOMContentLoaded", updateAuthUI);
