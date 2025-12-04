@@ -12,6 +12,26 @@ const pageSize = 10;
 let currentBudget = 0;
 const editUser = document.getElementById("editUser");
 const user = JSON.parse(localStorage.getItem("user"));
+const logoutBtn = document.getElementById("logout");
+
+logoutBtn.addEventListener("click", async(e) => {
+    e.preventDefault();
+
+    try{
+        const response = await fetch('/api/user/logout', {
+            method: "POST",
+            credentials: "include",
+        });
+
+        if (response.ok) {
+            window.location.href = '/';
+        } else {
+            alert('Could not logout');
+        }
+    } catch (error) {
+        alert('Could not logout: ' + error.message);
+    }
+});
 
 
 
