@@ -117,6 +117,17 @@ async function logout(req, res, next) {
         next(error);
     }
 }
+async function checkAuth(req, res, next) {
+    try {
+        if (req.user) {
+            return res.status(200).json({ success: true, user: req.user });
+        } else {
+            return res.status(401).json({ success: false, message: "Not authorized." });
+        }
+    } catch (error) {
+        next(error);
+    }
+}
 
 module.exports = {
     signup,
@@ -126,4 +137,5 @@ module.exports = {
     updateUser,
     deleteUser,
     logout,
+    checkAuth,
 };

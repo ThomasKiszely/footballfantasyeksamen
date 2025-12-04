@@ -85,7 +85,6 @@ async function loadTeam() {
             if (detailedGameweekData instanceof Map) {
                 detailedGameweekData = Object.fromEntries(detailedGameweekData);
             }
-
             for (const key in detailedGameweekData) {
 
                 latestPointsByPlayer[String(key)] = detailedGameweekData[key];

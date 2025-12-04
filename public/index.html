@@ -1,40 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Kort beskrivelse af din side til søgemaskiner.">
-    <meta name="keywords" content="node.js, HTML, SEO, webudvikling">
-    <meta name="author" content="Thomas BKJ">
-    <meta name="robots" content="index, follow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FootBallFantasy</title>
-    <link rel="stylesheet" href="styles/loginstyle.css">
+    <title>FootballFantasy</title>
+    <link rel="stylesheet" href="styles/home.css">
 </head>
 <body>
-<header>
-<h1>FootballFantasy</h1>
-</header>
-<div class="card">
-    <div class="tabs">
-        <button id="loginTab" class="active">Login</button>
-        <button id="signupTab">Opret bruger</button>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">FootballFantasy</div>
+        <div class="nav-links">
+            <a href="/team" id="teamLink">Mit Hold</a>
+            <a href="/leaderboard">Leaderboard</a>
+            <button id="logoutBtn" class="btn-nav">Logout</button>
+        </div>
     </div>
+</nav>
 
-    <form id="loginForm">
-        <input type="text" id="loginUsername" placeholder="Brugernavn" required autofocus>
-        <input type="password" id="loginPassword" placeholder="Adgangskode" required>
-        <button type="submit">Log ind</button>
-    </form>
+<main class="hero">
+    <div class="hero-content">
+        <h1>Velkommen til FootballFantasy</h1>
+        <p class="hero-subtitle">Skab dit ultimative hold og konkurrér mod andre</p>
 
-    <form id="signupForm" class="hidden">
-        <input type="text" id="signupUsername" placeholder="Brugernavn" required autofocus>
-        <input type="password" id="signupPassword" placeholder="Adgangskode" required>
-        <button type="submit">Opret bruger</button>
-    </form>
-    <div id="message"></div>
-</div>
-<script src="js/login.js"></script>
+        <div class="hero-actions">
+            <button id="goToTeam" class="btn btn-primary">Se Mit Hold</button>
+            <a href="/leaderboard" class="btn btn-secondary">Se Ranglisten</a>
+        </div>
 
-<footer></footer>
+        <div class="features">
+            <div class="feature">
+                <h3>Vælg Spillere</h3>
+                <p>Byg dit drømmehold fra Premier League</p>
+            </div>
+            <div class="feature">
+                <h3>Optjen Point</h3>
+                <p>Få point baseret på dine spilleres præstationer</p>
+            </div>
+            <div class="feature">
+                <h3>Konkurrér</h3>
+                <p>Kæmp om førstepladsen på leaderboardet</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="/js/home.js"></script>
 </body>
 </html>

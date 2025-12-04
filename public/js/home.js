@@ -21,18 +21,57 @@ async function logout() {
         alert('Could not logout: ' + error.message);
     }
 }
+async function updateAuthUI(){
+    try{
+        const isLoggedIn = await checkAuth();
+        if(logoutBtn){
+            if(isLoggedIn){
+                logoutBtn.textContent = 'Logout';
+                logoutBtn.onclick = logout;
+            } else {
+                logoutBtn.textContent = 'Login';
+                logoutBtn.onclick = () => {
+                    window.location.href = '/login.html';
+                }
+            }
+        }
+        if (goToTeamBtn) {
+            goToTeamBtn.disabled = !isLoggedIn; // deaktiver knappen hvis ikke logget ind
+        }
+    } catch (error) {
+        console.log(error.message);
+    }
+}
 
-function goToTeam() {
+async function checkAuth() {
+    try{
+        const response = await fetch('/api/user/checkAuth', {
+            method: 'GET',
+            credentials: 'include',
+        })
+        if (response.ok) {
+            const data = await response.json();
+            return data.success === true;
+        } else {
+            return false;
+        }
+    } catch (error){
+        alert('CheckAuth error:', error.message);
+    }
+}
+
+async function goToTeam() {
+    const isLoggedIn = await checkAuth();
+    if (!isLoggedIn) {
+        window.location.href = '/login.html';
+        return;
+    }
     const teamId = localStorage.getItem('teamId');
     if (teamId) {
         window.location.href = `/team?teamId=${teamId}`;
     } else {
         window.location.href = '/create-team';
     }
-}
-
-if (logoutBtn) {
-    logoutBtn.addEventListener('click', logout);
 }
 
 if (goToTeamBtn) {
@@ -45,3 +84,5 @@ if (teamLink) {
         goToTeam();
     });
 }
+
+document.addEventListener("DOMContentLoaded", updateAuthUI);
