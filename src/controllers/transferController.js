@@ -1,6 +1,7 @@
 const transferService = require("../services/transferService");
 
 exports.sellPlayer = async (req, res) => {
+
     const { playerId, teamId } = req.body;
 
     if (!playerId || !teamId) {
