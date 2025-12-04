@@ -1,39 +1,93 @@
-/* Generel styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f7f6;
+/* Navbar Styles */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
     color: #333;
 }
 
-/* Team Page Specific Styles */
-.team-page {
-    padding: 1rem;
-    padding-bottom: 3rem;
-    max-width: 1200px;
-    margin: 0 auto;
+.navbar {
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-#editUser {
-    padding: 0.5rem 1rem;
-    background: #667eea;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-bottom: 1rem;
-    transition: background 0.3s ease;
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-#logout {
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #667eea;
+}
+
+.nav-links a.active {
+    color: #667eea;
+    font-weight: 600;
+}
+
+.btn-nav {
     padding: 0.5rem 1rem;
+    background: transparent;
+    border: 2px solid #667eea;
+    color: #667eea;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.btn-nav:hover {
     background: #667eea;
     color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-bottom: 1rem;
-    transition: background 0.3s ease;
+}
+
+/* Team Page Content */
+.team-page {
+    background-color: #f4f7f6;
+    min-height: 100vh;
+}
+
+.team-content {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .team-header {
@@ -79,7 +133,6 @@ body {
     color: #667eea;
 }
 
-/* Formation Selector (hvis du genbruger dette) */
 .formation-selector {
     background: white;
     border-radius: 12px;
@@ -111,7 +164,6 @@ body {
     border-color: #667eea;
 }
 
-/* Football Pitch */
 .pitch-container {
     background: white;
     border-radius: 12px;
@@ -133,7 +185,6 @@ body {
     box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.1);
 }
 
-/* Pitch Lines */
 .football-pitch::before {
     content: '';
     position: absolute;
@@ -157,7 +208,6 @@ body {
     transform: translate(-50%, -50%);
 }
 
-/* Position Rows - bruges af team.js til at placere spillerne */
 .position-row {
     display: flex;
     justify-content: center;
@@ -183,17 +233,14 @@ body {
     gap: 3rem;
 }
 
-/* Player Slot */
 .player-slot {
     flex: 0 0 auto;
 }
 
 .player-card {
-    /* Fast størrelse for ensartethed */
     width: 100px;
     height: 130px;
-    box-sizing: border-box; /* Sikrer at padding er inkluderet i bredden/højden */
-
+    box-sizing: border-box;
     background: white;
     border-radius: 12px;
     display: flex;
@@ -223,7 +270,6 @@ body {
     font-weight: bold;
 }
 
-/* Styling for den brede position (GK, Defend, Midfield, Offence) */
 .player-card .position-label {
     font-size: 0.75rem;
     font-weight: bold;
@@ -235,20 +281,18 @@ body {
     margin-bottom: -0.25rem;
 }
 
-/* Filled Player Card */
 .player-card.filled {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
 }
 
-/* Tvinger navnet til to linjer, selvom navnet er kortere, for at holde layoutet ensartet */
 .player-card .player-name {
     font-size: 0.75rem;
     font-weight: bold;
     text-align: center;
     margin-bottom: 0.25rem;
     line-height: 1.2;
-    height: calc(0.75rem * 1.2 * 2); /* Fast højde for 2 linjer */
+    height: calc(0.75rem * 1.2 * 2);
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -256,7 +300,6 @@ body {
     -webkit-box-orient: vertical;
 }
 
-/* Sikrer at klubnavnet er stabilt */
 .player-card .player-club {
     font-size: 0.65rem;
     opacity: 0.9;
@@ -268,35 +311,28 @@ body {
     max-width: 90%;
 }
 
-/* ================================================= */
-/* Vertikal stak af pris og points */
-/* ================================================= */
-
-/* Container for pris og point */
 .player-card .player-stats {
     display: flex;
-    flex-direction: column; /* Vertikal stak */
+    flex-direction: column;
     justify-content: center;
-    align-items: center; /* Centrerer teksten horisontalt */
+    align-items: center;
     width: 100%;
     padding: 0;
     margin-top: 0.25rem;
     box-sizing: border-box;
-    height: 35px; /* Fast højde for at stabilisere kortets bund */
+    height: 35px;
 }
 
-/* Justeret prisvisning - Kun værdi, ingen label */
 .player-card .player-price {
     background: none;
     padding: 0;
-    margin-bottom: 3px; /* Mellemrum til pointene under */
+    margin-bottom: 3px;
     margin-top: 0;
     font-size: 0.8em;
     font-weight: normal;
     opacity: 0.9;
 }
 
-/* Styling for Gameweek Points - Kun værdi, ingen label */
 .player-card .player-gameweek-points {
     font-size: 1em;
     font-weight: 700;
@@ -306,7 +342,6 @@ body {
     display: inline-block;
 }
 
-/* Farvekoder for Point */
 .player-card .player-gameweek-points.player-points-zero {
     color: #FFDDDD;
     background: rgba(255, 0, 0, 0.2);
@@ -316,8 +351,6 @@ body {
     color: #D4F9D4;
     background: rgba(76, 175, 80, 0.3);
 }
-
-/* ================================================= */
 
 .player-card .remove-player {
     position: absolute;
@@ -343,7 +376,6 @@ body {
     transform: scale(1.1);
 }
 
-/* Team Actions */
 .team-actions {
     display: flex;
     gap: 1rem;
@@ -351,8 +383,68 @@ body {
     margin-bottom: 2rem;
 }
 
-/* Responsive Design */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-small {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.player-list {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.player-list-item {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.player-list-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.player-list-item.selected {
+    background: #f0f0f0;
+    border-color: #667eea;
+}
+
 @media (max-width: 1024px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
     .football-pitch {
         padding: 2rem 1rem;
     }
@@ -370,29 +462,9 @@ body {
 }
 
 @media (max-width: 768px) {
-    .search-filter {
-        grid-template-columns: 1fr;
-    }
-
-    .player-list {
-        grid-template-columns: 1fr;
-    }
-
     .team-info {
         flex-direction: column;
         gap: 1rem;
-    }
-
-    .team-actions {
-        flex-direction: column;
-    }
-
-    .team-actions .btn {
-        width: 100%;
-    }
-
-    .summary-grid {
-        grid-template-columns: 1fr;
     }
 
     .football-pitch {
@@ -420,22 +492,10 @@ body {
     }
 }
 
-/* Loading State & Error Message (beholdes) */
 .loading {
     text-align: center;
     padding: 2rem;
     color: #666;
-}
-
-.loading::after {
-    content: '...';
-    animation: dots 1.5s infinite;
-}
-
-@keyframes dots {
-    0%, 20% { content: '.'; }
-    40% { content: '..'; }
-    60%, 100% { content: '...'; }
 }
 
 .error-message {
@@ -446,13 +506,3 @@ body {
     border-left: 4px solid #c33;
     margin-bottom: 1rem;
 }
-
-.success-message {
-    background: #efe;
-    color: #3c3;
-    padding: 1rem;
-    border-radius: 8px;
-    border-left: 4px solid #3c3;
-    margin-bottom: 1rem;
-}
-

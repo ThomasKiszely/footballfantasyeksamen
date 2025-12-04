@@ -10,7 +10,6 @@ const { notFound } = require('./middlewares/notFound');
 const { errorHandler } = require('./middlewares/errorHandler');
 const { connectToMongo } = require('./services/db');
 const cron = require('node-cron');
-const playerRepo = require('./data/playerRepo');
 const {fetchAndSyncPlayers} = require('./services/playerService');
 const {fetchAllMatches} = require('./services/teamPointsService');
 const cookieParser = require('cookie-parser');
@@ -26,7 +25,7 @@ app.use('/api/user', router);
 
 app.use('/api/team', teamRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
-app.use('/api/admin', adminRoutes);
+//app.use('/api/admin', adminRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

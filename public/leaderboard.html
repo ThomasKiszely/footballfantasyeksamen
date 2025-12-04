@@ -1,26 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
     <meta charset="UTF-8">
-    <title>Leaderboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard - FootballFantasy</title>
+    <link rel="stylesheet" href="styles/leaderboard.css">
 </head>
 <body>
-<div class="container">
-     <div class="main-list">
-         <h2>Leaderboard</h2>
-         <table id="list">
-             <thead>
-             <tr>
-                <th>User</th>
-                <th>Clubname</th>
-                <th>Total points</th>
-             </tr>
-             </thead>
-             <tbody>
-             </tbody>
-         </table>
-     </div>
-</div>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="/home" class="logo">FootballFantasy</a>
+        <div class="nav-links">
+            <a href="/home">Hjem</a>
+            <a href="/team">Mit Hold</a>
+            <a href="/leaderboard" class="active">Leaderboard</a>
+            <button id="editUserBtn" class="btn-nav">Rediger Profil</button>
+            <button id="logoutBtn" class="btn-nav">Logout</button>
+        </div>
+    </div>
+</nav>
+
+<main class="container">
+    <header class="page-header">
+        <h1>Leaderboard</h1>
+        <p class="subtitle">Se hvem der topper ranglisten</p>
+    </header>
+
+    <div class="leaderboard-card">
+        <table id="list">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Bruger</th>
+                <th>Holdnavn</th>
+                <th>Point</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</main>
 
 <script src="/js/leaderboard.js"></script>
 </body>

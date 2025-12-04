@@ -7,45 +7,52 @@
 </head>
 <body class="team-page">
 
-<button id="editUser">Rediger bruger</button>
-<button id="logout">Logout</button>
-
-<div class="team-header">
-    <h2 id="teamName">Indlæser Holdnavn...</h2>
-    <div class="team-info">
-        <div class="budget-display">
-            <span class="label">Budget</span>
-            <span class="value" id="teamBudget">0M</span>
-        </div>
-
-        <div class="points-display">
-            <span class="label">Total Point</span>
-            <span class="value" id="teamPoints">0</span>
-        </div>
-
-        <div class="points-display gameweek-points">
-            <span class="label" id="currentGameweekHeader">Indlæser runde...</span>
-
-            <span class="value" id="gameweekPoints">0</span>
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="/home" class="logo">FootballFantasy</a>
+        <div class="nav-links">
+            <a href="/home">Hjem</a>
+            <a href="/team" class="active">Mit Hold</a>
+            <a href="/leaderboard">Leaderboard</a>
+            <button id="editUser" class="btn-nav">Rediger Profil</button>
+            <button id="logout" class="btn-nav">Logout</button>
         </div>
     </div>
-</div>
+</nav>
 
+<main class="team-content">
+    <div class="team-header">
+        <h2 id="teamName">Indlæser Holdnavn...</h2>
+        <div class="team-info">
+            <div class="budget-display">
+                <span class="label">Budget</span>
+                <span class="value" id="teamBudget">0M</span>
+            </div>
 
-<div class="pitch-container">
-    <div class="football-pitch" id="footballPitch">
-        <div class="position-row goalkeeper-row" id="goalkeeperRow"></div>
+            <div class="points-display">
+                <span class="label">Total Point</span>
+                <span class="value" id="teamPoints">0</span>
+            </div>
 
-        <div class="position-row defender-row" id="defenderRow"></div>
-
-        <div class="position-row midfielder-row" id="midfielderRow"></div>
-
-        <div class="position-row forward-row" id="forwardRow"></div>
+            <div class="points-display gameweek-points">
+                <span class="label" id="currentGameweekHeader">Indlæser runde...</span>
+                <span class="value" id="gameweekPoints">0</span>
+            </div>
+        </div>
     </div>
-</div>
 
-<div class="team-actions">
-</div>
+    <div class="pitch-container">
+        <div class="football-pitch" id="footballPitch">
+            <div class="position-row goalkeeper-row" id="goalkeeperRow"></div>
+            <div class="position-row defender-row" id="defenderRow"></div>
+            <div class="position-row midfielder-row" id="midfielderRow"></div>
+            <div class="position-row forward-row" id="forwardRow"></div>
+        </div>
+    </div>
+
+    <div class="team-actions">
+    </div>
+</main>
 
 <script src="/js/team.js"></script>
 </body>

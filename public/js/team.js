@@ -5,11 +5,13 @@ const logoutBtn = document.getElementById("logout");
 
 logoutBtn.addEventListener("click", async (e) => {
     try{
-        const response = await fetch('api/user/logout', {
+        const response = await fetch('/api/user/logout', {
             method: 'POST',
             credentials: "include",
         });
         if (response.ok) {
+            localStorage.removeItem('user');
+            localStorage.removeItem('teamId');
             window.location.href = '/';
         } else {
             alert('Could not logout');
@@ -45,27 +47,6 @@ function getTeamIdFromUrl() {
     const params = new URLSearchParams(window.location.search);
     return params.get("teamId");
 }
-
-
-/*function findLatestGameweek(detailedPoints) {
-    let latest = 0;
-
-    for (const matchdayString in detailedPoints) {
-        const playerPoints = detailedPoints[matchdayString];
-
-        // Beregn summen af point for Gameweeken for at tjekke, om den er afsluttet (points > 0)
-        const gameweekTotal = Object.values(playerPoints).reduce((sum, points) => sum + points, 0);
-        const matchdayNumber = parseInt(matchdayString);
-
-        if (gameweekTotal > 0 && matchdayNumber > latest) {
-            latest = matchdayNumber;
-        }
-    }
-    return latest;
-}
-
- */
-
 
 async function loadTeam() {
     try {
@@ -126,7 +107,7 @@ async function loadTeam() {
 
 function updateTeamStatsUI(team) {
     document.getElementById("teamName").textContent = team.teamName;
-    document.getElementById("teamBudget").textContent = (team.budget / 1000000).toFixed(1) + "M"; // Viser budget i M
+    document.getElementById("teamBudget").textContent = (team.budget / 1000000).toFixed(1) + "M";
     document.getElementById("teamPoints").textContent = team.points;
 
     if(team.currentGameweek) {
@@ -140,7 +121,6 @@ function updateTeamStatsUI(team) {
 
 
 function updateTeamPlayersUI(players, latestPointsByPlayer) {
-    // Tøm de nuværende rækker
     document.getElementById("goalkeeperRow").innerHTML = '';
     document.getElementById("defenderRow").innerHTML = '';
     document.getElementById("midfielderRow").innerHTML = '';
