@@ -1,5 +1,7 @@
 const Player = require('../models/player');
 
+// Sætter nye spillere til at koste 500.000 default
+const DEFAULT_PRICE = 1000000;
 // snakker med databasen og udfører CRUD operationer
 
 // opretter en ny spiller
@@ -30,8 +32,9 @@ exports.delete = async (id) => {
 exports.bulkUpsert = async (players) => {
     const bulkOps = players.map(player => ({
         updateOne: {
-            filter: { name: player.name, club: player.club },
-            update: { $set: { position: player.position} },
+            filter: {name: player.name, club: player.club},
+            update: {$set: {position: player.position}},
+            $setOnInsert: {price: DEFAULT_PRICE },
             upsert: true
         }
     }));
