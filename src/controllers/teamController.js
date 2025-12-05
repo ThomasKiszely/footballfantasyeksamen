@@ -44,29 +44,8 @@ exports.getById = async (req, res) => {
             ? updatedTeam.toObject()
             : updatedTeam; // Bruger det som et simpelt JS objekt, hvis .toObject ikke findes
 
-        // SIKKER TILGANG TIL DETAILED POINTS
-        const detailedPointsMap = teamObject.detailedGameweekPoints;
 
-        let allMatchdays;
-        if (detailedPointsMap instanceof Map) {
-            // Hvis det er et JavaScript Map (som Mongoose Maps bliver til efter .toObject())
-            allMatchdays = Array.from(detailedPointsMap.keys()).map(Number);
-        } else if (typeof detailedPointsMap === 'object' && detailedPointsMap !== null) {
-            // Hvis det er et almindeligt JavaScript Object
-            allMatchdays = Object.keys(detailedPointsMap).map(Number);
-        } else {
-            allMatchdays = [];
-        }
-
-        const currentGameweek = allMatchdays.length > 0 ? Math.max(...allMatchdays) : 0;
-
-        const teamData = {
-            ...teamObject,
-            currentGameweek: currentGameweek,
-        }
-
-        console.log("Team: ", teamData);
-        return res.status(200).json(teamData);
+        return res.status(200).json(teamObject);
     } catch (err) {
         console.error("Fejl i getById:", err);
         res.status(500).json({ error: err.message });

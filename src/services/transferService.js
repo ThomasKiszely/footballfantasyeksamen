@@ -1,6 +1,7 @@
 const teamService = require("../services/teamService")
 const playerService = require("../services/playerService");
 const {getAllMatches} = require("../data/footballMatchRepo");
+const mongoose = require("mongoose");
 
 async function sellPlayer(playerId, teamId) {
     const player = await playerService.findById(playerId);
@@ -8,10 +9,13 @@ async function sellPlayer(playerId, teamId) {
         throw new Error("Spiller ikke fundet.");
     }
     const team = await teamService.getTeamById(teamId);
-    if (!team) {
-        throw new Error("Hold ikke fundet.");
-    }
-    if (!team.players.includes(player._id)) {
+
+    const targetId = new mongoose.Types.ObjectId(playerId);
+    const isPlayerOwned = team.players.some(ownerId => {
+        return ownerId.equals(playerId);
+    });
+
+    if(!isPlayerOwned) {
         throw new Error("Dette hold ejer ikke denne spiller.");
     }
 
@@ -19,11 +23,15 @@ async function sellPlayer(playerId, teamId) {
 
     if (deadline && new Date() >= deadline) {
         throw new Error("Transfervinduet for denne Gameweek er lukket. Vent venligst på, at alle kampe er færdige.");
-    } else {
-        team.budget += player.price;
-        team.players.pull(player._id);
-        return await team.save();
     }
+
+    const salesPrice = player.price;
+
+    team.budget += salesPrice;
+
+    team.players = team.players.filter(ownedId => !ownedId.equals(targetId));
+
+    return await team.save();
 }
 
 async function getGameweekDeadline(gameweekNumber) { // eksporteres ikke fordi vi kun bruger den her
@@ -47,8 +55,44 @@ async function getGameweekDeadline(gameweekNumber) { // eksporteres ikke fordi v
         return earliestTime;
     }, null); // Returnerer et Date-objekt
 }
+async function buyPlayer(playerId, teamId) {
+    const playerMaster = await playerService.findById(playerId);
 
+    if (!playerMaster) {
+        throw new Error("Spiller ikke fundet.");
+    }
+
+    const team = await teamService.getTeamById(teamId);
+    if (!team) {
+        throw new Error("Hold ikke fundet.");
+    }
+
+    const deadline = await getGameweekDeadline(team.currentGameweek);
+
+    if (deadline && new Date() >= deadline) {
+        throw new Error("Transfervinduet for denne Gameweek er lukket.");
+    }
+
+
+    if (team.players.some(p => p._id.toString() === playerId)) {
+        throw new Error("Denne spiller er allerede på dit hold.");
+    }
+
+    const purchasePrice = playerMaster.price;
+
+    if (team.budget < purchasePrice) {
+        throw new Error(`Ikke nok budget. Mangler: ${purchasePrice - team.budget}M.`);
+    }
+
+    team.budget -= purchasePrice;
+
+    team.players.push(playerMaster._id);
+
+    // 5. Gem og returner
+    return await team.save();
+}
 
 module.exports = {
     sellPlayer,
+    buyPlayer,
 }

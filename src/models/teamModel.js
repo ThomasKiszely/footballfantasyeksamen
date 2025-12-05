@@ -11,6 +11,7 @@ const teamSchema = new mongoose.Schema({
     budget: { type: Number, required: true, default: 90000000 },
     points: { type: Number, required: true, default: 0 },
     latestGameweekPoints: { type: Number, default: 0 },
+    activeGameweekPoints: { type: Number, default: 0 },
     detailedGameweekPoints: {
         type: Map,
         of: {
@@ -20,6 +21,7 @@ const teamSchema = new mongoose.Schema({
         },
         default: {}
     },
+    currentGameweek: { type: Number},
 });
 
 module.exports = mongoose.models.Team || mongoose.model('Team', teamSchema);

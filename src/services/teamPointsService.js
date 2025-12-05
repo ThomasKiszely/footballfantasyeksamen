@@ -5,6 +5,15 @@ const footballMatchRepo = require("../data/footballMatchRepo");
 async function fetchAllMatches() {
     return footballMatchRepo.saveToDB();
 }
+async function updateAllTeamsAndGameweek() {
+    const allTeams = await teamRepo.getAllTeams();
+    console.log(`Starter pointberegning for ${allTeams.length} hold...`);
+
+    for(const team of allTeams) {
+        await updateTeamPoints(team._id);
+    }
+    console.log('Pointberegning fuldført.');
+}
 
 function calculatePointsForClub(match, clubName) {
     const normalizedClubName = clubName.toLowerCase().trim();
@@ -103,7 +112,7 @@ async function updateTeamPoints(teamId) {
     }
 
     // Prioritér den højeste GW, der har scoret point, hvis den er højere end den officielt afsluttede GW.
-    // Dette tvinger systemet til at bruge GW 14, hvis den har scoret point, men ikke er færdig.
+    // Dette tvinger systemet til at bruge den GW, hvis den har scoret point, men ikke er færdig.
     if (maxScoredGameweek > latestFinishedGameweek) {
         latestFinishedGameweek = maxScoredGameweek;
     }
@@ -126,6 +135,17 @@ async function updateTeamPoints(teamId) {
         }
     }
 
+    const liveScoreGameweek = nextActiveGameweek;
+    let activeGameweekPoints = 0;
+
+    if(liveScoreGameweek > 0) {
+        const activeGWPointsMap = detailedGameweekPoints.get(String(liveScoreGameweek));
+        if(activeGWPointsMap) {
+            for(const points of activeGWPointsMap.values()) {
+                activeGameweekPoints += parseInt(points);
+            }
+        }
+    }
 
     // --- 5. OPDATER OG GEM ---
     team.points = totalPoints;
@@ -133,11 +153,14 @@ async function updateTeamPoints(teamId) {
     team.latestGameweekPoints = latestGameweekPoints;
     team.currentGameweek = nextActiveGameweek;
 
+    team.activeGameweekPoints = activeGameweekPoints;
+
     await teamRepo.updateTeam(teamId, {
         points: totalPoints,
         detailedGameweekPoints: detailedGameweekPoints,
         latestGameweekPoints: latestGameweekPoints,
-        currentGameweek: nextActiveGameweek
+        currentGameweek: nextActiveGameweek,
+        activeGameweekPoints: activeGameweekPoints,
     });
 
 
@@ -157,8 +180,11 @@ async function updateTeamPoints(teamId) {
 
     return teamObject;
 }
+
+
 module.exports = {
     updateTeamPoints,
     calculatePointsForClub,
-    fetchAllMatches
+    fetchAllMatches,
+    updateAllTeamsAndGameweek,
 }

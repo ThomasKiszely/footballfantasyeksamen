@@ -21,8 +21,12 @@
 
 <main class="team-content">
     <div class="team-header">
-        <h2 id="teamName">Indlæser Holdnavn...</h2>
+        <div class="header-top-row">
+            <h2 id="teamName">Indlæser Holdnavn...</h2>
+        </div>
+
         <div class="team-info">
+
             <div class="budget-display">
                 <span class="label">Budget</span>
                 <span class="value" id="teamBudget">0M</span>
@@ -33,9 +37,15 @@
                 <span class="value" id="teamPoints">0</span>
             </div>
 
-            <div class="points-display gameweek-points">
-                <span class="label" id="currentGameweekHeader">Indlæser runde...</span>
-                <span class="value" id="gameweekPoints">0</span>
+            <div class="points-display previous-gameweek-points">
+                <span class="label" id="previousGameweekLabel">GW 14 Point</span>
+                <span class="value" id="previousGameweekPoints">0</span>
+            </div>
+
+            <div class="points-display current-gameweek-points">
+                <span class="label" id="activeGameweekHeader">Aktiv GW 15</span>
+                <span class="label" id="gameweekPointsLabel">Live Point</span>
+                <span class="value" id="latestGameweekPointsValue">0</span>
             </div>
         </div>
     </div>

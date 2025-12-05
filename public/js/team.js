@@ -104,20 +104,50 @@ async function loadTeam() {
 }
 
 
-function updateTeamStatsUI(team) {
-    document.getElementById("teamName").textContent = team.teamName;
-    document.getElementById("teamBudget").textContent = (team.budget / 1000000).toFixed(1) + "M";
-    document.getElementById("teamPoints").textContent = team.points;
+// team.js
 
-    if(team.currentGameweek) {
-        document.getElementById("currentGameweekHeader").textContent = `Gameweek ${team.currentGameweek}:`;
-    } else {
-        document.getElementById("currentGameweekHeader").textContent = `Start runde:`;
-    }
-    document.getElementById("gameweekPoints").textContent = team.latestGameweekPoints;
+function updateTeamStatsUI(team) {
+    const safeUpdate = (id, content) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.textContent = content;
+        } else {
+            console.warn(`Advarsel: DOM-element med ID '${id}' blev ikke fundet.`);
+        }
+    };
+
+    safeUpdate("teamName", team.teamName);
+    safeUpdate("teamBudget", (team.budget / 1000000).toFixed(1) + "M");
+    safeUpdate("teamPoints", team.points);
+
+    // --- Opdater Gameweek/Point Logik ---
+
+    const activeGameweek = team.currentGameweek;
+    const previousGameweek = activeGameweek > 1 ? activeGameweek - 1 : 1;
+
+    // --- 1. LIVE POINT (NUVÆRENDE GW) ---
+    let activeGWHeaderText = `Aktiv GW ${activeGameweek}`;
+    let livePointsLabel = `Live Point`; // Klarere label
+
+    safeUpdate("activeGameweekHeader", activeGWHeaderText);
+    safeUpdate("gameweekPointsLabel", livePointsLabel);
+    // Viser de LIVE point for aktive GW
+    safeUpdate("latestGameweekPointsValue", team.activeGameweekPoints);
+
+
+    // --- 2. TIDLIGERE POINT (AFSLUTTET GW) ---
+
+    // Label for den afsluttede GW
+    let previousGWLabel = `GW ${previousGameweek} Point`;
+
+    safeUpdate("previousGameweekLabel", previousGWLabel);
+
+    // Viser de ENDELIGE point for tidligere gameweek
+    safeUpdate("previousGameweekPoints", team.latestGameweekPoints);
 }
 
 
+// team.js
 
 function updateTeamPlayersUI(players, latestPointsByPlayer) {
     document.getElementById("goalkeeperRow").innerHTML = '';
@@ -153,7 +183,6 @@ function updateTeamPlayersUI(players, latestPointsByPlayer) {
             const playerCardHTML = `
                 <div class="player-slot" data-player-id="${player._id}" data-position="${broadPosition}">
                     <div class="player-card filled">
-                        <span class="remove-player">X</span>
                         <div class="player-name">${player.name}</div>
                         <div class="player-club">${player.club}</div>
                         <div class="player-stats">
@@ -178,13 +207,17 @@ function updateTeamPlayersUI(players, latestPointsByPlayer) {
 }
 
 function addEditTeamButton() {
-    const teamHeader = document.querySelector('.team-header');
-    if (teamHeader && !document.getElementById('editTeamBtn')) {
+    const headerTopRow = document.querySelector('.header-top-row');
+
+    if (headerTopRow && !document.getElementById('editTeamBtn')) {
         const editButton = document.createElement('button');
         editButton.id = 'editTeamBtn';
-        editButton.textContent = 'Rediger Hold';
-        editButton.className = 'btn btn-secondary';
-        teamHeader.appendChild(editButton);
+        editButton.textContent = 'Ændre Hold';
+        // Brug en mere passende, stærk knapfarve
+        editButton.className = 'btn btn-primary btn-small edit-team-action';
+
+        // 🛑 NYT: Tilføj knappen til den nye wrapper
+        headerTopRow.appendChild(editButton);
 
         editButton.addEventListener('click', () => {
             const teamId = getTeamIdFromUrl() || localStorage.getItem("teamId");

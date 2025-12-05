@@ -6,12 +6,13 @@ const playerRoutes = require('./routes/playerRoutes');
 const router = require('./routes/userRoutes');
 const teamRoutes = require('./routes/teamRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const transferRoutes = require('./routes/transferRoutes');
 const { notFound } = require('./middlewares/notFound');
 const { errorHandler } = require('./middlewares/errorHandler');
 const { connectToMongo } = require('./services/db');
 const cron = require('node-cron');
 const {fetchAndSyncPlayers} = require('./services/playerService');
-const {fetchAllMatches} = require('./services/teamPointsService');
+const  teamPointsService = require('./services/teamPointsService');
 const cookieParser = require('cookie-parser');
 const authToken = require('./middlewares/authMiddleware');
 connectToMongo();
@@ -36,7 +37,7 @@ app.use(express.static(path.join(__dirname, '..', 'public'), { extensions: ['htm
 app.use('/api/players', playerRoutes)
 app.use('/api/user', router);
 
-
+app.use('/api/transfers', transferRoutes);
 app.use('/api/team', teamRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
 app.use('/api/admin', adminRoutes);
@@ -50,8 +51,10 @@ function startDataSync() {
     cron.schedule('*/1 * * * *', async () => {
         console.log('Reading player data and alle matches from API...');
         await fetchAndSyncPlayers();
-        await fetchAllMatches();
 
+        await teamPointsService.fetchAllMatches();
+
+        await teamPointsService.updateAllTeamsAndGameweek();
     });
 }
 startDataSync();

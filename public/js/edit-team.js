@@ -141,29 +141,48 @@ function renderPlayers() {
     nextPageBtn.disabled = currentPage === totalPages;
 }
 
-function buyPlayer(player) {
-    const posLabel = normalizePosition(player.position);
+async function buyPlayer(player) {
+        const posLabel = normalizePosition(player.position);
+        const emptySlot = document.querySelector(`.player-slot[data-position="${posLabel}"]:not([data-player-id])`);
+        if (!emptySlot) {
+            alert(`Ingen ledig plads til ${posLabel} i den valgte opstilling.`);
+            return;
+        }
 
-    if (player.price > currentBudget) {
-        alert("Ikke nok budget! Spillerens pris overstiger det resterende budget.");
-        return;
-    }
-    if (selectedPlayers.find(p => p._id === player._id)) {
-        alert("Spiller allerede valgt!");
-        return;
-    }
-    const emptySlot = document.querySelector(`.player-slot[data-position="${posLabel}"]:not([data-player-id])`);
-    if (!emptySlot) {
-        alert(`Ingen ledig plads til ${posLabel} i den valgte opstilling.`);
-        return;
-    }
+        try {
+            const res = await fetch(`${API_BASE_URL}/transfers/buy`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify({ playerId: player._id }) // Sender kun ID
+            });
 
-    currentBudget -= player.price;
-    selectedPlayers.push(player);
-    fillSlotWithPlayer(emptySlot, player);
-    renderPlayers();
-    updateBudgetUI();
-    renderSelectedPlayers();
+            const data = await res.json();
+
+            if (!res.ok) {
+                // Håndterer budgetfejl, deadline-fejl, osv. fra backend
+                throw new Error(data.message || "Kunne ikke købe spiller.");
+            }
+
+            const updatedTeam = data.team;
+
+            // Synkroniser state med serverens data
+            currentBudget = updatedTeam.budget;
+
+            const newPlayerIds = updatedTeam.players.map(id => id.toString());
+            selectedPlayers = allPlayers.filter(p => newPlayerIds.includes(p._id));
+
+
+            // 3. Opdater UI
+            fillSlotWithPlayer(emptySlot, player);
+            renderPlayers();
+            updateBudgetUI();
+            renderSelectedPlayers();
+
+        } catch (error) {
+            alert(`Fejl ved køb: ${error.message}`);
+            console.error("Buy Player API fejl:", error);
+        }
 }
 
 async function sellPlayer(playerId) {
@@ -173,24 +192,47 @@ async function sellPlayer(playerId) {
     const confirmation = confirm(`Er du sikker på, du vil sælge ${player.name} for ${(player.price / 1000000).toFixed(1)}M?`);
     if (!confirmation) return;
 
-    currentBudget += player.price;
-    selectedPlayers = selectedPlayers.filter(p => p._id !== playerId);
+    try {
+        const res = await fetch(`${API_BASE_URL}/transfers/sell/${playerId}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            //body: JSON.stringify({ playerId: playerId }) // Sender ID i body (da DELETE ikke har en standard body)
+        });
 
-    const slot = document.querySelector(`.player-slot[data-player-id="${playerId}"]`);
-    if (slot) {
-        const position = slot.getAttribute('data-position');
-        slot.innerHTML = `
-            <div class="player-card empty">
-                <span class="add-player">+</span>
-                <span class="position-label">${position}</span>
-            </div>
-        `;
-        slot.removeAttribute("data-player-id");
+        const data = await res.json();
+
+        if (!res.ok) {
+            // Håndterer deadline-fejl, ejer-ikke-spiller-fejl, osv. fra backend
+            throw new Error(data.message || "Kunne ikke sælge spiller.");
+        }
+
+
+        const updatedTeam = data.team;
+
+        // Synkroniser state med serverens data
+        currentBudget = updatedTeam.budget;
+
+        // Opdater selectedPlayers, da spilleren nu er væk fra serverens liste
+        const newPlayerIds = updatedTeam.players.map(id => id.toString());
+        selectedPlayers = allPlayers.filter(p => newPlayerIds.includes(p._id));
+
+        // 3. Opdater UI
+        const slot = document.querySelector(`.player-slot[data-player-id="${playerId}"]`);
+        if (slot) {
+            const position = slot.getAttribute('data-position');
+            slot.innerHTML = `<div class="player-card empty"><span class="add-player">+</span><span class="position-label">${position}</span></div>`;
+            slot.removeAttribute("data-player-id");
+        }
+
+        renderPlayers();
+        updateBudgetUI();
+        renderSelectedPlayers();
+
+    } catch (error) {
+        alert(`Fejl ved salg: ${error.message}`);
+        console.error("Sell Player API fejl:", error);
     }
-
-    renderPlayers();
-    updateBudgetUI();
-    renderSelectedPlayers();
 }
 
 function fillSlotWithPlayer(slot, player) {
