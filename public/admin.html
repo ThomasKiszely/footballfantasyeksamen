@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - FootballFantasy</title>
+    <link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="/" class="logo">FootballFantasy <span style="font-size:0.6em; opacity:0.8; margin-left:5px;">ADMIN</span></a>
+        <div class="nav-links">
+            <a href="/team">Mit Hold</a>
+            <a href="/leaderboard">Leaderboard</a>
+            <button id="logoutBtn" class="btn-nav">Logout</button>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <div class="admin-header">
+        <h1>Administrator Panel</h1>
+        <button id="syncDataBtn" class="btn-sync">🔄 Synkroniser Data (API)</button>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="openTab('users')">Brugere</button>
+        <button class="tab-btn" onclick="openTab('players')">Spillere & Priser</button>
+        <button class="tab-btn" onclick="openTab('matches')">Kampe & Resultater</button>
+        <button class="tab-btn" onclick="openTab('teams')">Fantasy Hold</button>
+    </div>
+
+    <div id="users" class="tab-content active">
+        <div class="card">
+            <h3>Brugerliste</h3>
+            <table id="userTable">
+                <thead>
+                <tr>
+                    <th>Navn</th>
+                    <th>Email/ID</th>
+                    <th>Rolle</th>
+                    <th>Handlinger</th>
+                </tr>
+                </thead>
+                <tbody id="userTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="players" class="tab-content">
+        <div class="card">
+            <h3>Spiller Prisjustering</h3>
+            <input type="text" id="playerSearch" placeholder="Søg spiller..." style="padding:8px; margin-bottom:10px; width:100%; max-width:300px;">
+            <div class="table-container">
+                <table id="playerTable">
+                    <thead>
+                    <tr>
+                        <th>Navn</th>
+                        <th>Klub</th>
+                        <th>Pos</th>
+                        <th>Pris (DKK)</th>
+                        <th>Ny Pris</th>
+                        <th>Gem</th>
+                    </tr>
+                    </thead>
+                    <tbody id="playerTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="matches" class="tab-content">
+        <div class="card">
+            <h3>Kamp Oversigt</h3>
+            <p style="font-size:0.9em; color:#666;">Her kan du manuelt rette resultater, hvis API'et fejler.</p>
+            <div class="table-container">
+                <table id="matchTable">
+                    <thead>
+                    <tr>
+                        <th>Dato</th>
+                        <th>Hjemme</th>
+                        <th>Ude</th>
+                        <th>Score</th>
+                        <th>Gem</th>
+                    </tr>
+                    </thead>
+                    <tbody id="matchTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="teams" class="tab-content">
+        <div class="card">
+            <h3>Oprettede Hold</h3>
+            <table id="teamTable">
+                <thead>
+                <tr>
+                    <th>Holdnavn</th>
+                    <th>Ejer</th>
+                    <th>Point</th>
+                    <th>Budget Rest</th>
+                    <th>Vis Hold</th>
+                </tr>
+                </thead>
+                <tbody id="teamTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+</main>
+
+<div id="pitchModal" class="pitch-modal">
+    <div class="pitch-content">
+        <span class="close-modal" onclick="closePitchModal()">&times;</span>
+        <h2 id="modalTeamName" style="text-align:center; margin-bottom:10px;">Holdnavn</h2>
+
+        <div class="pitch">
+            <div class="row goalkeeper-row"></div>
+            <div class="row defender-row"></div>
+            <div class="row midfielder-row"></div>
+            <div class="row forward-row"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/admin.js"></script>
+</body>
+</html>

@@ -1,64 +1,56 @@
 const userService = require("../services/userService");
 const playerService = require("../services/playerService");
+const teamService = require("../services/teamService");
+const footballMatchService = require("../services/footballMatchService");
 
+async function verifyAdmin(adminId) {
+    const user = await userService.getUserById(adminId);
+    if (!user) throw new Error("User not found");
 
-function isUserAdmin (userId) {
-    const user = userService.getUserById(userId);
-    if (user.role === "admin") {
-        return true;
+    if (user.role !== "admin") {
+        const error = new Error("Adgang nægtet: ikke admin");
+        error.statusCode = 403;
+        throw error;
     }
+    return true;
 }
 
-function adminDeleteUser (userId) {
-    const user = userService.getUserById(userId);
-    if (isUserAdmin(user)) {
-        userService.deleteUser(userId)
-    }
-}
+exports.getAllUsers = async (adminId) => {
+    await verifyAdmin(adminId);
+    return await userService.getAllUsers();
+};
 
-function adminUpdateUser (userId, updateData) {
-    const user = userService.getUserById(userId);
+exports.deleteUser = async (adminId, targetUserId) => {
+    await verifyAdmin(adminId);
+    return await userService.deleteUser(targetUserId);
+};
 
-    if (isUserAdmin(user)) {
-        userService.updateUser(userId, updateData)
-    }
-}
+exports.updateUser = async (adminId, targetUserId, updateData) => {
+    await verifyAdmin(adminId);
+    return await userService.updateUser(targetUserId, updateData);
+};
 
-function adminUpdateTeam () {
-    const user = user.getUserById(userId);
-    if (isUserAdmin(user)) {
-        teamService.update(teamId, updateData)
-    }
-}
+exports.updatePlayer = async (adminId, playerId, updateData) => {
+    await verifyAdmin(adminId);
+    return await playerService.update(playerId, updateData);
+};
 
-function adminUpdatePlayer () {
+exports.updateTeam = async (adminId, teamId, updateData) => {
+    await verifyAdmin(adminId);
+    return await teamService.updateTeam(teamId, updateData);
+};
 
-    const user = user.getUserById(userId);
-    if (isUserAdmin(user)) {
-        playerService.update(playerId, updateData)
-    }
-}
+exports.updateFootballMatch = async (adminId, matchId, updateData) => {
+    await verifyAdmin(adminId);
+    return await footballMatchService.updateFootballMatch(matchId, updateData);
+};
 
-function updatePlayerPrice(playerId, newPrice, userId) {
-    const user = user.getUserById(userId);
-    if (isUserAdmin(user)) {
-        playerService.updatePlayerPrice(playerId, newPrice)
-    }
-}
+exports.getAllMatches = async (adminId) => {
+    await verifyAdmin(adminId);
+    return await footballMatchService.getAllMatches();
+};
 
-function adminUpdateFootballMatch () {
-    const user = user.getUserById(userId);
-    if (isUserAdmin(user)) {
-        footballMatchService.update(matchId, updateData)
-    }
-}
-
-module.exports = {
-    isUserAdmin,
-    adminUpdateUser,
-    adminUpdateTeam,
-    adminUpdatePlayer,
-    updatePlayerPrice,
-    adminUpdateFootballMatch,
-    adminDeleteUser
-}
+exports.syncMatches = async (adminId) => {
+    await verifyAdmin(adminId);
+    return await footballMatchService.fetchAllMatches();
+};

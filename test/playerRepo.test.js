@@ -62,6 +62,7 @@ describe('playerRepo', () => {
         expect(deleteResult._id).toEqual(createdPlayer._id);
 
     });
+
     it('Update a player', async () => {
         let testUpdatePlayer = {
             name: 'Ronaldo',
@@ -114,4 +115,3 @@ describe('playerRepo', () => {
     });
 
 });
-

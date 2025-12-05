@@ -29,6 +29,7 @@ describe('userService', () => {
         expect(userRepo.getUserById).toHaveBeenCalledWith(mockId);
         expect(result).toEqual(mockResponse);
     });
+
     it('returns an updated user', async () => {
         const mockId = 1;
         const mockResponse = { name: 'John', password: '1234', teams: ['Liverpool', 'Chelsea'] };
@@ -39,6 +40,7 @@ describe('userService', () => {
         expect(userRepo.updateUser).toHaveBeenCalledWith(mockId, mockResponse);
         expect(result).toEqual(mockResponse);
     });
+
     it('returns a signed in user', async () => {
         vi.spyOn(userRepo, 'getUserByName').mockResolvedValue({
             _id: 1,

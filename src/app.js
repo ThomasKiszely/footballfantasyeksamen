@@ -23,9 +23,10 @@ app.use(express.static(path.join(__dirname, '..', 'public'), { extensions: ['htm
 app.use('/api/players', playerRoutes)
 app.use('/api/user', router);
 
+
 app.use('/api/team', teamRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
-//app.use('/api/admin', adminRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

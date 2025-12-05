@@ -25,6 +25,10 @@ async function getUserById(id){
     return await userRepo.getUserById(id);
 }
 
+async function getAllUsers() {
+    return await userRepo.getAllUsers();
+}
+
 async function login(username, password){
     const user = await userRepo.getUserByName(username);
     if (!user) {
@@ -78,6 +82,7 @@ async function deleteUser(id) {
 module.exports = {
     signUp,
     getUserById,
+    getAllUsers,
     updateUser,
     login,
     deleteUser,

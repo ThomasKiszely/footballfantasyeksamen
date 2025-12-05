@@ -71,11 +71,15 @@ async function getAllMatches() {
     }
 }
 
+async function updateMatch(matchId, updateData) {
+    return FootballMatch.findByIdAndUpdate(matchId, updateData, {new: true});
+}
+
 
 module.exports = {
     fetchAllMatches,
     saveToDB,
     createMatch,
     getAllMatches,
-
+    updateMatch,
 }
