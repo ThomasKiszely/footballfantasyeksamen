@@ -63,8 +63,8 @@ if (editUserBtn) {
 }
 async function checkAuth(){
     try{
-        const response = await fetch('/api/user/checkAuth', {
-            method: 'POST',
+        const response = await fetch('/api/user/check', {
+            method: 'GET',
             credentials: 'include',
         });
         if (response.ok) {
