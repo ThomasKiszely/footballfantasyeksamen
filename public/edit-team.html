@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Rediger Dit Fantasy Hold</title>
+    <link rel="stylesheet" href="styles/team.css">
+</head>
+<body class="team-page">
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="/" class="logo">FootballFantasy</a>
+        <div class="nav-links">
+            <a href="/create-team">Opret Hold</a>
+            <a href="/leaderboard">Leaderboard</a>
+            <button id="editUser" class="btn-nav">Rediger Profil</button>
+            <button id="logout" class="btn-nav">Logout</button>
+        </div>
+    </div>
+</nav>
+
+<main class="team-content">
+    <div class="team-header">
+        <h2>Rediger Dit Hold (11 Spillere)</h2>
+        <div class="team-info">
+            <input type="text" id="teamName" placeholder="Dit Holdnavn" required style="padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+
+            <div class="budget-display">
+                <span class="label">Resterende Budget</span>
+                <span class="value" id="remainingBudget">0.0M kr</span>
+            </div>
+
+            <button id="saveChangesBtn" class="btn btn-primary">Gem Ændringer</button>
+        </div>
+    </div>
+
+    <div class="formation-selector">
+        <label for="formationSelect">Valgt Opstilling:</label>
+        <select id="formationSelect" disabled>
+            <option value="4-3-3">4-3-3</option>
+        </select>
+
+        <label for="positionFilter">Filtrér Position:</label>
+        <select id="positionFilter">
+            <option value="ALL">Alle Positioner</option>
+            <option value="GK">Målmænd (GK)</option>
+            <option value="Defend">Forsvar (Defend)</option>
+            <option value="Midfield">Midtbane (Midfield)</option>
+            <option value="Offence">Angreb (Offence)</option>
+        </select>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+
+        <div class="pitch-section">
+            <div class="pitch-container">
+                <h3 style="margin-top:0;">Din Holdopstilling</h3>
+                <div class="football-pitch pitch" id="footballPitch">
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h3 style="margin-top:0;">Tilgængelige Spillere</h3>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <div id="pageIndicator" style="font-weight: bold;"></div>
+                <div>
+                    <button id="prevPageBtn" class="btn btn-small">Forrige</button>
+                    <button id="nextPageBtn" class="btn btn-small">Næste</button>
+                </div>
+            </div>
+
+            <div class="player-list" id="playerList">
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <h4>Valgte spillere (Liste)</h4>
+                <ul id="selectedPlayers"></ul>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<script src="/js/edit-team.js"></script>
+</body>
+</html>

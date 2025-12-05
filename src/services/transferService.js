@@ -26,7 +26,7 @@ async function sellPlayer(playerId, teamId) {
     }
 }
 
-async function getGameweekDeadline(gameweekNumber) {
+async function getGameweekDeadline(gameweekNumber) { // eksporteres ikke fordi vi kun bruger den her
     const allMatches = await getAllMatches(); // Henter alle kampe
 
     // Filtrer kampe for den specifikke Gameweek
@@ -51,5 +51,4 @@ async function getGameweekDeadline(gameweekNumber) {
 
 module.exports = {
     sellPlayer,
-    getGameweekDeadline
 }

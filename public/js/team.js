@@ -177,4 +177,28 @@ function updateTeamPlayersUI(players, latestPointsByPlayer) {
     document.getElementById("forwardRow").innerHTML = positionRows.forwardRow.join('');
 }
 
-document.addEventListener("DOMContentLoaded", loadTeam);
+function addEditTeamButton() {
+    const teamHeader = document.querySelector('.team-header');
+    if (teamHeader && !document.getElementById('editTeamBtn')) {
+        const editButton = document.createElement('button');
+        editButton.id = 'editTeamBtn';
+        editButton.textContent = 'Rediger Hold';
+        editButton.className = 'btn btn-secondary';
+        teamHeader.appendChild(editButton);
+
+        editButton.addEventListener('click', () => {
+            const teamId = getTeamIdFromUrl() || localStorage.getItem("teamId");
+            if (teamId) {
+                window.location.href = `/edit-team?teamId=${teamId}`;
+            } else {
+                alert('Could not find team ID to edit.');
+            }
+        });
+    }
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadTeam();
+    addEditTeamButton();
+});
