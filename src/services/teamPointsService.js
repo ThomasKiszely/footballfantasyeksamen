@@ -41,21 +41,18 @@ async function updateTeamPoints(teamId) {
     );
     scoredMatches.sort((a,b) => parseInt(a.matchday) - parseInt(b.matchday));
 
-
-    let detailedGameweekPoints = new Map(); // Bruger JavaScript Map
-
+    let detailedGameweekPoints = new Map();
 
     // --- 1. OPRET DETALJERET POINTKORT (MAP-BASERET) ---
+    // (Uændret)
     for (const match of scoredMatches) {
         if(match.matchday === null || match.matchday === undefined) continue;
-
         const matchday = parseInt(match.matchday);
         const matchdayString = String(matchday);
 
-        // Hent det indre Map, eller opret et nyt Map()
         let playerPointsMap = detailedGameweekPoints.get(matchdayString);
         if (!playerPointsMap) {
-            playerPointsMap = new Map(); // Bruger indre Map
+            playerPointsMap = new Map();
             detailedGameweekPoints.set(matchdayString, playerPointsMap);
         }
 
@@ -63,7 +60,6 @@ async function updateTeamPoints(teamId) {
             const clubPoints = calculatePointsForClub(match, player.club);
             const playerIdString = player._id.toString();
 
-            // Brug Map-metoder: .get() og .set()
             const existingPoints = playerPointsMap.get(playerIdString) || 0;
             playerPointsMap.set(playerIdString, existingPoints + clubPoints);
         }
@@ -77,16 +73,43 @@ async function updateTeamPoints(teamId) {
         }
     }
 
-    // --- 3. LOGIK FOR GAMEWEEK SKIFTE ---
+    // --- 3. LOGIK FOR GAMEWEEK SKIFTE (NY LOGIK) ---
 
-    // Antager vi vil vise point for den seneste scorede GW (GW 14)
+    // Find den højeste Gameweek, der findes i kildedata (den maksimale GW der er scoret i)
+    const maxScoredGameweek = Array.from(detailedGameweekPoints.keys())
+        .reduce((max, current) => Math.max(max, parseInt(current)), 0);
+
+    let latestFinishedGameweek = 0;
+
+    // Først tjekker vi den formelle afslutningsstatus (som vi gjorde før)
     const maxMatchday = allMatches.reduce((max, match) => {
         const matchdayNum = parseInt(match.matchday);
         return matchdayNum > max ? matchdayNum : max;
     }, 0);
 
-    const latestFinishedGameweek = 14;
+    // Find den seneste officielt afsluttede Gameweek (GW 13 i dit tilfælde)
+    for (let currentGW = maxMatchday; currentGW >= 1; currentGW--) {
+        const gwMatches = allMatches.filter(match => parseInt(match.matchday) === currentGW);
 
+        const allFinishedOrExcluded = gwMatches.every(match =>
+            match.status === 'FINISHED' ||
+            match.status === 'POSTPONED' ||
+            match.status === 'CANCELLED'
+        );
+
+        if(allFinishedOrExcluded && gwMatches.length > 0){
+            latestFinishedGameweek = currentGW;
+            break;
+        }
+    }
+
+    // Prioritér den højeste GW, der har scoret point, hvis den er højere end den officielt afsluttede GW.
+    // Dette tvinger systemet til at bruge GW 14, hvis den har scoret point, men ikke er færdig.
+    if (maxScoredGameweek > latestFinishedGameweek) {
+        latestFinishedGameweek = maxScoredGameweek;
+    }
+
+    // Næste aktive Gameweek er altid den næste i rækken.
     const nextActiveGameweek = latestFinishedGameweek > 0 ? latestFinishedGameweek + 1 : 1;
 
 
@@ -106,7 +129,7 @@ async function updateTeamPoints(teamId) {
 
 
     // --- 5. OPDATER OG GEM ---
-
+    // (Uændret)
     team.points = totalPoints;
     team.detailedGameweekPoints = detailedGameweekPoints;
     team.latestGameweekPoints = latestGameweekPoints;
@@ -125,10 +148,7 @@ async function updateTeamPoints(teamId) {
 
     // Sørg for at konvertere Maps tilbage til Objects ved returnering for frontend
     if (teamObject.detailedGameweekPoints && teamObject.detailedGameweekPoints instanceof Map) {
-        // Konverter ydre Map til Object
         teamObject.detailedGameweekPoints = Object.fromEntries(teamObject.detailedGameweekPoints);
-
-        // Konverter indre Maps i det nye objekt
         for(const gwKey in teamObject.detailedGameweekPoints) {
             let gwEntry = teamObject.detailedGameweekPoints[gwKey];
             if (gwEntry instanceof Map) {
