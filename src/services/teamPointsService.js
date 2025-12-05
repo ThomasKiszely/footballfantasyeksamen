@@ -44,7 +44,6 @@ async function updateTeamPoints(teamId) {
     let detailedGameweekPoints = new Map();
 
     // --- 1. OPRET DETALJERET POINTKORT (MAP-BASERET) ---
-    // (Uændret)
     for (const match of scoredMatches) {
         if(match.matchday === null || match.matchday === undefined) continue;
         const matchday = parseInt(match.matchday);
@@ -81,13 +80,13 @@ async function updateTeamPoints(teamId) {
 
     let latestFinishedGameweek = 0;
 
-    // Først tjekker vi den formelle afslutningsstatus (som vi gjorde før)
+    // Først tjekker vi den formelle afslutningsstatus
     const maxMatchday = allMatches.reduce((max, match) => {
         const matchdayNum = parseInt(match.matchday);
         return matchdayNum > max ? matchdayNum : max;
     }, 0);
 
-    // Find den seneste officielt afsluttede Gameweek (GW 13 i dit tilfælde)
+    // Find den seneste officielt afsluttede Gameweek
     for (let currentGW = maxMatchday; currentGW >= 1; currentGW--) {
         const gwMatches = allMatches.filter(match => parseInt(match.matchday) === currentGW);
 
@@ -129,7 +128,6 @@ async function updateTeamPoints(teamId) {
 
 
     // --- 5. OPDATER OG GEM ---
-    // (Uændret)
     team.points = totalPoints;
     team.detailedGameweekPoints = detailedGameweekPoints;
     team.latestGameweekPoints = latestGameweekPoints;
