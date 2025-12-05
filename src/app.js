@@ -13,10 +13,23 @@ const cron = require('node-cron');
 const {fetchAndSyncPlayers} = require('./services/playerService');
 const {fetchAllMatches} = require('./services/teamPointsService');
 const cookieParser = require('cookie-parser');
+const authToken = require('./middlewares/authMiddleware');
 connectToMongo();
 
 app.use(cookieParser());
 app.use(express.json());
+app.get('/create-team', authToken ,(req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'create-team.html'));
+});
+app.get('/team', authToken, (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'team.html'));
+});
+app.get('/editUser', authToken, (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'editUser.html'));
+});
+app.get('/admin', authToken, (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'admin.html'));
+});
 app.use(express.static(path.join(__dirname, '..', 'public'), { extensions: ['html'] }));
 
 // Routes

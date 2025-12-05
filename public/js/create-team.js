@@ -39,18 +39,20 @@ editUser.addEventListener("click", (e) => {
     window.location.href = `/editUser?userid=${user._id}`;
 });
 
+
+
 async function fetchInitialData() {
     try {
         const res = await fetch (`${API_BASE_URL}/team/config`, {credentials: "include"});
 
         if(res.ok) {
-           const config = await res.json();
-           currentBudget = config.startBudget;
+            const config = await res.json();
+            currentBudget = config.startBudget;
 
-           const budgetLabel = document.getElementById("budgetLabel");
-           if(budgetLabel) {
-               budgetLabel.textContent = `Resterende Budget (Start: ${(currentBudget / 1000000).toFixed(1)}M)`;
-           }
+            const budgetLabel = document.getElementById("budgetLabel");
+            if(budgetLabel) {
+                budgetLabel.textContent = `Resterende Budget (Start: ${(currentBudget / 1000000).toFixed(1)}M)`;
+            }
         } else {
             console.log("Kunne ikke hente team config fra API. Bruger standard 90m");
             currentBudget = 90000000;
@@ -58,9 +60,17 @@ async function fetchInitialData() {
     } catch (error) {
         console.error("Fejl ved hentnig af inital data: " + error.message);
     }
-    loadPlayers();
+    await loadPlayers();
     renderPitch("4-3-3");
 }
+
+function filterPlayersByPosition(position) {
+    positionFilterEl.value = position;
+    currentPage = 1;
+    renderPlayers();
+}
+
+
 
 // Opdaterer budget UI
 function updateBudgetUI() {
@@ -283,6 +293,15 @@ function renderPitch(formation) {
     // Når banen er oprettet, skal vi genplacere eventuelt valgte spillere
     // Denne funktion forsøger at placere spillere, der allerede er valgt, i de nye slots
     selectedPlayers.forEach(p => selectPlayer(p));
+
+    document.querySelectorAll(".player-slot").forEach(slot => {
+        if (!slot.hasAttribute("data-player-id")) {
+            slot.addEventListener("click", function () {
+                const position = this.getAttribute("data-position");
+                filterPlayersByPosition(position);
+            })
+        }
+    })
 }
 
 // --- Event Listeners ---
@@ -338,4 +357,7 @@ createTeamBtn.addEventListener("click", async () => {
 });
 
 // Starter med 4-3-3
-document.addEventListener("DOMContentLoaded", () => { fetchInitialData()});
+document.addEventListener("DOMContentLoaded", () =>
+{
+    fetchInitialData();
+});
