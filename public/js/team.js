@@ -75,9 +75,11 @@ async function loadTeam() {
         updateTeamStatsUI(teamData);
 
         const currentGameweek = teamData.currentGameweek;
-        const gameweekKey = String(currentGameweek);
 
-        let detailedGameweekData = teamData.detailedGameweekPoints[gameweekKey];
+
+        const activeGameweekKey = String(currentGameweek);
+
+        let detailedGameweekData = teamData.detailedGameweekPoints[activeGameweekKey];
         let latestPointsByPlayer = {};
 
         if (detailedGameweekData) {
@@ -91,7 +93,7 @@ async function loadTeam() {
             }
         }
 
-        console.log(`Frontend: Pedro point for GW ${currentGameweek} er: ${latestPointsByPlayer['69284d6df59036d8a3fc6f4f']}`);
+        // send de aktive/live point til spiller UI
         updateTeamPlayersUI(teamData.players, latestPointsByPlayer, currentGameweek);
 
     } catch (err) {
@@ -103,8 +105,6 @@ async function loadTeam() {
     }
 }
 
-
-// team.js
 
 function updateTeamStatsUI(team) {
     const safeUpdate = (id, content) => {
@@ -123,31 +123,40 @@ function updateTeamStatsUI(team) {
     // --- Opdater Gameweek/Point Logik ---
 
     const activeGameweek = team.currentGameweek;
+    // Den GW, der lige er afsluttet
     const previousGameweek = activeGameweek > 1 ? activeGameweek - 1 : 1;
 
-    // --- 1. LIVE POINT (NUVÆRENDE GW) ---
-    let activeGWHeaderText = `Aktiv GW ${activeGameweek}`;
-    let livePointsLabel = `Live Point`; // Klarere label
-
-    safeUpdate("activeGameweekHeader", activeGWHeaderText);
-    safeUpdate("gameweekPointsLabel", livePointsLabel);
-    // Viser de LIVE point for aktive GW
-    safeUpdate("latestGameweekPointsValue", team.activeGameweekPoints);
-
-
-    // --- 2. TIDLIGERE POINT (AFSLUTTET GW) ---
-
-    // Label for den afsluttede GW
+    // --- 1. TIDLIGERE POINT (AFSLUTTET GW) ---
     let previousGWLabel = `GW ${previousGameweek} Point`;
 
     safeUpdate("previousGameweekLabel", previousGWLabel);
+    safeUpdate("previousGameweekPoints", team.latestGameweekPoints); // Afsluttede point (GW 14)
 
-    // Viser de ENDELIGE point for tidligere gameweek
-    safeUpdate("previousGameweekPoints", team.latestGameweekPoints);
+    // Live point
+
+    const activeGameweekHeaderEl = document.getElementById('activeGameweekHeader');
+
+    // Antager, at du har DOM-elementer med ID'erne 'livePointsLabel' og 'liveGameweekPointsValue' i din HTML.
+    const livePointsLabelEl = document.getElementById('livePointsLabel');
+
+    if (activeGameweekHeaderEl) {
+        // Sikrer, at containeren er synlig igen, hvis den blev skjult
+        const parentDiv = activeGameweekHeaderEl.closest('.points-display');
+        if (parentDiv) parentDiv.style.display = '';
+    }
+
+    // Label for den aktive GW (f.eks. GW 15 Live)
+    if (livePointsLabelEl) {
+        livePointsLabelEl.textContent = `GW ${activeGameweek} Live Point`;
+    } else {
+        // Fallback, hvis elementet har et ældre ID (som i dit tidligere script)
+        safeUpdate('gameweekPointsLabel', `GW ${activeGameweek} Live Point`);
+    }
+
+    // Viser de LIVE point for nuværende gameweek
+    safeUpdate("liveGameweekPointsValue", team.activeGameweekPoints);
 }
 
-
-// team.js
 
 function updateTeamPlayersUI(players, latestPointsByPlayer) {
     document.getElementById("goalkeeperRow").innerHTML = '';
@@ -168,6 +177,7 @@ function updateTeamPlayersUI(players, latestPointsByPlayer) {
 
         const playerIdString = player._id.toString();
 
+        // Bruger latestPointsByPlayer, som indeholder point fra den AFSLUTTEDE GW (currentGameweek - 1)
         const playerPoints = latestPointsByPlayer[playerIdString] || 0;
 
 
@@ -216,7 +226,6 @@ function addEditTeamButton() {
         // Brug en mere passende, stærk knapfarve
         editButton.className = 'btn btn-primary btn-small edit-team-action';
 
-        // 🛑 NYT: Tilføj knappen til den nye wrapper
         headerTopRow.appendChild(editButton);
 
         editButton.addEventListener('click', () => {

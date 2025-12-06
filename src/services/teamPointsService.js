@@ -45,16 +45,17 @@ async function updateTeamPoints(teamId) {
     const team = await teamRepo.getTeamById(teamId);
     let allMatches = await footballMatchRepo.getAllMatches();
 
+    // Vi inkluderer kampe, der har score-data, selvom de ikke er færdige (for at fange live point)
     let scoredMatches = allMatches.filter(match =>
         match.homeScore !== null && match.homeScore !== undefined
     );
-    scoredMatches.sort((a,b) => parseInt(a.matchday) - parseInt(b.matchday));
+    scoredMatches.sort((a, b) => parseInt(a.matchday) - parseInt(b.matchday));
 
     let detailedGameweekPoints = new Map();
 
     // --- 1. OPRET DETALJERET POINTKORT (MAP-BASERET) ---
     for (const match of scoredMatches) {
-        if(match.matchday === null || match.matchday === undefined) continue;
+        if (match.matchday === null || match.matchday === undefined) continue;
         const matchday = parseInt(match.matchday);
         const matchdayString = String(matchday);
 
@@ -64,7 +65,7 @@ async function updateTeamPoints(teamId) {
             detailedGameweekPoints.set(matchdayString, playerPointsMap);
         }
 
-        for(const player of team.players) {
+        for (const player of team.players) {
             const clubPoints = calculatePointsForClub(match, player.club);
             const playerIdString = player._id.toString();
 
@@ -73,29 +74,22 @@ async function updateTeamPoints(teamId) {
         }
     }
 
-    // --- 2. BEREGN TOTAL POINTS (MAP-SUMMERING MED PARSEINT FIX) ---
+    // --- 2. BEREGN TOTAL POINTS (MAP-SUMMERING) ---
     let totalPoints = 0;
-    for(const gwPointsMap of detailedGameweekPoints.values()) {
-        for(const points of gwPointsMap.values()) {
+    for (const gwPointsMap of detailedGameweekPoints.values()) {
+        for (const points of gwPointsMap.values()) {
             totalPoints += parseInt(points);
         }
     }
 
-    // --- 3. LOGIK FOR GAMEWEEK SKIFTE (NY LOGIK) ---
-
-    // Find den højeste Gameweek, der findes i kildedata (den maksimale GW der er scoret i)
-    const maxScoredGameweek = Array.from(detailedGameweekPoints.keys())
-        .reduce((max, current) => Math.max(max, parseInt(current)), 0);
-
+    // --- 3. LOGIK FOR GAMEWEEK SKIFTE ---
     let latestFinishedGameweek = 0;
-
-    // Først tjekker vi den formelle afslutningsstatus
     const maxMatchday = allMatches.reduce((max, match) => {
         const matchdayNum = parseInt(match.matchday);
         return matchdayNum > max ? matchdayNum : max;
     }, 0);
 
-    // Find den seneste officielt afsluttede Gameweek
+    // Find den seneste officielt afsluttede Gameweek (alle kampe er 'FINISHED' eller aflyst)
     for (let currentGW = maxMatchday; currentGW >= 1; currentGW--) {
         const gwMatches = allMatches.filter(match => parseInt(match.matchday) === currentGW);
 
@@ -105,45 +99,37 @@ async function updateTeamPoints(teamId) {
             match.status === 'CANCELLED'
         );
 
-        if(allFinishedOrExcluded && gwMatches.length > 0){
+        if (allFinishedOrExcluded && gwMatches.length > 0) {
             latestFinishedGameweek = currentGW;
             break;
         }
     }
 
-    // Prioritér den højeste GW, der har scoret point, hvis den er højere end den officielt afsluttede GW.
-    // Dette tvinger systemet til at bruge den GW, hvis den har scoret point, men ikke er færdig.
-    if (maxScoredGameweek > latestFinishedGameweek) {
-        latestFinishedGameweek = maxScoredGameweek;
-    }
-
-    // Næste aktive Gameweek er altid den næste i rækken.
-    const nextActiveGameweek = latestFinishedGameweek > 0 ? latestFinishedGameweek + 1 : 1;
-
-
-    // --- 4. BEREGN SENESTE GAMEWEEK POINT (MAP-SUMMERING MED PARSEINT FIX) ---
+    // Sætter den aktuelle Gameweek til den Gameweek, der skal tjekkes/køres
+    const activeTransferGameweek = latestFinishedGameweek > 0 ? latestFinishedGameweek + 1 : 1;
     const pointsGameweek = String(latestFinishedGameweek);
+
+    // --- 4. BEREGN FÆRDIGE GAMEWEEK POINT ---
     let latestGameweekPoints = 0;
 
     if (latestFinishedGameweek > 0) {
         const gwPointsMap = detailedGameweekPoints.get(pointsGameweek);
 
         if (gwPointsMap) {
-            for(const points of gwPointsMap.values()) {
+            for (const points of gwPointsMap.values()) {
                 latestGameweekPoints += parseInt(points);
             }
         }
     }
 
-    const liveScoreGameweek = nextActiveGameweek;
+    // Aktive gameweek points
     let activeGameweekPoints = 0;
+    const activeGWPointsMap = detailedGameweekPoints.get(String(activeTransferGameweek));
 
-    if(liveScoreGameweek > 0) {
-        const activeGWPointsMap = detailedGameweekPoints.get(String(liveScoreGameweek));
-        if(activeGWPointsMap) {
-            for(const points of activeGWPointsMap.values()) {
-                activeGameweekPoints += parseInt(points);
-            }
+    // Hvis vi har point-data for den aktive Gameweek (GW 15)
+    if (activeGWPointsMap) {
+        for (const points of activeGWPointsMap.values()) {
+            activeGameweekPoints += parseInt(points);
         }
     }
 
@@ -151,15 +137,15 @@ async function updateTeamPoints(teamId) {
     team.points = totalPoints;
     team.detailedGameweekPoints = detailedGameweekPoints;
     team.latestGameweekPoints = latestGameweekPoints;
-    team.currentGameweek = nextActiveGameweek;
-
+    team.currentGameweek = activeTransferGameweek;
     team.activeGameweekPoints = activeGameweekPoints;
 
+    //Gem i databasen
     await teamRepo.updateTeam(teamId, {
         points: totalPoints,
         detailedGameweekPoints: detailedGameweekPoints,
         latestGameweekPoints: latestGameweekPoints,
-        currentGameweek: nextActiveGameweek,
+        currentGameweek: activeTransferGameweek,
         activeGameweekPoints: activeGameweekPoints,
     });
 
@@ -170,13 +156,15 @@ async function updateTeamPoints(teamId) {
     // Sørg for at konvertere Maps tilbage til Objects ved returnering for frontend
     if (teamObject.detailedGameweekPoints && teamObject.detailedGameweekPoints instanceof Map) {
         teamObject.detailedGameweekPoints = Object.fromEntries(teamObject.detailedGameweekPoints);
-        for(const gwKey in teamObject.detailedGameweekPoints) {
+        for (const gwKey in teamObject.detailedGameweekPoints) {
             let gwEntry = teamObject.detailedGameweekPoints[gwKey];
             if (gwEntry instanceof Map) {
                 teamObject.detailedGameweekPoints[gwKey] = Object.fromEntries(gwEntry);
             }
         }
     }
+
+   teamObject.activeGameweekPoints = activeGameweekPoints;
 
     return teamObject;
 }
