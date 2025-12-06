@@ -85,3 +85,7 @@ exports.fetchAndSyncPlayers = async () => {
     return { playerCount: players.length, teamCount: data.teams.length };
 };
 
+exports.findManyByIds = async (playerIds) => {
+    return await playerRepo.findManyByIds(playerIds);
+}
+

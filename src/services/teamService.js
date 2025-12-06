@@ -1,11 +1,7 @@
 const teamRepo = require('../data/teamRepo');
 const userRepo = require('../data/userRepo');
-const Team = require('../models/teamModel');
-
-function getDefaultBudget() {
-    const teamSchema = Team.schema.path('budget');
-    return teamSchema.default();
-}
+const {isInitialTeamValid} = require("../policies/teamPolicy");
+const {getDefaultBudget} = require('../config/teamConfig');
 
 async function getAllTeams() {
     return teamRepo.getAllTeams();
@@ -16,6 +12,8 @@ async function getTeamById(id) {
 }
 
 async function createTeam(teamData) {
+    await isInitialTeamValid(teamData.players, teamData.budget);
+
     const team = await teamRepo.createTeam(teamData);
     await userRepo.addTeamToUser(teamData.userId, team._id);
     return team;

@@ -1,5 +1,6 @@
 const teamService = require('../services/teamService');
 const teamPointsService = require('../services/teamPointsService');
+const {MAX_PLAYERS_PER_CLUB, MAX_PLAYERS_TOTAL} = require("../policies/teamPolicy");
 
 
 exports.getTeamConfig = async function (req, res) {
@@ -7,7 +8,8 @@ exports.getTeamConfig = async function (req, res) {
         const START_BUDGET = teamService.getDefaultBudget();
         res.json({
             startBudget: START_BUDGET,
-            maxPlayers: 11,
+            maxPlayersTotal: MAX_PLAYERS_TOTAL,
+            maxPlayersPerClub: MAX_PLAYERS_PER_CLUB,
 
         });
     } catch (error) {

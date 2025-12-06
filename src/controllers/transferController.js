@@ -6,7 +6,8 @@ const handleTransferError = (res, error) => {
     }
     if (error.message === "Dette hold ejer ikke denne spiller." ||
         error.message === "Denne spiller er allerede på dit hold." ||
-        error.message.includes("Ikke nok budget")
+        error.message.includes("Ikke nok budget") ||
+        error.message.includes("Du må kun have 3 spillere fra samme klub")
     ) {
         return res.status(400).json({ message: error.message });
     }

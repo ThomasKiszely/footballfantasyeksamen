@@ -10,6 +10,8 @@ const formationSelectEl = document.getElementById("formationSelect");
 let selectedPlayers = [], allPlayers = [], currentPage = 1;
 const pageSize = 10;
 let currentBudget = 0;
+let maxPlayersPerClub = 3;
+let maxPlayersTotal = 11;
 const editUser = document.getElementById("editUser");
 const user = JSON.parse(localStorage.getItem("user"));
 const logoutBtn = document.getElementById("logout");
@@ -48,6 +50,9 @@ async function fetchInitialData() {
         if(res.ok) {
             const config = await res.json();
             currentBudget = config.startBudget;
+
+            maxPlayersPerClub = config.maxPlayersPerClub;
+            maxPlayersTotal = config.maxPlayersTotal;
 
             const budgetLabel = document.getElementById("budgetLabel");
             if(budgetLabel) {
@@ -171,6 +176,18 @@ function selectPlayer(player) {
     // Tjek om spiller allerede er valgt (dobbelt check)
     if (selectedPlayers.find(p => p._id === player._id)) {
         alert("Spiller allerede valgt!");
+        return;
+    }
+
+    if(selectedPlayers.length >= maxPlayersTotal) {
+        alert(`Du har allerede valgt det maksimale antal spillere (${maxPlayersTotal}). Fjern en spiller først.`);
+        return;
+    }
+
+    const clubCount = selectedPlayers.filter(p => p.club === player.club).length;
+
+    if(clubCount >= maxPlayersPerClub) {
+        alert(`Du må kun have ${maxPlayersPerClub} spillere fra samme klub. Du har allerede ${player.club} spillere.`);
         return;
     }
 
@@ -323,15 +340,26 @@ createTeamBtn.addEventListener("click", async () => {
     const teamName = document.getElementById("teamName").value;
     const usedPrice = selectedPlayers.reduce((total, p) => total + p.price, 0);
 
-    if (!teamName) { alert("Indtast et holdnavn!"); return; }
-    if (selectedPlayers.length !== 11) { alert("Du skal vælge præcis 11 spillere!"); return; }
-    if (usedPrice > currentBudget) { alert("Budgettet er overskredet!"); return; }
+    const remainingBudget = currentBudget - usedPrice;
+
+    if (!teamName) {
+        alert("Indtast et holdnavn!");
+        return;
+    }
+    if (selectedPlayers.length !== maxPlayersTotal) {
+        alert("Du skal vælge præcis 11 spillere!");
+        return;
+    }
+    if (usedPrice > currentBudget) {
+        alert("Budgettet er overskredet!");
+        return;
+    }
 
     const body = {
         teamName,
         players: selectedPlayers.map(p => p._id),
         formation: formationSelectEl.value,
-        budget: currentBudget - usedPrice
+        budget: remainingBudget
     };
 
     try {

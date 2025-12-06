@@ -1,4 +1,5 @@
 const Player = require('../models/player');
+const moogoose = require('mongoose')
 
 // Sætter nye spillere til at koste 500.000 default
 const DEFAULT_PRICE = 1000000;
@@ -51,4 +52,15 @@ exports.findByPosition = async (position) => {
 
 exports.findByPriceRange = async (minPrice, maxPrice) => {
     return await Player.find({ price: { $gte: minPrice, $lte: maxPrice } });
+};
+
+exports.findManyByIds = async(playerIds) => {
+    if (!Array.isArray(playerIds) || playerIds.length === 0) {
+        return [];
+    }
+
+    // PRØV DETTE: Lad Mongoose håndtere konverteringen fra string/ObjectId mix:
+    return await Player.find({
+        '_id': { $in: playerIds }
+    }).lean();
 };
