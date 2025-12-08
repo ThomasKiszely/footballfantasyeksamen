@@ -15,6 +15,11 @@ async function updateAllTeamsAndGameweek() {
     }
     console.log('Pointberegning fuldført.');
 }
+
+function hasScoreData(match) {
+    return match.homeScore != null; // tjekker både null og undefined
+}
+
 // Hjælper til at konventere Mongoose maps til plain Objects for frontend
 function formatTeamOutput(teamDocument, activeGameweekPoints) {
     const teamObject = teamDocument.toObject ? teamDocument.toObject() : teamDocument;
@@ -42,7 +47,7 @@ async function updateTeamPoints(teamId) {
     ]);
 
     // Filtrer kampe med score-data (til pointberegning)
-    const scoredMatches = allMatches.filter(match => match.homeScore !== null && match.homeScore !== undefined);
+    const scoredMatches = allMatches.filter(hasScoreData);
 
     // 2. beregner vi detaljernde point
     const detailedGameweekPoints = calculateDetailedPoints(team.players, scoredMatches);

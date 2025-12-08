@@ -320,4 +320,9 @@ saveChangesBtn.addEventListener("click", async () => {
     }
 });
 
-document.addEventListener("DOMContentLoaded", initAuthUI,fetchInitialData);
+function initializePage() {
+    initAuthUI();
+    fetchInitialData();
+}
+
+document.addEventListener("DOMContentLoaded", initializePage);
