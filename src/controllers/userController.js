@@ -69,19 +69,6 @@ async function getUserById(req, res, next) {
     }
 }
 
-async function getUserBudget(req, res, next) {
-    try {
-        const userId = req.params.id;
-        const user = await userService.getUserById(userId);
-        return res.status(200).json({
-            success: true,
-            budget: user.budget,
-        });
-    } catch (error) {
-        next(error);
-    }
-}
-
 async function updateUser(req, res, next) {
     try{
         const id = req.params.id;
@@ -97,9 +84,10 @@ async function updateUser(req, res, next) {
 async function deleteUser(req, res, next) {
     try{
         const userId = req.params.id;
-        const user = await userService.deleteUser(userId);
+        await userService.deleteUser(userId);
         return res.status(204).send();
     } catch (error) {
+        res.status(404).json({ success: false, message: "User not found." });
         next(error);
     }
 }
@@ -113,6 +101,7 @@ async function logout(req, res, next) {
         });
         return res.status(200).json({ success: true, message: "Logout successfully." });
     } catch (error){
+        res.status(500).json({ success: false, message: "Logout failed." });
         next(error);
     }
 }
@@ -145,7 +134,6 @@ module.exports = {
     signup,
     login,
     getUserById,
-    getUserBudget,
     updateUser,
     deleteUser,
     logout,
