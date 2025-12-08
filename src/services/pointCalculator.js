@@ -32,7 +32,7 @@ function calculateDetailedPoints(teamPlayers, scoredMatches) {
     scoredMatches.sort((a, b) => parseInt(a.matchday) - parseInt(b.matchday));
 
     for(const match of scoredMatches) {
-        // Behandler kun kmape med en valid GW
+        // Behandler kun kampe med en valid GW
         if(!match.matchday) continue;
 
         // Konventerer til String

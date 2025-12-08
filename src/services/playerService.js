@@ -70,7 +70,7 @@ exports.fetchAndSyncPlayers = async () => {
     const players = [];
 
     data.teams.forEach(team => {
-        team.squad.forEach(player => {
+        team.players.forEach(player => {
             players.push({
                 name: player.name,
                 club: team.name,
