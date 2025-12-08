@@ -48,7 +48,7 @@ app.use(errorHandler);
 
 function startDataSync() {
     // Fetch data every 10 minutes
-    cron.schedule('*/1 * * * *', async () => {
+    cron.schedule('*/10 * * * *', async () => {
         console.log('Reading player data and alle matches from API...');
         await fetchAndSyncPlayers();
 
