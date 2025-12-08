@@ -1,11 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Tjek om brugeren er logget ind som admin
     checkAdmin();
-
-    // 2. Default load
     loadUsers();
 
-    // 3. Sync knap (kalder fetchAllMatches på backend)
     document.getElementById('syncDataBtn').addEventListener('click', async () => {
         if(!confirm("Dette vil hente data fra API'et og opdatere databasen. Fortsæt?")) return;
         try {
@@ -13,23 +9,27 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.textContent = "Henter data...";
             btn.disabled = true;
 
-            // Vi bruger en ny admin route til sync
             const res = await fetch('/api/admin/sync-matches', { method: 'POST' });
-            if(res.ok) alert("Data synkroniseret!");
-            else alert("Fejl ved synkronisering");
+            if(res.ok) {
+                alert("Data synkroniseret!");
+            } else {
+                const err = await res.json();
+                alert("Fejl ved synkronisering: " + (err.error || err.message || "Ukendt fejl"));
+            }
 
             btn.textContent = "🔄 Synkroniser Data (API)";
             btn.disabled = false;
-        } catch(e) { console.error(e); }
+        } catch(e) {
+            console.error(e);
+            alert("Netværksfejl ved synkronisering");
+        }
     });
 
-    // 4. Logout
     document.getElementById('logoutBtn').addEventListener('click', async () => {
         await fetch('/api/user/logout', { method: 'POST' });
         window.location.href = '/';
     });
 
-    // 5. Søgning på spillere
     document.getElementById('playerSearch').addEventListener('input', (e) => {
         const term = e.target.value.toLowerCase();
         document.querySelectorAll('#playerTableBody tr').forEach(row => {
@@ -38,20 +38,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-/* --- Navigation --- */
 window.openTab = function(tabName) {
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
     document.getElementById(tabName).classList.add('active');
 
-    // Find knappen og gør den aktiv
-    const btns = document.querySelectorAll('.tab-btn');
-    btns.forEach(btn => {
-        if(btn.textContent.toLowerCase().includes(tabName === 'matches' ? 'kampe' : tabName === 'users' ? 'brugere' : tabName)) {
+    const tabMapping = {
+        'users': 'Brugere',
+        'players': 'Spillere',
+        'matches': 'Kampe',
+        'teams': 'Hold'
+    };
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        if(btn.textContent.includes(tabMapping[tabName])) {
             btn.classList.add('active');
         }
     });
 
+    if(tabName === 'users') loadUsers();
     if(tabName === 'players') loadPlayers();
     if(tabName === 'matches') loadMatches();
     if(tabName === 'teams') loadTeams();
@@ -60,148 +66,248 @@ window.openTab = function(tabName) {
 async function checkAdmin() {
     try {
         const res = await fetch('/api/user/check');
+        if (!res.ok) {
+            console.log("Ikke logget ind, redirecter...");
+            window.location.href = '/login';
+            return;
+        }
         const data = await res.json();
-        if(!data.success || data.user.role !== 'admin') {
+        if(!data.success || !data.user || data.user.role !== 'admin') {
+            console.log("Ikke admin, redirecter...");
             window.location.href = '/';
         }
-    } catch(e) { window.location.href = '/'; }
+    } catch(e) {
+        console.error("checkAdmin fejl:", e);
+        window.location.href = '/';
+    }
 }
 
-/* --- USERS --- */
 async function loadUsers() {
-    const res = await fetch('/api/admin/users');
-    const users = await res.json();
-    const tbody = document.getElementById('userTableBody');
-    tbody.innerHTML = users.map(u => `
-        <tr>
-            <td>${u.username}</td>
-            <td>${u._id}</td>
-            <td>${u.role}</td>
-            <td>${u.role !== 'admin' ? `<button class="btn-sm btn-red" onclick="deleteUser('${u._id}')">Slet</button>` : ''}</td>
-        </tr>
-    `).join('');
+    try {
+        const res = await fetch('/api/admin/users');
+        if (!res.ok) {
+            const err = await res.json();
+            console.error("Fejl ved hentning af brugere:", err);
+            return;
+        }
+        const users = await res.json();
+        const tbody = document.getElementById('userTableBody');
+        tbody.innerHTML = users.map(u => `
+            <tr>
+                <td>${u.username}</td>
+                <td>${u._id}</td>
+                <td><span class="role-badge ${u.role}">${u.role}</span></td>
+                <td>${u.role !== 'admin' ? `<button class="btn-sm btn-red" onclick="deleteUser('${u._id}')">Slet</button>` : '<span style="color:#999">-</span>'}</td>
+            </tr>
+        `).join('');
+    } catch(e) {
+        console.error("loadUsers fejl:", e);
+    }
 }
 
 window.deleteUser = async (id) => {
-    if(confirm('Er du sikker?')) {
-        await fetch(`/api/admin/users/${id}`, { method: 'DELETE' });
-        loadUsers();
+    if(confirm('Er du sikker på du vil slette denne bruger?')) {
+        try {
+            const res = await fetch(`/api/admin/users/${id}`, { method: 'DELETE' });
+            if(res.ok) {
+                loadUsers();
+            } else {
+                const err = await res.json();
+                alert("Fejl ved sletning: " + (err.error || err.message));
+            }
+        } catch(e) {
+            console.error(e);
+        }
     }
 };
 
-/* --- PLAYERS --- */
 async function loadPlayers() {
-    const res = await fetch('/api/players');
-    const players = await res.json();
-    const tbody = document.getElementById('playerTableBody');
-    tbody.innerHTML = players.map(p => `
-        <tr>
-            <td>${p.name}</td>
-            <td>${p.club}</td>
-            <td>${p.position}</td>
-            <td>${p.price.toLocaleString()}</td>
-            <td><input type="number" id="price-${p._id}" value="${p.price}" style="width:80px"></td>
-            <td><button class="btn-sm btn-green" onclick="updatePlayerPrice('${p._id}')">Gem</button></td>
-        </tr>
-    `).join('');
+    try {
+        const res = await fetch('/api/admin/players');
+        if (!res.ok) {
+            const err = await res.json();
+            console.error("Fejl ved hentning af spillere:", err);
+            return;
+        }
+        const players = await res.json();
+        const tbody = document.getElementById('playerTableBody');
+        tbody.innerHTML = players.map(p => `
+            <tr>
+                <td>${p.name}</td>
+                <td>${p.club}</td>
+                <td>${p.position}</td>
+                <td>${(p.price / 1000000).toFixed(1)}M</td>
+                <td><input type="number" id="price-${p._id}" value="${p.price}" style="width:100px" step="100000"></td>
+                <td><button class="btn-sm btn-green" onclick="updatePlayerPrice('${p._id}')">Gem</button></td>
+            </tr>
+        `).join('');
+    } catch(e) {
+        console.error("loadPlayers fejl:", e);
+    }
 }
 
 window.updatePlayerPrice = async (id) => {
-    const price = document.getElementById(`price-${id}`).value;
-    await fetch(`/api/admin/players/${id}`, {
-        method: 'PATCH',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ price: price })
-    });
-    alert('Pris opdateret');
+    const priceInput = document.getElementById(`price-${id}`);
+    const price = parseInt(priceInput.value);
+
+    if(isNaN(price) || price < 0) {
+        alert("Ugyldig pris");
+        return;
+    }
+
+    try {
+        const res = await fetch(`/api/admin/players/${id}`, {
+            method: 'PATCH',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ price: price })
+        });
+        if(res.ok) {
+            alert('Pris opdateret!');
+            loadPlayers();
+        } else {
+            const err = await res.json();
+            alert("Fejl: " + (err.error || err.message));
+        }
+    } catch(e) {
+        console.error(e);
+        alert("Netværksfejl ved opdatering");
+    }
 };
 
-/* --- MATCHES (Nyt) --- */
 async function loadMatches() {
-    // Vi kalder den nye admin route for at få kampe
-    const res = await fetch('/api/admin/matches');
-    const matches = await res.json();
+    try {
+        const res = await fetch('/api/admin/matches');
+        if (!res.ok) {
+            const err = await res.json();
+            console.error("Fejl ved hentning af kampe:", err);
+            return;
+        }
+        const matches = await res.json();
 
-    // Sorter så nyeste kampe vises, eller dem der mangler resultater
-    matches.sort((a,b) => new Date(b.utcDate) - new Date(a.utcDate));
+        matches.sort((a, b) => new Date(b.utcDate) - new Date(a.utcDate));
 
-    const tbody = document.getElementById('matchTableBody');
-    tbody.innerHTML = matches.map(m => `
-        <tr>
-            <td>${new Date(m.utcDate).toLocaleDateString()}</td>
-            <td>${m.homeTeam}</td>
-            <td>${m.awayTeam}</td>
-            <td>
-                <input type="number" id="home-${m._id}" value="${m.homeScore ?? 0}" style="width:40px"> - 
-                <input type="number" id="away-${m._id}" value="${m.awayScore ?? 0}" style="width:40px">
-            </td>
-            <td><button class="btn-sm btn-blue" onclick="updateMatch('${m._id}')">Gem</button></td>
-        </tr>
-    `).join('');
+        const tbody = document.getElementById('matchTableBody');
+        tbody.innerHTML = matches.map(m => `
+            <tr>
+                <td>${new Date(m.utcDate).toLocaleDateString('da-DK')}</td>
+                <td>${m.homeTeam || 'N/A'}</td>
+                <td>${m.awayTeam || 'N/A'}</td>
+                <td>
+                    <input type="number" id="home-${m._id}" value="${m.homeScore ?? ''}" style="width:50px" min="0" placeholder="-"> 
+                    - 
+                    <input type="number" id="away-${m._id}" value="${m.awayScore ?? ''}" style="width:50px" min="0" placeholder="-">
+                </td>
+                <td><button class="btn-sm btn-blue" onclick="updateMatch('${m._id}')">Gem</button></td>
+            </tr>
+        `).join('');
+    } catch(e) {
+        console.error("loadMatches fejl:", e);
+    }
 }
 
 window.updateMatch = async (id) => {
-    const h = document.getElementById(`home-${id}`).value;
-    const a = document.getElementById(`away-${id}`).value;
+    const homeInput = document.getElementById(`home-${id}`);
+    const awayInput = document.getElementById(`away-${id}`);
+
+    const homeScore = homeInput.value !== '' ? parseInt(homeInput.value) : null;
+    const awayScore = awayInput.value !== '' ? parseInt(awayInput.value) : null;
+
+    let winner = null;
+    if(homeScore !== null && awayScore !== null) {
+        if(homeScore > awayScore) winner = 'HOME_TEAM';
+        else if(awayScore > homeScore) winner = 'AWAY_TEAM';
+        else winner = 'DRAW';
+    }
 
     const body = {
-        score: {
-            fullTime: { home: h, away: a },
-            winner: h > a ? 'HOME_TEAM' : a > h ? 'AWAY_TEAM' : 'DRAW'
-        }
+        homeScore: homeScore,
+        awayScore: awayScore,
+        winner: winner,
+        status: (homeScore !== null && awayScore !== null) ? 'FINISHED' : 'SCHEDULED'
     };
 
-    await fetch(`/api/admin/matches/${id}`, {
-        method: 'PATCH',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(body)
-    });
-    alert('Kamp opdateret');
+    try {
+        const res = await fetch(`/api/admin/matches/${id}`, {
+            method: 'PATCH',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(body)
+        });
+        if(res.ok) {
+            alert('Kamp opdateret!');
+        } else {
+            const err = await res.json();
+            alert("Fejl: " + (err.error || err.message));
+        }
+    } catch(e) {
+        console.error(e);
+        alert("Netværksfejl ved opdatering");
+    }
 };
 
-/* --- TEAMS & PITCH --- */
 async function loadTeams() {
-    // Bruger brugerens teamRoutes: router.get('/', ...) => /api/team/
-    const res = await fetch('/api/team/');
-    const teams = await res.json();
-    const tbody = document.getElementById('teamTableBody');
+    try {
+        const res = await fetch('/api/admin/teams');
+        if (!res.ok) {
+            const err = await res.json();
+            console.error("Fejl ved hentning af hold:", err);
+            return;
+        }
+        const teams = await res.json();
+        const tbody = document.getElementById('teamTableBody');
 
-    tbody.innerHTML = teams.map(t => `
-        <tr>
-            <td>${t.teamName}</td>
-            <td>${t.userId?.username || 'Ukendt'}</td>
-            <td>${t.points || 0}</td>
-            <td>${t.budget?.toLocaleString() || 0}</td>
-            <td><button class="btn-sm btn-blue" onclick='openPitch(${JSON.stringify(t)})'>Se Hold</button></td>
-        </tr>
-    `).join('');
+        tbody.innerHTML = teams.map(t => {
+            const username = t.userId?.username || 'Ukendt';
+            const teamJson = JSON.stringify(t).replace(/'/g, "\\'").replace(/"/g, '&quot;');
+            return `
+                <tr>
+                    <td>${t.teamName}</td>
+                    <td>${username}</td>
+                    <td>${t.points || 0}</td>
+                    <td>${((t.budget || 0) / 1000000).toFixed(1)}M</td>
+                    <td><button class="btn-sm btn-blue" onclick='openPitch(${teamJson})'>Se Hold</button></td>
+                </tr>
+            `;
+        }).join('');
+    } catch(e) {
+        console.error("loadTeams fejl:", e);
+    }
 }
 
 window.openPitch = (team) => {
-    document.getElementById('modalTeamName').textContent = team.teamName;
+    document.getElementById('modalTeamName').textContent = team.teamName || 'Ukendt Hold';
     document.getElementById('pitchModal').style.display = 'flex';
 
-    // Ryd banen
     ['goalkeeper', 'defender', 'midfielder', 'forward'].forEach(pos => {
-        document.querySelector(`.${pos}-row`).innerHTML = '';
+        const row = document.querySelector(`.${pos}-row`);
+        if(row) row.innerHTML = '';
     });
 
-    if(team.players) {
+    if(team.players && Array.isArray(team.players)) {
         team.players.forEach(p => {
+            if(!p || !p.name) return;
+
             const div = document.createElement('div');
             div.className = 'player-slot';
+
+            const lastName = p.name.split(' ').pop();
             div.innerHTML = `
-                <div style="margin-bottom:2px;">${p.name.split(' ').pop()}</div>
-                <div style="font-weight:normal; font-size:9px;">${p.club}</div>
+                <div style="margin-bottom:2px; font-weight:bold;">${lastName}</div>
+                <div style="font-size:9px; opacity:0.9;">${p.club || ''}</div>
             `;
 
-            let rowClass = '';
-            if(p.position === 'Goalkeeper') rowClass = '.goalkeeper-row';
-            else if(p.position === 'Defence') rowClass = '.defender-row';
-            else if(p.position === 'Midfield') rowClass = '.midfielder-row';
-            else rowClass = '.forward-row';
+            let rowClass = '.forward-row';
+            const pos = (p.position || '').toLowerCase();
 
-            document.querySelector(rowClass).appendChild(div);
+            if(pos.includes('goal') || pos === 'gk') {
+                rowClass = '.goalkeeper-row';
+            } else if(pos.includes('back') || pos.includes('defen') || pos === 'lb' || pos === 'rb' || pos === 'cb') {
+                rowClass = '.defender-row';
+            } else if(pos.includes('mid') || pos === 'cm' || pos === 'cdm' || pos === 'cam') {
+                rowClass = '.midfielder-row';
+            }
+
+            const row = document.querySelector(rowClass);
+            if(row) row.appendChild(div);
         });
     }
 };

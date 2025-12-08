@@ -9,13 +9,12 @@ async function signup(req, res, next) {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: "strict",
-            maxAge: 1000 * 60 * 60, //1 time
+            maxAge: 1000 * 60 * 60,
         });
 
-        console.log("[login] user._id typeof:", typeof user._id, "value:", user._id);
+        console.log("[signup] user._id typeof:", typeof user._id, "value:", user._id);
         const team = await teamService.getTeamByUserId(user._id || user.id);
-        console.log("[login] team found:", team && team._id);
-
+        console.log("[signup] team found:", team && team._id);
 
         return res.status(201).json({
             success: true,
@@ -41,7 +40,6 @@ async function login(req, res, next) {
         console.log("[login] user._id typeof:", typeof user._id, "value:", user._id);
         const team = await teamService.getTeamByUserId(user._id || user.id);
         console.log("[login] team found:", team && team._id);
-
 
         return res.status(200).json({
             success: true,
@@ -105,6 +103,7 @@ async function deleteUser(req, res, next) {
         next(error);
     }
 }
+
 async function logout(req, res, next) {
     try{
         res.clearCookie("jwt", {
@@ -117,10 +116,23 @@ async function logout(req, res, next) {
         next(error);
     }
 }
+
 async function checkAuth(req, res, next) {
     try {
-        if (req.user) {
-            return res.status(200).json({ success: true, user: req.user });
+        if (req.user && req.user.id) {
+            const fullUser = await userService.getUserById(req.user.id);
+            if (!fullUser) {
+                return res.status(401).json({ success: false, message: "User not found." });
+            }
+            return res.status(200).json({
+                success: true,
+                user: {
+                    _id: fullUser._id,
+                    username: fullUser.username,
+                    role: fullUser.role,
+                    teams: fullUser.teams,
+                }
+            });
         } else {
             return res.status(401).json({ success: false, message: "Not authorized." });
         }

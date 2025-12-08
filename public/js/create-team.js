@@ -19,7 +19,7 @@ const logoutBtn = document.getElementById("logout");
 logoutBtn.addEventListener("click", async(e) => {
     e.preventDefault();
 
-    try{
+    try {
         const response = await fetch('/api/user/logout', {
             method: "POST",
             credentials: "include",

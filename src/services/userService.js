@@ -9,7 +9,11 @@ async function signUp(username, password) {
     }
     const hashed = await bcrypt.hash(password, 10);
     const user = await userRepo.createUser({ username, password: hashed });
-    const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN});
+    const token = jwt.sign(
+        { id: user._id, role: user.role },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_EXPIRES_IN }
+    );
     return ({
         token,
         user: {
@@ -38,7 +42,11 @@ async function login(username, password){
     if (!match) {
         throw new Error('User or password is wrong');
     }
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
+    const token = jwt.sign(
+        { id: user._id, role: user.role },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_EXPIRES_IN }
+    );
     return {
         token,
         user: {

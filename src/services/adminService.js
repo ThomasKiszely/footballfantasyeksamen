@@ -5,7 +5,11 @@ const footballMatchService = require("../services/footballMatchService");
 
 async function verifyAdmin(adminId) {
     const user = await userService.getUserById(adminId);
-    if (!user) throw new Error("User not found");
+    if (!user) {
+        const error = new Error("User not found");
+        error.statusCode = 404;
+        throw error;
+    }
 
     if (user.role !== "admin") {
         const error = new Error("Adgang nægtet: ikke admin");
@@ -35,6 +39,11 @@ exports.updatePlayer = async (adminId, playerId, updateData) => {
     return await playerService.update(playerId, updateData);
 };
 
+exports.getAllTeams = async (adminId) => {
+    await verifyAdmin(adminId);
+    return await teamService.getAllTeams();
+};
+
 exports.updateTeam = async (adminId, teamId, updateData) => {
     await verifyAdmin(adminId);
     return await teamService.updateTeam(teamId, updateData);
@@ -53,4 +62,9 @@ exports.getAllMatches = async (adminId) => {
 exports.syncMatches = async (adminId) => {
     await verifyAdmin(adminId);
     return await footballMatchService.fetchAllMatches();
+};
+
+exports.getAllPlayers = async (adminId) => {
+    await verifyAdmin(adminId);
+    return await playerService.findAll();
 };

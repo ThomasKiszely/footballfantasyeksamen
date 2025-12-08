@@ -22,7 +22,13 @@ exports.updateUser = async (req, res, next) => {
     } catch (error) { next(error); }
 };
 
-// --- PLAYERS ---
+exports.getAllPlayers = async (req, res, next) => {
+    try {
+        const players = await adminService.getAllPlayers(req.user.id);
+        res.status(200).json(players);
+    } catch (error) { next(error); }
+};
+
 exports.updatePlayer = async (req, res, next) => {
     try {
         const updatedPlayer = await adminService.updatePlayer(req.user.id, req.params.id, req.body);
@@ -30,7 +36,13 @@ exports.updatePlayer = async (req, res, next) => {
     } catch (error) { next(error); }
 };
 
-// --- TEAMS ---
+exports.getAllTeams = async (req, res, next) => {
+    try {
+        const teams = await adminService.getAllTeams(req.user.id);
+        res.status(200).json(teams);
+    } catch (error) { next(error); }
+};
+
 exports.updateTeam = async (req, res, next) => {
     try {
         const updatedTeam = await adminService.updateTeam(req.user.id, req.params.id, req.body);
@@ -41,7 +53,6 @@ exports.updateTeam = async (req, res, next) => {
 // --- MATCHES ---
 exports.getAllMatches = async (req, res, next) => {
     try {
-        // Kalder adminService.getAllMatches
         const matches = await adminService.getAllMatches(req.user.id);
         res.status(200).json(matches);
     } catch (error) { next(error); }
@@ -49,7 +60,6 @@ exports.getAllMatches = async (req, res, next) => {
 
 exports.syncMatches = async (req, res, next) => {
     try {
-        // Kalder adminService.syncMatches
         await adminService.syncMatches(req.user.id);
         res.status(200).json({ message: "Sync fuldført" });
     } catch (error) { next(error); }
