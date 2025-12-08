@@ -5,7 +5,7 @@ const backbutton = document.getElementById('backbutton');
 const teamId = localStorage.getItem('teamId');
 
 backbutton.onclick = () => {
-    window.location.href = `/team?teamId=${teamId}`;
+    window.history.back();
 }
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -1,29 +1,5 @@
-const API_BASE_URL = "http://localhost:3000/api/team";
-const editUser = document.getElementById("editUser");
 const user = JSON.parse(localStorage.getItem("user"));
-const logoutBtn = document.getElementById("logout");
 
-logoutBtn.addEventListener("click", async (e) => {
-    try{
-        const response = await fetch('/api/user/logout', {
-            method: 'POST',
-            credentials: "include",
-        });
-        if (response.ok) {
-            localStorage.removeItem('user');
-            localStorage.removeItem('teamId');
-            window.location.href = '/';
-        } else {
-            alert('Could not logout');
-        }
-    } catch (error) {
-        console.error(error.message);
-    }
-});
-
-editUser.addEventListener("click", (e) => {
-    window.location.href = `/editUser?userid=${user._id}`;
-});
 
 const POSITION_MAP = {
     "GK": "goalkeeperRow",
@@ -56,7 +32,7 @@ async function loadTeam() {
             return;
         }
 
-        const response = await fetch(`${API_BASE_URL}/${teamId}`, {
+        const response = await fetch(`${API_BASE_URL}/team/${teamId}`, {
             method: "GET",
             credentials: "include"
         });
@@ -241,6 +217,7 @@ function addEditTeamButton() {
 
 
 document.addEventListener("DOMContentLoaded", () => {
+    initAuthUI();
     loadTeam();
     addEditTeamButton();
 });
