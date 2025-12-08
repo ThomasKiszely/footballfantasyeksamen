@@ -36,6 +36,7 @@ async function checkAuth() {
 function initAuthUI() {
     const logoutBtn = document.getElementById("logout");
     const editUserBtn = document.getElementById("editUser");
+    const adminLink = document.getElementById("adminLink");
 
     checkAuth().then(isLoggedIn => {
         if (logoutBtn) {
@@ -57,6 +58,13 @@ function initAuthUI() {
                     window.location.href = "/login";
                 }
             };
+        }
+
+        if (adminLink) {
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (user && user.role === "admin") {
+                adminLink.style.display = "inline";
+            }
         }
     });
 }
