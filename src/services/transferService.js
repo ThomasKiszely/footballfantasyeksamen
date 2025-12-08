@@ -2,7 +2,7 @@ const teamService = require("../services/teamService")
 const playerService = require("../services/playerService");
 const {getAllMatches} = require("../data/footballMatchRepo");
 const mongoose = require("mongoose");
-const {isClubLimitExceeded, MAX_PLAYERS_PER_CLUB, MAX_PLAYERS_TOTAL} = require("../policies/teamPolicy");
+const {MAX_PLAYERS_PER_CLUB, MAX_PLAYERS_TOTAL} = require("../policies/teamPolicy");
 const STARTED_MATCH_STATUSES = ['IN_PLAY', 'PAUSED', 'FINISHED', 'LIVE', 'HT', 'FT', 'AET', 'PEN_AET'];
 
 async function isTransferWindowClosed(gameweekNumber) {
@@ -52,10 +52,6 @@ async function sellPlayer(playerId, teamId) {
         throw new Error("Transfervinduet for denne Gameweek er lukket, da kampe er i gang eller færdige.");
     }
 
-
-
-
-
     const targetId = new mongoose.Types.ObjectId(playerId);
     const isPlayerOwned = team.players.some(ownerId => {
         return ownerId.equals(playerId);
@@ -75,9 +71,8 @@ async function sellPlayer(playerId, teamId) {
     return await team.save();
 }
 
-async function buyPlayer(playerId, teamId) {
 
-    // 1. Hent Spiller og Hold
+async function buyPlayer(playerId, teamId) {
     const playerMaster = await playerService.findById(playerId);
 
     if (!playerMaster) {
@@ -98,18 +93,17 @@ async function buyPlayer(playerId, teamId) {
 
 
     // 2. Tjek Allerede Ejet
-    // Tjekker om spillerens ID allerede er i arrayet.
+    // Tjekker om spillerens ID allerede er i array.
     if (team.players.some(pId => pId.equals(playerMaster._id))) {
         throw new Error("Denne spiller er allerede på dit hold.");
     }
 
-    // 3. Tjek Budget
     const purchasePrice = playerMaster.price;
-    if (team.budget < purchasePrice) {
+    if (!await canAffordPlayer(teamId, playerId)) {
         throw new Error(`Ikke nok budget. Mangler: ${purchasePrice - team.budget} kr.`);
     }
 
-    // 4. Tjek Maksimalt Antal Spillere
+    // er der plads på holdet?
     if (team.players.length >= MAX_PLAYERS_TOTAL) {
         throw new Error(`Dit hold er allerede fuldt. Du skal sælge en spiller, før du kan købe en ny.`);
     }
@@ -133,7 +127,6 @@ async function buyPlayer(playerId, teamId) {
 
 
     if (currentClubCount + 1 > MAX_PLAYERS_PER_CLUB) {
-
         throw new Error(`Du må kun have ${MAX_PLAYERS_PER_CLUB} spillere fra samme klub (${playerMaster.club}).`);
     }
 
@@ -144,6 +137,17 @@ async function buyPlayer(playerId, teamId) {
     return await team.save();
 }
 
+
+async function canAffordPlayer(teamId, playerId) {
+    const team = await teamService.getTeamById(teamId);
+    const player = await playerService.findById(playerId);
+
+    if (!team || !player) {
+        throw new Error('team or player not found');
+    }
+
+    return team.budget >= player.price;
+}
 
 
 module.exports = {
