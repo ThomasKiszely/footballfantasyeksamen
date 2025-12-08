@@ -7,7 +7,7 @@ const teamLink = document.getElementById('teamlink');
 async function logout() {
     try {
         const response = await fetch('/api/user/logout', {
-            method: 'GET',
+            method: 'POST',
             credentials: 'include',
         });
 
