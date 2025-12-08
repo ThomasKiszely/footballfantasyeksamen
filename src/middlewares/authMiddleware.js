@@ -27,6 +27,7 @@ function authenticateToken(req, res, next) {
             id: decoded.id,
             role: decoded.role || 'user'
         };
+        console.log(req.user);
 
         try {
             const userTeam = await teamService.getTeamByUserId(decoded.id);

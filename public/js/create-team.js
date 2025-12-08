@@ -1,4 +1,3 @@
-const API_BASE_URL = "http://localhost:3000/api";
 const playerListEl = document.getElementById("playerList");
 const selectedPlayersEl = document.getElementById("selectedPlayers");
 const createTeamBtn = document.getElementById("createTeamBtn");
@@ -12,35 +11,6 @@ const pageSize = 10;
 let currentBudget = 0;
 let maxPlayersPerClub = 3;
 let maxPlayersTotal = 11;
-const editUser = document.getElementById("editUser");
-const user = JSON.parse(localStorage.getItem("user"));
-const logoutBtn = document.getElementById("logout");
-
-logoutBtn.addEventListener("click", async(e) => {
-    e.preventDefault();
-
-    try {
-        const response = await fetch('/api/user/logout', {
-            method: "POST",
-            credentials: "include",
-        });
-
-        if (response.ok) {
-            window.location.href = '/';
-        } else {
-            alert('Could not logout');
-        }
-    } catch (error) {
-        alert('Could not logout: ' + error.message);
-    }
-});
-
-
-
-editUser.addEventListener("click", (e) => {
-    window.location.href = `/editUser?userid=${user._id}`;
-});
-
 
 
 async function fetchInitialData() {
@@ -387,5 +357,6 @@ createTeamBtn.addEventListener("click", async () => {
 // Starter med 4-3-3
 document.addEventListener("DOMContentLoaded", () =>
 {
+    initAuthUI();
     fetchInitialData();
 });

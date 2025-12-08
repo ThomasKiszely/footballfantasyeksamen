@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    initAuthUI();
     checkAdmin();
     loadUsers();
 
@@ -25,10 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    document.getElementById('logoutBtn').addEventListener('click', async () => {
-        await fetch('/api/user/logout', { method: 'POST' });
-        window.location.href = '/';
-    });
 
     document.getElementById('playerSearch').addEventListener('input', (e) => {
         const term = e.target.value.toLowerCase();
@@ -65,7 +62,7 @@ window.openTab = function(tabName) {
 
 async function checkAdmin() {
     try {
-        const res = await fetch('/api/user/check');
+        const res = await fetch('/api/user/check', { method: 'GET' , credentials: 'include' });
         if (!res.ok) {
             console.log("Ikke logget ind, redirecter...");
             window.location.href = '/login';
