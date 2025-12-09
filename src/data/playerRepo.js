@@ -1,5 +1,5 @@
 const Player = require('../models/player');
-const moogoose = require('mongoose')
+const mongoose = require('mongoose');
 
 // Sætter nye spillere til at koste 500.000 default
 const DEFAULT_PRICE = 1000000;
