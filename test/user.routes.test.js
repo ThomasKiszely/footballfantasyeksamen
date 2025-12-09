@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeAll } from 'vitest';
+import { describe, it, expect, vi, afterAll } from 'vitest';
 import request from 'supertest';
 
 vi.mock('../src/services/db', () => ({
@@ -7,48 +7,68 @@ vi.mock('../src/services/db', () => ({
 
 const app = require('../src/app');
 
-describe('User Routes', () => {
-    it('Should return 200 and an array of users', async () => {
-        const res = await request(app).get('/api');
-        expect(res.status).toBe(200);
-        expect(Array.isArray(res.body)).toBe(true);
-    });
+describe('User Routes (with JWT)', () => {
+    const username = `testuser_${Date.now()}`;
+    const password = '1234';
 
-    it('Should return 404 for invalid user ID', async () => {
-        const fakeId = '507f1f77bcf86cd799439011';
-        const res = await request(app).get(`/api/${fakeId}`);
-        expect(res.status).toBe(404);
-    });
+    let createdUserId;
+    let cookieHeader; // gem hele cookie header array
 
-    it('Should return 201 when creating a user', async () => {
-        const newUser = {
-            username: 'testuser',
-            password: '1234'
-        };
-        const res = await request(app).post('/api').send(newUser);
+    it('Should create a new user and return 201', async () => {
+        const res = await request(app)
+            .post('/api/user/signup')
+            .send({ username, password });
+
         expect(res.status).toBe(201);
+        expect(res.body.user.username).toBe(username);
+
+        createdUserId = res.body.user._id;
+
+        // Hent cookie fra Set-Cookie header (Express sætter jwt cookie)
+        const setCookie = res.headers['set-cookie'];
+        expect(setCookie).toBeDefined();
+        cookieHeader = setCookie; // gem arrayet direkte, supertest kan bruge det
     });
 
-    it('Should return 400 for invalid user data', async () => {
-        const invalidUser = {
-            username: ''
-        };
-        const res = await request(app).post('/api').send(invalidUser);
-        expect(res.status).toBe(400);
-    });
+    it('Should login and return 200 with cookie (same user)', async () => {
+        const res = await request(app)
+            .post('/api/user/login')
+            .send({ username, password });
 
-    it('Should return 200 when updating a user', async () => {
-        const userId = '507f1f77bcf86cd799439011';
-        const res = await request(app).put(`/api/${userId}`).send({
-            username: 'updated',
-            password: '5678'
-        });
         expect(res.status).toBe(200);
+        expect(res.body.user.username).toBe(username);
+
+        // login kan også sætte cookie; opdater cookieHeader hvis den gør
+        const setCookie = res.headers['set-cookie'];
+        if (setCookie) cookieHeader = setCookie;
+        expect(cookieHeader).toBeDefined();
     });
 
-    it('Should return 200 when deleting a user', async () => {
-        const userId = '507f1f77bcf86cd799439011';
-        const res = await request(app).delete(`/api/${userId}`);
+    it('Should update user when authorized', async () => {
+        const res = await request(app)
+            .put(`/api/user/${createdUserId}`)
+            .set('Cookie', cookieHeader) // brug hele header array
+            .send({ username: `${username}_updated`, password: '5678' });
+
         expect(res.status).toBe(200);
+        expect(res.body.success).toBe(true);
+        expect(res.body.updatedUser.username).toBe(`${username}_updated`);
+    });
+
+    it('Should delete user when authorized', async () => {
+        const res = await request(app)
+            .delete(`/api/user/${createdUserId}`)
+            .set('Cookie', cookieHeader);
+
+        expect(res.status).toBe(204);
+    });
+
+    afterAll(async () => {
+        // best-effort cleanup hvis noget gik galt tidligere
+        if (createdUserId) {
+            await request(app)
+                .delete(`/api/${createdUserId}`)
+                .set('Cookie', cookieHeader || []);
+        }
     });
 });

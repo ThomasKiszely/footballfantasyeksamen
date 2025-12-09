@@ -10,15 +10,33 @@ test('assert', () => {
 });
 
 describe('userService', () => {
-    it('creates a new user', async() => {
-        const mockResponse = { username: 'John', password: '1234', teams: ['Liverpool', 'Chelsea'] };
+    it('creates a new user', async () => {
+        const mockResponse = {
+            _id: 1,
+            username: 'John',
+            password: '1234',
+            teams: ['Liverpool', 'Chelsea'],
+            role: 'user'
+        };
         vi.spyOn(userRepo, 'createUser').mockResolvedValue(mockResponse);
 
         const result = await userService.signUp(mockResponse.username, mockResponse.password);
 
-        expect(userRepo.createUser).toHaveBeenCalledWith( { username: 'John', password: expect.any(String) });
-        expect(result).toEqual(mockResponse);
+        expect(userRepo.createUser).toHaveBeenCalledWith({
+            username: 'John',
+            password: expect.any(String) // hashed password
+        });
+
+        // Tjek at resultatet har token og user
+        expect(result).toHaveProperty('token');
+        expect(result.user).toMatchObject({
+            _id: 1,
+            username: 'John',
+            teams: ['Liverpool', 'Chelsea'],
+            role: 'user'
+        });
     });
+
     it('returns a user', async () => {
         const mockId = 1;
         const mockResponse = { name: 'John', password: '1234', teams: ['Liverpool', 'Chelsea'] };
@@ -53,18 +71,6 @@ describe('userService', () => {
 
         expect(result.user.username).toBe('John');
     });
-    it('Shows a users budget'), async () => {
-        const mockId = 1;
-        const mockUser = new User({
-            _id: mockId,
-            username: 'John',
-            password: 'hashed',
-            budget: 10000,
-        });
-        vi.spyOn(userRepo, 'getUserById').mockResolvedValue(mockUser);
-        const user = await userService.getUserById(mockId);
-        expect(user.budget).toBe(10000);
-    }
     it('Deleted a user', async () => {
         const mockId = 1;
         const mockUser = new User({

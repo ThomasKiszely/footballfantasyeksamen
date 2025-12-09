@@ -26,7 +26,7 @@ beforeEach(() => {
 describe("handleAuthentication", () => {
     it("viser succesbesked ved login", async () => {
         const fakeResponse = {
-            json: async () => ({ success: true, token: "abc123" }),
+            json: async () => ({ success: true, token: "abc123", user: { name: "Thomas" } }),
         };
         vi.spyOn(global, "fetch").mockResolvedValue(fakeResponse);
 
@@ -35,12 +35,17 @@ describe("handleAuthentication", () => {
         const form = document.getElementById("loginForm");
         form.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
 
-        await new Promise(resolve => setTimeout(resolve, 0));
-
-        expect(document.getElementById("message").textContent).toContain("Login successfuldt");
-        expect(setItemSpy).toHaveBeenCalledWith("jwt", "abc123");
-        expect(window.location.href).toBe("/fodbold");
+        await vi.waitFor(() => {
+            expect(document.getElementById("message").textContent).toContain("Login successful");
+            expect(setItemSpy).toHaveBeenCalledWith(
+                "user",
+                JSON.stringify({ name: "Thomas" })
+            );
+            expect(window.location.href).toBe("/create-team");
+        });
     });
+
+
 
 });
 
