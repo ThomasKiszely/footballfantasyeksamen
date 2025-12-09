@@ -1,10 +1,14 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, afterEach } from 'vitest';
 import jwt from 'jsonwebtoken';
 import authenticateToken from '../src/middlewares/authMiddleware';
 
+afterEach(() => {
+    vi.restoreAllMocks();
+});
+
 describe('authMiddleware middleware', () => {
     it('returns 401 if no token is provided', () => {
-        const req = { headers: {} };
+        const req = { cookies: {}, originalUrl: '/api/test' }; // tilføj originalUrl
         const res = { status: vi.fn().mockReturnThis(), json: vi.fn() };
         const next = vi.fn();
 
@@ -16,7 +20,7 @@ describe('authMiddleware middleware', () => {
     });
 
     it('returns 403 if token is invalid', () => {
-        const req = { headers: { authorization: 'Bearer invalidtoken' } };
+        const req = { cookies: { jwt: 'invalidtoken' }, originalUrl: '/api/test' };
         const res = { status: vi.fn().mockReturnThis(), json: vi.fn() };
         const next = vi.fn();
 
@@ -29,17 +33,24 @@ describe('authMiddleware middleware', () => {
         expect(next).not.toHaveBeenCalled();
     });
 
-    it('calls next and attaches user if token is valid', () => {
-        const fakeUser = { id: 1, username: 'John' };
-        const req = { headers: { authorization: 'Bearer validtoken' } };
+    it('calls next and attaches user if token is valid', (done) => {
+        const fakeUser = { id: 1, role: 'user' };
+        const req = { cookies: { jwt: 'validtoken' }, originalUrl: '/api/test' };
         const res = { status: vi.fn().mockReturnThis(), json: vi.fn() };
-        const next = vi.fn();
 
-        vi.spyOn(jwt, 'verify').mockImplementation((token, secret, cb) => cb(null, fakeUser));
+        const next = vi.fn(() => {
+            // assertions inde i next, så vi ved det er kørt
+            expect(req.user).toEqual(fakeUser);
+            expect(next).toHaveBeenCalled();
+            done();
+        });
+
+        vi.spyOn(jwt, 'verify').mockImplementation((token, secret, cb) => {
+            cb(null, fakeUser); // kalder callback med det samme
+        });
 
         authenticateToken(req, res, next);
-
-        expect(req.user).toEqual(fakeUser);
-        expect(next).toHaveBeenCalled();
     });
 });
+
+
