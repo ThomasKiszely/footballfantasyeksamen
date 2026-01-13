@@ -14,7 +14,7 @@ async function getUserById(id) {
 }
 
 async function getUserByName(username) {
-    user = await User.findOne({username});
+    const user = await User.findOne({username});
     return user;
 }
 async function addTeamToUser(userId, teamId) {
