@@ -39,6 +39,8 @@ function initAuthUI() {
     const adminLink = document.getElementById("adminLink");
 
     checkAuth().then(isLoggedIn => {
+        const user = JSON.parse(localStorage.getItem("user"));
+
         if (logoutBtn) {
             if (isLoggedIn) {
                 logoutBtn.textContent = "Logout";
@@ -51,7 +53,6 @@ function initAuthUI() {
 
         if (editUserBtn) {
             editUserBtn.onclick = () => {
-                const user = JSON.parse(localStorage.getItem("user"));
                 if (user && user._id) {
                     window.location.href = `/editUser?userid=${user._id}`;
                 } else {
@@ -61,9 +62,10 @@ function initAuthUI() {
         }
 
         if (adminLink) {
-            const user = JSON.parse(localStorage.getItem("user"));
-            if (user && user.role === "admin") {
+            if (isLoggedIn && user && user.role === "admin") {
                 adminLink.style.display = "inline";
+            } else {
+                adminLink.style.display = "none";
             }
         }
     });
